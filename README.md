@@ -1,7 +1,7 @@
 # MakersListWeb
-### Website and core application functionality for MakersList services.
+Website and core application functionality for MakersList services.
 
-<img src="https://cdn.discordapp.com/attachments/535648677528731667/537169107003637800/DepthLogo.png" alt="logo" style="width:100px;height:100px;"/>
+<img src="DepthLogo.png" alt="logo" style="width:100px;height:100px;"/>
 
 
 ## Worklog

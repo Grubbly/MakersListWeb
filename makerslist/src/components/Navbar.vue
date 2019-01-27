@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <!-- Position nav at top of page -->
-        <nav class="nav-extended indigo darken-2">
+        <nav class="nav-extended cyan darken-4">
             <div class="nav-content">
                 <router-link to="">
                     <span class="nav-title">MakersList</span>

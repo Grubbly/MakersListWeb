@@ -3,6 +3,7 @@
   <div class="index container">
     <div class="card orange" v-for="list in lists" :key="list.id">
       <div class="card-content">
+        <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <h2 class="white-text">{{list.title}}</h2>
         <ul class="items">
           <li v-for="(item,index) in list.items" :key="index"><span class="chip">{{item}}</span></li>
@@ -22,6 +23,13 @@ export default {
         {title: 'Drone Parts', slug: 'drone-parts', items: ['carbon fiber frame', 'motors', 'props', 'cc3d', 'pdb'], id:'1'},
         {title: 'Robot Parts', slug: 'robot-parts', items: ['plexiglass', 'motors', 'raspberry pi'], id:'2'},
       ]
+    }
+  },
+  methods: {
+    deleteList(id) {
+      this.lists = this.lists.filter(list => {
+        return list.id !== id
+      })
     }
   }
 }
@@ -49,5 +57,14 @@ export default {
 
 .index .items li {
   display: inline-block;
+}
+
+.index .delete {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    color:#f9e4e4;
+    font-size: 2em;
 }
 </style>

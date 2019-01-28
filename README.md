@@ -35,3 +35,13 @@ Review | Reviewer has verified code does what it is suppose to do, is formatted 
 * The plan is to use Vue and Firebase Firestore and Authentication.
 * Vue will serve as the frontend development framework.
 * Firebase will provide user accounts and data persistance/associativity.
+
+## Chappell's Words of Wisdom
+##### Why Software Projects Fail
+* Lack of:
+  * Communication
+  * Testing
+  * Follow-through on issues
+  * Domain knowledge
+  * Scalability
+  * Scope creep

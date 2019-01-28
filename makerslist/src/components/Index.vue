@@ -1,7 +1,7 @@
 <template>
 <!-- container makes a central column on the page so text doesn't hug the browser edges -->
   <div class="index container">
-    <div class="card orange" v-for="list in lists" :key="list.id">
+    <div class="card cyan darken-4" v-for="list in lists" :key="list.id">
       <div class="card-content">
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <h2 class="white-text">{{list.title}}</h2>
@@ -9,6 +9,11 @@
           <li v-for="(item,index) in list.items" :key="index"><span class="chip">{{item}}</span></li>
         </ul>
       </div>
+      <span class="btn-floating btn-large halfway-fab orange">
+        <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
+          <i class="material-icons edit">edit</i>
+        </router-link>
+      </span>
     </div>
   </div>
 </template>

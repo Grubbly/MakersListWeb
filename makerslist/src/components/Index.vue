@@ -14,14 +14,15 @@
 </template>
 
 <script>
+
+import db from '@/firebase/init'
+
 export default {
   name: 'Index',
   data () {
     return {
       lists: [
         // slug: is a URL friendly version of the title.
-        {title: 'Drone Parts', slug: 'drone-parts', items: ['carbon fiber frame', 'motors', 'props', 'cc3d', 'pdb'], id:'1'},
-        {title: 'Robot Parts', slug: 'robot-parts', items: ['plexiglass', 'motors', 'raspberry pi'], id:'2'},
       ]
     }
   },
@@ -31,6 +32,17 @@ export default {
         return list.id !== id
       })
     }
+  },
+  created() {
+    // fetch data from firestore
+    // snapshot refers to the state of the lists collection at a certain point in time
+    db.collection('lists').get().then(snapshot => {
+      snapshot.forEach(dbList => {
+        let list = dbList.data()
+        list.id = dbList.id
+        this.lists.push(list)
+      })
+    })
   }
 }
 </script>

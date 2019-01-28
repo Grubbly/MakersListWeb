@@ -1,6 +1,6 @@
 <template>
     <div class="add-list container">
-        <h2 class="center-align cyan-text">Add New List</h2>
+        <h2 class="center-align cyan-text text-darken-4">Add New List</h2>
         <form @submit.prevent="AddList">
             <div class="field title">
                 <label for="title">List Title</label>
@@ -16,6 +16,7 @@
             <div class="field add-list">
                 <label for="add-list">Add a list item:</label>
                 <input type="text" name="add-list" @keydown.enter.prevent="addItem" v-model="item">
+                <i class="class material-icons add" @click="addItem">add</i>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
@@ -108,5 +109,13 @@ export default {
     bottom: 16px;
     cursor: pointer;
     color:#f9e4e4; 
+}
+
+.add-list .add {
+    position: absolute;
+    cursor: pointer;
+    right: 20px;
+    bottom: 40px;
+    color: orange;
 }
 </style>

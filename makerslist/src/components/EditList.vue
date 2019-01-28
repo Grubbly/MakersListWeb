@@ -51,7 +51,7 @@ export default {
                     lower: true //capital -> lower-case,
                 });
 
-                db.collection('lists').add({
+                db.collection('lists').doc(this.list.id).update({
                     title: this.list.title,
                     slug: this.list.slug,
                     items: this.list.items, 

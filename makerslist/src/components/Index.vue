@@ -28,8 +28,14 @@ export default {
   },
   methods: {
     deleteList(id) {
-      this.lists = this.lists.filter(list => {
-        return list.id !== id
+      // Delete from firestore
+
+      // Get a reference to the doc
+      // When the doc is deleted, fire the .then to update the frontend
+      db.collection('lists').doc(id).delete().then(() => {
+        this.lists = this.lists.filter (list => {
+          return list.id !== id
+        })
       })
     }
   },

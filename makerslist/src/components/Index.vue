@@ -6,7 +6,7 @@
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <h2 class="white-text">{{list.title}}</h2>
         <ul class="items">
-          <li v-for="(item,index) in list.items" :key="index"><span class="chip">{{item}}</span></li>
+          <li v-for="(item,index) in list.items" :key="index"><a class="chip btn" href="https://www.amazon.com">{{item}}</a></li>
         </ul>
       </div>
       <span class="btn-floating btn-large halfway-fab orange">
@@ -89,5 +89,9 @@ export default {
     cursor: pointer;
     color:#f9e4e4;
     font-size: 2em;
+}
+
+.index .btn {
+  text-transform: none;
 }
 </style>

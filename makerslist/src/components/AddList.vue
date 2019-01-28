@@ -6,11 +6,12 @@
                 <label for="title">List Title</label>
                 <input type="text" name="title" @keydown.enter.prevent="" v-model="title">
             </div>
-            <div v-for="(item, index) in items" :key="index">
+            <div v-for="(item, index) in items" :key="index" class="field">
                 <label for="item">Items:</label>
                 <!-- Bind to the position in items array -->
                 <!-- Updates in the list display update elements in the items array -->
                 <input type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">
+                <i class="material-icons delete" @click="deleteItem(item)">delete</i>
             </div>
             <div class="field add-list">
                 <label for="add-list">Add a list item:</label>
@@ -25,6 +26,9 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
+import slugify from 'slugify'
+
 export default {
     name: 'AddList',
     data() {
@@ -32,12 +36,35 @@ export default {
             title: null,
             item: null,
             items: [],
-            feedback: '',
+            feedback: null,
+            slug: null,
         }
     },
     methods: {
         AddList() {
-            console.log(this.title, this.items)
+            if(this.title) {
+                this.feedback = null
+
+                // Create slug using slugify
+                // replacement replaces all spaces with specified char
+                this.slug = slugify(this.title, {
+                    replacement: '-',
+                    remove: /[$*_+~.()'"!\-:@]/g, //regex remove symbols for sanitizing,
+                    lower: true //capital -> lower-case,
+                });
+
+                db.collection('lists').add({
+                    title: this.title,
+                    slug: this.slug,
+                    items: this.items, 
+                }).then(() => {
+                    this.$router.push({name: 'Index'})
+                }).catch( err => {
+                    console.log(err)
+                })
+            } else {
+                this.feedback = 'Please enter a title'
+            }
         },
         addItem() {
             if(this.item) {
@@ -49,6 +76,11 @@ export default {
             } else {
                 this.feedback = 'A list item cannot be blank!'
             }
+        },
+        deleteItem(item) {
+            this.items = this.items.filter(_item => {
+                return _item !== item 
+            })
         }
     }
 }
@@ -67,5 +99,14 @@ export default {
 
 .add-list .field {
     margin: 20px auto;
+    position: relative;
+}
+
+.add-list .delete {
+    position: absolute;
+    right: 0px;
+    bottom: 16px;
+    cursor: pointer;
+    color:#f9e4e4; 
 }
 </style>

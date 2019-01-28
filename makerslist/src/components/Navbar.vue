@@ -3,12 +3,12 @@
         <!-- Position nav at top of page -->
         <nav class="nav-extended cyan darken-4">
             <div class="nav-content">
-                <router-link to="">
+                <router-link :to="{name: 'Index'}">
                     <span class="nav-title">MakersList</span>
                 </router-link>
                 <!-- halfway-fab pushes button halfway beyond nav boundary -->
                 <a href="" class="btn-floating btn-large halfway-fab orange">
-                    <router-link to="">
+                    <router-link :to="{name: 'AddList'}">
                         <!-- <i> for icon "add" is the name of the icon -->
                         <i class="material-icons">add</i>
                     </router-link>

@@ -7,7 +7,7 @@
                 <input type="text" name="title" @keydown.enter.prevent="" v-model="title">
             </div>
             <div v-for="(item, index) in items" :key="index" class="field">
-                <label for="item">Items:</label>
+                <label for="item">Item:</label>
                 <!-- Bind to the position in items array -->
                 <!-- Updates in the list display update elements in the items array -->
                 <input type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">

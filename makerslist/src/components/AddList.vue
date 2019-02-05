@@ -14,9 +14,12 @@
                 <i class="material-icons delete" @click="deleteItem(item)">delete</i>
             </div>
             <div class="field add-list">
-                <label for="add-list">Add a list item:</label>
-                <input type="text" name="add-list" @keydown.enter.prevent="addItem" v-model="item">
-                <i class="class material-icons add" @click="addItem">add</i>
+                <span>
+                    <label for="add-list">Add a list item:</label>
+                    <input placeholder="Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
+                    <i class="class material-icons add" @click="addAll">add</i>
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
+                </span>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
@@ -35,10 +38,12 @@ export default {
     data() {
         return {
             title: null,
-            item: null,
+            item: '',
+            quantity: 1,
+            price: 1,
             items: [],
             prices: [],
-            quantity: null,
+            quantities: [],
             feedback: null,
             slug: null,
         }
@@ -59,7 +64,9 @@ export default {
                 db.collection('lists').add({
                     title: this.title,
                     slug: this.slug,
-                    items: this.items, 
+                    items: this.items,
+                    prices: this.prices,
+                    quantities: this.quantities 
                 }).then(() => {
                     this.$router.push({name: 'Index'})
                 }).catch( err => {
@@ -76,6 +83,39 @@ export default {
                 // Update the item value which re-renders the field to be blank
                 this.item = null
                 this.feedback = null
+            } else {
+                this.feedback = 'A list item cannot be blank!'
+            }
+        },
+        addQuantity() {
+            if(!isNaN(this.quantity)) {
+                this.quantities.push(this.quantity)
+
+                // Update the item value which re-renders the field to be blank
+                this.quantity = null
+                this.feedback = null
+            } else {
+                this.feedback = 'Please enter a valid quantity.'
+            }
+        },
+        addAll() {
+            if(this.item) {
+                if(!isNaN(this.quantity) && this.quantity >= 1) {
+
+                    this.items.push(this.item)
+
+                    // Update the item value which re-renders the field to be blank
+                    this.item = null
+                    this.feedback = null
+
+                    this.quantities.push(this.quantity)
+
+                    // Update the item value which re-renders the field to be blank
+                    this.quantity = null
+                    this.feedback = null
+                } else {
+                    this.feedback = 'Please enter a valid quantity.'
+                }
             } else {
                 this.feedback = 'A list item cannot be blank!'
             }
@@ -116,14 +156,14 @@ export default {
 .add-list .add {
     position: absolute;
     cursor: pointer;
-    right: 20px;
+    right: 10px;
     bottom: 40px;
     color: orange;
 }
 
 .add-list span {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     grid-gap: 10px;
 }
 </style>

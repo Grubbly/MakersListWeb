@@ -11,11 +11,11 @@
               <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
                 <div slot="header">{{item}}</div>
                 <v-card>
-                  <v-card-text class="yellow lighten-3">
+                  <v-card-text class="grey lighten-3">
                     <ul>
-                      <span class="first"><li class="chip waves-effect waves-green btn-large butt">Amazingon: $24.99</li></span>
-                      <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: $25.99</li></span>
-                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: $4000.00</li></span>
+                      <span class="first"><li class="chip waves-effect waves-green btn-large">Amazingon: ${{list.prices[index]}}</li></span>
+                      <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
+                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span>
                     </ul>
                   </v-card-text>
                 </v-card>

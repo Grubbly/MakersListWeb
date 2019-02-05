@@ -4,7 +4,11 @@
         <nav class="nav-extended cyan darken-4">
             <div class="nav-content">
                 <router-link :to="{name: 'Index'}">
-                    <span class="nav-title">MakersList</span>
+                    <!-- <img  src='/static/DepthLogo.png' width=100px height=100px style="padding: 0;"/> -->
+                    <span class="nav-title">
+                        MakersList
+                    </span>
+                    
                 </router-link>
                 <!-- halfway-fab pushes button halfway beyond nav boundary -->
                 <a href="" class="btn-floating btn-large halfway-fab orange">

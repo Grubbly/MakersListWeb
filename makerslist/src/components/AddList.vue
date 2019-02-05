@@ -118,4 +118,10 @@ export default {
     bottom: 40px;
     color: orange;
 }
+
+.add-list span {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
 </style>

@@ -6,7 +6,23 @@
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <h2 class="white-text">{{list.title}}</h2>
         <ul class="items">
-          <li v-for="(item,index) in list.items" :key="index"><a class="chip btn" href="https://www.amazon.com">{{item}}</a></li>
+          <div>
+            <v-expansion-panel expand>
+              <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                <div slot="header">{{item}}</div>
+                <v-card>
+                  <v-card-text class="yellow lighten-3">
+                    <ul>
+                      <span class="first"><li class="chip waves-effect waves-green btn-large butt">Amazingon: $24.99</li></span>
+                      <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: $25.99</li></span>
+                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: $4000.00</li></span>
+                    </ul>
+                  </v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </div>
+          <!-- <li class="btn chip" v-for="(item,index) in list.items" :key="index">{{ item }}</li> -->
         </ul>
       </div>
       <span class="btn-floating btn-large halfway-fab orange">
@@ -66,6 +82,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
   margin-top: 60px;
+  max-width: 75%;
 }
 
 .index h2 {
@@ -78,7 +95,7 @@ export default {
   margin: 30px auto;
 }
 
-.index .items li {
+.index .first li {
   display: inline-block;
 }
 
@@ -91,7 +108,32 @@ export default {
     font-size: 2em;
 }
 
-.index .btn {
+.index .first .btn-large {
   text-transform: none;
+  background-color:springgreen;
 }
+
+.index .first .btn-large:hover {
+  background-color: chartreuse
+}
+
+.index .second .btn-large {
+  text-transform: none;
+  background-color: orange;
+}
+
+.index .second .btn-large:hover {
+  background-color: yellow;
+}
+
+.index .third .btn-large {
+  text-transform: none;
+  background-color: tomato;
+}
+
+.index .third .btn-large:hover {
+  background-color:red;
+}
+
+
 </style>

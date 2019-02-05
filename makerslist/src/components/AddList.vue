@@ -7,11 +7,14 @@
                 <input type="text" name="title" @keydown.enter.prevent="" v-model="title">
             </div>
             <div v-for="(item, index) in items" :key="index" class="field">
-                <label for="item">Item:</label>
-                <!-- Bind to the position in items array -->
-                <!-- Updates in the list display update elements in the items array -->
-                <input type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">
-                <i class="material-icons delete" @click="deleteItem(item)">delete</i>
+                <span>
+                    <label for="item">Item:</label>
+                    <!-- Bind to the position in items array -->
+                    <!-- Updates in the list display update elements in the items array -->
+                    <input type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantities[index]">
+                    <i class="material-icons delete" @click="deleteItem(item)">delete</i>
+                </span> 
             </div>
             <div class="field add-list">
                 <span>
@@ -88,8 +91,8 @@ export default {
             }
         },
         addQuantity() {
-            if(!isNaN(this.quantity)) {
-                this.quantities.push(this.quantity)
+            if(!isNaN(this.quantity) && this.quantity >= 1) {
+                this.quantities.push(Number(this.quantity))
 
                 // Update the item value which re-renders the field to be blank
                 this.quantity = null
@@ -121,8 +124,15 @@ export default {
             }
         },
         deleteItem(item) {
-            this.items = this.items.filter(_item => {
+            var deleteIndex
+            this.items = this.items.filter((_item,index) => {
+                if (_item === item)
+                    deleteIndex = index
+
                 return _item !== item 
+            })
+            this.quantities = this.quantities.filter((quantity, index) => {
+                return index !== deleteIndex
             })
         }
     }

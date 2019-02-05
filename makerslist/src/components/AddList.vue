@@ -37,6 +37,8 @@ export default {
             title: null,
             item: null,
             items: [],
+            prices: [],
+            quantity: null,
             feedback: null,
             slug: null,
         }

@@ -4,7 +4,7 @@
         <nav class="nav-extended cyan darken-4">
             <div class="nav-content">
                 <router-link :to="{name: 'Index'}">
-                    <!-- <img  src='/static/DepthLogo.png' width=100px height=100px style="padding: 0;"/> -->
+                    <img  src='/static/DepthLogo.png' width=120px height=100px style="vertical-align: middle;"/>
                     <span class="nav-title">
                         MakersList
                     </span>

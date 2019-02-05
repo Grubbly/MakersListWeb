@@ -17,7 +17,10 @@
                   <v-card-text class="grey lighten-3">
                     <ul>
                       <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
-                      <span v-for="(item,index) in list.items" :key="index" class="first"><li class="chip waves-effect waves-green btn-large"><i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li></span>
+                      <span v-for="(item,index) in list.items" :key="index" class="first">
+                        <li class="chip waves-effect waves-green btn-large">
+                          <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
+                      </span>
                       <!-- <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
                       <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span> -->
                     </ul>

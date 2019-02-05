@@ -91,7 +91,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
   margin-top: 60px;
-  max-width: 75%;
+  max-width: 80%;
 }
 
 .index h2 {

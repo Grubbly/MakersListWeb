@@ -7,16 +7,22 @@
                 <input type="text" name="title" @keydown.enter.prevent="" v-model="list.title">
             </div>
             <div v-for="(item, index) in list.items" :key="index" class="field">
-                <label for="item">Item:</label>
-                <!-- Bind to the position in items array -->
-                <!-- Updates in the list display update elements in the items array -->
-                <input type="text" name="item" @keydown.enter.prevent="" v-model="list.items[index]">
-                <i class="material-icons delete" @click="deleteItem(item)">delete</i>
+                <span>
+                    <label for="item">Item:</label>
+                    <!-- Bind to the position in items array -->
+                    <!-- Updates in the list display update elements in the items array -->
+                    <input type="text" name="item" @keydown.enter.prevent="" v-model="list.items[index]">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="list.quantities[index]">
+                    <i class="material-icons delete" @click="deleteItem(item)">delete</i>
+                </span>
             </div>
             <div class="field add-list">
-                <label for="add-list">Add a list item:</label>
-                <input type="text" name="add-list" @keydown.enter.prevent="addItem" v-model="item">
-                <i class="material-icons add" @click="addItem">add</i>
+                <span>
+                    <label for="add-list">Add a list item:</label>
+                    <input type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
+                    <i class="material-icons add" @click="addAll">add</i>
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
+                </span>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
@@ -36,6 +42,7 @@ export default {
         return {
             list: null,
             item: null,
+            quantity: 1,
             feedback: null,
         }
     },
@@ -52,10 +59,19 @@ export default {
                     lower: true //capital -> lower-case,
                 });
 
+                let temp = 0
+                this.list.prices.forEach(price => {
+                    temp += Number(price)
+                });
+                this.list.total = temp
+
                 db.collection('lists').doc(this.list.id).update({
                     title: this.list.title,
                     slug: this.list.slug,
                     items: this.list.items, 
+                    prices: this.list.prices,
+                    total: this.list.total,
+                    quantities: this.list.quantities
                 }).then(() => {
                     this.$router.push({name: 'Index'})
                 }).catch( err => {
@@ -76,9 +92,60 @@ export default {
                 this.feedback = 'A list item cannot be blank!'
             }
         },
+        addQuantity() {
+            if(!isNaN(this.quantity) && this.quantity >= 1) {
+                this.list.quantities.push(Number(this.quantity))
+
+                // Update the item value which re-renders the field to be blank
+                this.quantity = 1
+                this.feedback = null
+            } else {
+                this.feedback = 'Please enter a valid quantity.'
+            }
+        },
+        addAll() {
+            if(this.item) {
+                if(!isNaN(this.quantity) && this.quantity >= 1) {
+                    
+
+                    // ************ DEBUG **************** //
+
+                        this.list.prices.push(100)
+
+                    // ************ CHANGE PRICE ********* //
+
+
+                    this.list.items.push(this.item)
+
+                    // Update the item value which re-renders the field to be blank
+                    this.item = null
+                    this.feedback = null
+
+                    this.list.quantities.push(this.quantity)
+
+                    // Update the item value which re-renders the field to be blank
+                    this.quantity = 1
+                    this.feedback = null
+                } else {
+                    this.feedback = 'Please enter a valid quantity.'
+                }
+            } else {
+                this.feedback = 'A list item cannot be blank!'
+            }
+        },
         deleteItem(item) {
-            this.list.items = this.list.items.filter(_item => {
+            var deleteIndex
+            this.list.items = this.list.items.filter((_item,index) => {
+                if (_item === item)
+                    deleteIndex = index
+
                 return _item !== item 
+            })
+            this.list.quantities = this.list.quantities.filter((quantity, index) => {
+                return index !== deleteIndex
+            })
+            this.list.prices = this.list.prices.filter((price, index) => {
+                return index !== deleteIndex
             })
         }
     },
@@ -98,7 +165,7 @@ export default {
 .edit-list {
     margin-top: 60px;
     padding: 20px;
-    max-width: 500px;
+    max-width: 40%;
 }
 .edit-list h2 {
     font-size: 40px;
@@ -124,6 +191,12 @@ export default {
     right: 20px;
     bottom: 40px;
     color: orange;
+}
+
+.edit-list span {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-gap: 10px;
 }
 </style>
 

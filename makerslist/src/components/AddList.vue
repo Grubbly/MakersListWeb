@@ -46,6 +46,7 @@ export default {
             price: 1,
             items: [],
             prices: [],
+            total: 0,
             quantities: [],
             feedback: null,
             slug: null,
@@ -64,11 +65,19 @@ export default {
                     lower: true //capital -> lower-case,
                 });
 
+
+                let temp = 0
+                this.prices.forEach(price => {
+                    temp += Number(price)
+                });
+                this.total = temp
+
                 db.collection('lists').add({
                     title: this.title,
                     slug: this.slug,
                     items: this.items,
                     prices: this.prices,
+                    total: this.total,
                     quantities: this.quantities 
                 }).then(() => {
                     this.$router.push({name: 'Index'})
@@ -95,7 +104,7 @@ export default {
                 this.quantities.push(Number(this.quantity))
 
                 // Update the item value which re-renders the field to be blank
-                this.quantity = null
+                this.quantity = 1
                 this.feedback = null
             } else {
                 this.feedback = 'Please enter a valid quantity.'
@@ -104,6 +113,14 @@ export default {
         addAll() {
             if(this.item) {
                 if(!isNaN(this.quantity) && this.quantity >= 1) {
+                    
+
+                    // ************ DEBUG **************** //
+
+                        this.prices.push(100)
+
+                    // ************ CHANGE PRICE ********* //
+
 
                     this.items.push(this.item)
 
@@ -114,7 +131,7 @@ export default {
                     this.quantities.push(this.quantity)
 
                     // Update the item value which re-renders the field to be blank
-                    this.quantity = null
+                    this.quantity = 1
                     this.feedback = null
                 } else {
                     this.feedback = 'Please enter a valid quantity.'
@@ -132,6 +149,9 @@ export default {
                 return _item !== item 
             })
             this.quantities = this.quantities.filter((quantity, index) => {
+                return index !== deleteIndex
+            })
+            this.prices = this.prices.filter((price, index) => {
                 return index !== deleteIndex
             })
         }

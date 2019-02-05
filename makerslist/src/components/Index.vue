@@ -9,22 +9,28 @@
           <div>
             <v-expansion-panel expand>
               <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
-                <div slot="header">{{item}}</div>
+                <div slot="header">
+                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                  <span> {{item}} </span>
+                </div>
                 <v-card>
                   <v-card-text class="grey lighten-3">
                     <ul>
-                      <span class="first"><li class="chip waves-effect waves-green btn-large">Amazingon: ${{list.prices[index]}}</li></span>
-                      <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
-                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span>
+                      <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
+                      <span v-for="(item,index) in list.items" :key="index" class="first"><li class="chip waves-effect waves-green btn-large">Amazingon: ${{list.prices[index]}}</li></span>
+                      <!-- <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
+                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span> -->
                     </ul>
                   </v-card-text>
                 </v-card>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </div>
-          <!-- <li class="btn chip" v-for="(item,index) in list.items" :key="index">{{ item }}</li> -->
         </ul>
       </div>
+      <span class="totalPrice" style="position: absolute;">
+          <h2 class="green-text text-darken-2 chip">${{list.total}}</h2>
+      </span>
       <span class="btn-floating btn-large halfway-fab orange">
         <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
           <i class="material-icons edit">edit</i>
@@ -44,7 +50,7 @@ export default {
     return {
       lists: [
         // slug: is a URL friendly version of the title.
-      ]
+      ],
     }
   },
   methods: {
@@ -70,7 +76,7 @@ export default {
         this.lists.push(list)
       })
     })
-  }
+  },
 }
 </script>
 
@@ -108,6 +114,13 @@ export default {
     font-size: 2em;
 }
 
+.index .totalPrice {
+    position: absolute;
+    bottom: 4px;
+    left: 5px;
+    cursor: pointer;
+}
+
 .index .first .btn-large {
   text-transform: none;
   background-color:springgreen;
@@ -134,6 +147,5 @@ export default {
 .index .third .btn-large:hover {
   background-color:red;
 }
-
 
 </style>

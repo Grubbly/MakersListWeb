@@ -6,9 +6,34 @@
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <h2 class="white-text">{{list.title}}</h2>
         <ul class="items">
-          <li v-for="(item,index) in list.items" :key="index"><a class="chip btn" href="https://www.amazon.com">{{item}}</a></li>
+          <div>
+            <v-expansion-panel expand>
+              <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                <div slot="header">
+                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                  <span> {{item}} </span>
+                </div>
+                <v-card>
+                  <v-card-text class="grey lighten-3">
+                    <ul>
+                      <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
+                      <span v-for="(item,index) in list.items" :key="index" class="first">
+                        <li class="chip waves-effect waves-green btn-large">
+                          <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
+                      </span>
+                      <!-- <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
+                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span> -->
+                    </ul>
+                  </v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </div>
         </ul>
       </div>
+      <span class="totalPrice" style="position: absolute;">
+          <h2 class="green-text text-darken-2 chip">${{list.total}}</h2>
+      </span>
       <span class="btn-floating btn-large halfway-fab orange">
         <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
           <i class="material-icons edit">edit</i>
@@ -28,7 +53,7 @@ export default {
     return {
       lists: [
         // slug: is a URL friendly version of the title.
-      ]
+      ],
     }
   },
   methods: {
@@ -54,7 +79,7 @@ export default {
         this.lists.push(list)
       })
     })
-  }
+  },
 }
 </script>
 
@@ -66,6 +91,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
   margin-top: 60px;
+  max-width: 80%;
 }
 
 .index h2 {
@@ -78,8 +104,12 @@ export default {
   margin: 30px auto;
 }
 
-.index .items li {
+.index .first li {
   display: inline-block;
+}
+
+.index .first i {
+  vertical-align: middle;
 }
 
 .index .delete {
@@ -91,7 +121,38 @@ export default {
     font-size: 2em;
 }
 
-.index .btn {
-  text-transform: none;
+.index .totalPrice {
+    position: absolute;
+    bottom: 4px;
+    left: 5px;
+    cursor: pointer;
 }
+
+.index .first .btn-large {
+  text-transform: none;
+  background-color:springgreen;
+}
+
+.index .first .btn-large:hover {
+  background-color: chartreuse
+}
+
+.index .second .btn-large {
+  text-transform: none;
+  background-color: orange;
+}
+
+.index .second .btn-large:hover {
+  background-color: yellow;
+}
+
+.index .third .btn-large {
+  text-transform: none;
+  background-color: tomato;
+}
+
+.index .third .btn-large:hover {
+  background-color:red;
+}
+
 </style>

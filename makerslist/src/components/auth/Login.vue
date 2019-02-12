@@ -11,7 +11,7 @@
                 <input type="password" name="password" v-model="password">
             </div>
             <p v-if="feedback" class="red-text center">{{feedback}}</p>
-            <div class="field">
+            <div class="field center">
                 <button class="btn cyan darken-4">Login</button>
             </div>
         </form>

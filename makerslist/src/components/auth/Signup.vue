@@ -65,7 +65,6 @@ export default {
                         }).then(() => {
                             this.$router.push({ name: 'Index' })
                         }).catch(err => {
-                            console.log(err)
                             this.feedback = err.message
                         })
                     }

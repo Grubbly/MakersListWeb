@@ -13,13 +13,13 @@
                 <ul class="right">
                     <li v-if="!user"><router-link :to="{ name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
-                    <li v-if="user && id"><router-link :to="{name: 'ViewProfile', params: {id: this.id}}">{{user.email}}</router-link></li>
-                    <li v-if="user && id"><a @click="logout">Logout</a></li>
+                    <li v-if="user && id && alias"><router-link :to="{name: 'ViewProfile', params: {id: this.alias}}">{{user.email}}</router-link></li>
+                    <li v-if="user && id && alias"><a @click="logout">Logout</a></li>
                 </ul>
 
                 <!-- halfway-fab pushes button halfway beyond nav boundary -->
                 <a v-if="user" href="" class="btn-floating btn-large halfway-fab orange">
-                    <router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.id}}">
+                    <router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">
                         <!-- <i> for icon "add" is the name of the icon -->
                         <i class="material-icons">add</i>
                     </router-link>
@@ -38,6 +38,7 @@ export default {
     data() {
         return {
             user: null,
+            alias: null,
             id: null,
         }
     },
@@ -52,12 +53,13 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             if(user) {
                 this.user = user
-                db.collection('users').get().then(users => {
-                    users.docs.forEach(doc => {
-                        // In case of (impossible?) collision this needs better redundancy
-                        this.id = doc.id
+                this.id = user.uid;
+                db.collection('users').where('user_id', '==', user.uid).get()
+                .then(snapshot => {
+                    snapshot.forEach(doc => {
+                        this.alias = doc.id
+                        });
                     });
-                })
             } else {
                 this.user = null
             }

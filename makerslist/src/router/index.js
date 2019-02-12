@@ -16,7 +16,10 @@ const router = new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/add-list',

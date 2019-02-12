@@ -19,7 +19,7 @@
 
                 <!-- halfway-fab pushes button halfway beyond nav boundary -->
                 <a v-if="user" href="" class="btn-floating btn-large halfway-fab orange">
-                    <router-link :to="{name: 'AddList'}">
+                    <router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.id}}">
                         <!-- <i> for icon "add" is the name of the icon -->
                         <i class="material-icons">add</i>
                     </router-link>

@@ -13,7 +13,7 @@
                 <ul class="right">
                     <li v-if="!user"><router-link :to="{ name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
-                    <li v-if="user"><a>{{user.email}}</a></li>
+                    <li v-if="user"><router-link :to="{name: 'ViewProfile', params: {id: this.id}}">{{user.email}}</router-link></li>
                     <li v-if="user"><a @click="logout">Logout</a></li>
                 </ul>
 
@@ -31,12 +31,14 @@
 
 <script>
 import firebase from 'firebase'
+import db from '@/firebase/init'
 
 export default {
     name: 'Navbar',
     data() {
         return {
             user: null,
+            id: null,
         }
     },
     methods: {
@@ -50,6 +52,12 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             if(user) {
                 this.user = user
+                db.collection('users').get().then(users => {
+                    users.docs.forEach(doc => {
+                        // In case of (impossible?) collision this needs better redundancy
+                        this.id = doc.id
+                    });
+                })
             } else {
                 this.user = null
             }

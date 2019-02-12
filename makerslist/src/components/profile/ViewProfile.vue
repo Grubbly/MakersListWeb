@@ -2,6 +2,7 @@
     <div class="view-profile container">
         <div v-if="profile" class="card">
             <h2 class="cyan-text text-darken-4 center">{{profile.alias}}'s Profile</h2>
+            <div class="card-details">HI</div>
         </div>
     </div>
 </template>

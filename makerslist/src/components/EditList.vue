@@ -165,7 +165,6 @@ export default {
 .edit-list {
     margin-top: 60px;
     padding: 20px;
-    max-width: 40%;
 }
 .edit-list h2 {
     font-size: 40px;

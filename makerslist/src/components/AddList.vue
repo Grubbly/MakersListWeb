@@ -170,7 +170,6 @@ export default {
 .add-list {
     margin-top: 60px;
     padding: 20px;
-    max-width: 40%;
 }
 .add-list h2 {
     font-size: 40px;

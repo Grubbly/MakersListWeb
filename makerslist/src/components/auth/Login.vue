@@ -55,6 +55,10 @@ export default {
     margin-top: 60px;
 }
 
+.container {
+    max-width: 600px;
+}
+
 .login h2 {
     font-size: 2.4em;
 }

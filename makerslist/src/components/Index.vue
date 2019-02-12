@@ -49,6 +49,7 @@ import db from '@/firebase/init'
 
 export default {
   name: 'Index',
+  props: ['filter'],
   data () {
     return {
       lists: [
@@ -70,6 +71,7 @@ export default {
     }
   },
   created() {
+    console.log(this.filter)
     // fetch data from firestore
     // snapshot refers to the state of the lists collection at a certain point in time
     db.collection('lists').get().then(snapshot => {

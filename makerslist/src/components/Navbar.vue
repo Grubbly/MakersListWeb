@@ -13,8 +13,8 @@
                 <ul class="right">
                     <li v-if="!user"><router-link :to="{ name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
-                    <li v-if="user"><router-link :to="{name: 'ViewProfile', params: {id: this.id}}">{{user.email}}</router-link></li>
-                    <li v-if="user"><a @click="logout">Logout</a></li>
+                    <li v-if="user && id"><router-link :to="{name: 'ViewProfile', params: {id: this.id}}">{{user.email}}</router-link></li>
+                    <li v-if="user && id"><a @click="logout">Logout</a></li>
                 </ul>
 
                 <!-- halfway-fab pushes button halfway beyond nav boundary -->

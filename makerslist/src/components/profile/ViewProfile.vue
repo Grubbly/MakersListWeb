@@ -3,7 +3,7 @@
         <div v-if="profile" class="card title">
             <h2 class="cyan-text text-darken-4 center">{{profile.alias}}'s Profile</h2>
         </div>
-        <!-- <Index v-if="profile" :filter="profile.alias"/> -->
+        <Index v-if="profile" :filter="profile.user_id"/>
     </div>
 </template>
 

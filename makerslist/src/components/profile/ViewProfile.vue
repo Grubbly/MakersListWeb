@@ -1,5 +1,5 @@
 <template>
-    <div class="view-profile container">
+    <div class="view-profile bogus2">
         <div v-if="profile" class="card title">
             <h2 class="cyan-text text-darken-4 center">{{profile.alias}}'s Profile</h2>
         </div>

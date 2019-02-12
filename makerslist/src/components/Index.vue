@@ -1,6 +1,6 @@
 <template>
-<!-- container makes a central column on the page so text doesn't hug the browser edges -->
-  <div class="index container">
+<!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
+  <div class="index bogus2">
     <div class="card cyan darken-4" v-for="list in lists" :key="list.id">
       <div class="card-content">
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
@@ -102,8 +102,13 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
-  margin-top: 60px;
   max-width: 80%;
+}
+
+.bogus2 {
+    margin:60px auto;
+    max-width: 1250px;
+    width:90%
 }
 
 .index h2 {

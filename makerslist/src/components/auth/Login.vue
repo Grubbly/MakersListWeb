@@ -1,5 +1,5 @@
 <template>
-    <div class="login container">
+    <div class="login bogus">
         <form @submit.prevent="login" class="card-panel">
             <h2 class="center cyan-text text-darken-4">Login</h2>
             <div class="field">
@@ -51,12 +51,13 @@ export default {
 
 <style>
 .login {
-    max-width: 400px;
     margin-top: 60px;
 }
 
-.container {
+.bogus {
+    margin:0 auto;
     max-width: 600px;
+    width:90%
 }
 
 .login h2 {

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="list" class="edit-list container">
+    <div v-if="list" class="edit-list bogus">
         <h2 class="cyan-text text-darken-4">Edit {{ list.title }} List</h2>
         <form @submit.prevent="EditList">
             <div class="field title">

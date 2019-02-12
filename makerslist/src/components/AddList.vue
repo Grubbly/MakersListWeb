@@ -1,5 +1,5 @@
 <template>
-    <div class="add-list container">
+    <div class="add-list bogus">
         <h2 class="center-align cyan-text text-darken-4">Add New List</h2>
         <form @submit.prevent="AddList">
             <div class="field title">

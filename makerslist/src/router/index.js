@@ -6,6 +6,7 @@ import EditList from '@/components/EditList'
 import Signup from '@/components/auth/Signup'
 import Login from '@/components/auth/Login'
 import ViewProfile from '@/components/profile/ViewProfile'
+import About from '@/components/About'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -54,6 +55,11 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })

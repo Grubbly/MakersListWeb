@@ -13,6 +13,7 @@
                 <ul class="right">
                     <li v-if="!user"><router-link :to="{ name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
+                    <li v-if="user"><router-link :to="{name: 'About'}">About</router-link></li>
                     <li v-if="user && id && alias"><router-link :to="{name: 'ViewProfile', params: {id: this.alias}}">{{user.email}}</router-link></li>
                     <li v-if="user && id && alias"><a @click="logout">Logout</a></li>
                 </ul>

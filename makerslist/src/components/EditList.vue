@@ -73,7 +73,7 @@ export default {
                     total: this.list.total,
                     quantities: this.list.quantities
                 }).then(() => {
-                    this.$router.push({name: 'Index'})
+                    this.$router.go(-1)
                 }).catch( err => {
                     console.log(err)
                 })

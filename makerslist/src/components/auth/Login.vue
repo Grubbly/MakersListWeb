@@ -36,8 +36,7 @@ export default {
                     this.email,
                     this.password
                 ).then(cred => {
-                    console.log(cred.user)
-                    this.$router.push({name: 'GMap'})
+                    this.$router.push({name: 'Index'})
                 }).catch(err => {
                     this.feedback = err.message
                 })

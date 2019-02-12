@@ -11,7 +11,7 @@
                 <input type="password" name="password" v-model="password">
             </div>
             <div class="field">
-                <label for="alias">Alias:</label>
+                <label for="alias">Username:</label>
                 <input type="text" name="alias" v-model="alias">
             </div>
             <p class="red-text center" v-if="feedback">{{feedback}}</p>
@@ -60,11 +60,10 @@ export default {
                         ).then(cred => {
                             ref.set({
                                 alias: this.alias,
-                                geolocation: null,
                                 user_id: cred.user.uid
                             })
                         }).then(() => {
-                            this.$router.push({ name: 'GMap' })
+                            this.$router.push({ name: 'Index' })
                         }).catch(err => {
                             console.log(err)
                             this.feedback = err.message

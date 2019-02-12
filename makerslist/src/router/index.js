@@ -24,12 +24,18 @@ const router = new Router({
     {
       path: '/add-list',
       name: 'AddList',
-      component: AddList
+      component: AddList,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/edit-list/:list_slug',
       name: 'EditList',
-      component: EditList
+      component: EditList,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/signup',

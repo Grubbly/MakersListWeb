@@ -18,7 +18,7 @@
                 </ul>
 
                 <!-- halfway-fab pushes button halfway beyond nav boundary -->
-                <a href="" class="btn-floating btn-large halfway-fab orange">
+                <a v-if="user" href="" class="btn-floating btn-large halfway-fab orange">
                     <router-link :to="{name: 'AddList'}">
                         <!-- <i> for icon "add" is the name of the icon -->
                         <i class="material-icons">add</i>

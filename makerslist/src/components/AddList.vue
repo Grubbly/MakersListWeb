@@ -1,5 +1,5 @@
 <template>
-    <div class="add-list container">
+    <div class="add-list bogus">
         <h2 class="center-align cyan-text text-darken-4">Add New List</h2>
         <form @submit.prevent="AddList">
             <div class="field title">
@@ -50,13 +50,20 @@ export default {
             quantities: [],
             feedback: null,
             slug: null,
+            id: null,
         }
+    },
+    created() {
+        let ref = db.collection('users')
+        ref.doc(this.$route.params.id).get()
+        .then(user => {
+            this.id = user.data().user_id
+        })
     },
     methods: {
         AddList() {
             if(this.title) {
                 this.feedback = null
-
                 // Create slug using slugify
                 // replacement replaces all spaces with specified char
                 this.slug = slugify(this.title, {
@@ -64,7 +71,6 @@ export default {
                     remove: /[$*_+~.()'"!\-:@]/g, //regex remove symbols for sanitizing,
                     lower: true //capital -> lower-case,
                 });
-
 
                 let temp = 0
                 this.prices.forEach(price => {
@@ -78,7 +84,8 @@ export default {
                     items: this.items,
                     prices: this.prices,
                     total: this.total,
-                    quantities: this.quantities 
+                    quantities: this.quantities,
+                    user_id: this.id,
                 }).then(() => {
                     this.$router.push({name: 'Index'})
                 }).catch( err => {
@@ -163,7 +170,6 @@ export default {
 .add-list {
     margin-top: 60px;
     padding: 20px;
-    max-width: 40%;
 }
 .add-list h2 {
     font-size: 40px;

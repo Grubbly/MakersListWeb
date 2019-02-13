@@ -1,5 +1,5 @@
 <template>
-    <div v-if="list" class="edit-list container">
+    <div v-if="list" class="edit-list bogus">
         <h2 class="cyan-text text-darken-4">Edit {{ list.title }} List</h2>
         <form @submit.prevent="EditList">
             <div class="field title">
@@ -73,7 +73,7 @@ export default {
                     total: this.list.total,
                     quantities: this.list.quantities
                 }).then(() => {
-                    this.$router.push({name: 'Index'})
+                    this.$router.go(-1)
                 }).catch( err => {
                     console.log(err)
                 })
@@ -165,7 +165,6 @@ export default {
 .edit-list {
     margin-top: 60px;
     padding: 20px;
-    max-width: 40%;
 }
 .edit-list h2 {
     font-size: 40px;

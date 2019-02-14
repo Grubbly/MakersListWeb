@@ -88,16 +88,28 @@
                    <v-expansion-panel expand>
                     <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
                         <div slot="header">
+                        <!-- WIP -->
+                        <!-- <v-img
+                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*20) + 50)}`"
+                                    :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*20) + 50)}`"
+                                    aspect-ratio="1"
+                                    class="circle cyan darken-4"
+                                    >
+                                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                                        <v-progress-circular indeterminate color="cyan"></v-progress-circular>
+                                    </v-layout>
+                        </v-img> -->
                         <span> {{item}} </span>
                         <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                         </div>
                         <v-card>
-                        <v-card-text class="grey lighten-3">
+                        <v-card-text class="grey lighten-2">
                             <ul>
                             <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
                             <div v-for="(item,index) in list.items" :key="index" class="first">
                                 <li class="chip waves-effect waves-green btn-large">
-                                <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
+                                    <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}
+                                </li>
                             </div>
                             </ul>
                         </v-card-text>

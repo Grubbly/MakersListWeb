@@ -7,7 +7,7 @@ import Signup from '@/components/auth/Signup'
 import Login from '@/components/auth/Login'
 import ViewProfile from '@/components/profile/ViewProfile'
 import About from '@/components/About'
-import ListView from '@/components/ListView'
+import ListView from '@/components/ListPage/ListView'
 import firebase from 'firebase'
 
 Vue.use(Router)

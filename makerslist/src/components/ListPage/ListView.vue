@@ -24,7 +24,7 @@
             </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm5>
-            <v-card color="grey lighten-3" dark tile flat>
+            <v-card color="grey lighten-3" dark tile>
             <h2 class="cyan-text text-darken-4 center">List-View</h2>
             <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia ea consequatur quo possimus! Commodi ex vitae, eaque eum tempore corrupti aut culpa perferendis molestias repellendus.</v-card-text>
             </v-card>

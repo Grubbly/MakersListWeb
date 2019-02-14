@@ -36,8 +36,8 @@
         <v-flex d-flex xs12 sm8 offset-sm2 class="itempanel">
             <v-card>
 
-                <v-tabs v-model="tab" color="cyan darken-4" grow slider-color="yellow">
-                    <v-tabs-slider color="white"></v-tabs-slider>
+                <v-tabs v-model="tab" color="cyan darken-4" grow slider-color="orange">
+                    <v-tabs-slider color="orange"></v-tabs-slider>
                     <v-tab
                     v-for="view in viewTypes"
                     :key="view" class="white-text"
@@ -95,10 +95,10 @@
                         <v-card-text class="grey lighten-3">
                             <ul>
                             <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
-                            <span v-for="(item,index) in list.items" :key="index" class="first">
+                            <div v-for="(item,index) in list.items" :key="index" class="first">
                                 <li class="chip waves-effect waves-green btn-large">
                                 <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
-                            </span>
+                            </div>
                             </ul>
                         </v-card-text>
                         </v-card>

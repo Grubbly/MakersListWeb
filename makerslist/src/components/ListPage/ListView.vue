@@ -1,14 +1,4 @@
 <template>
-    <!-- <div class="bogus2 listview">
-            <TileGallery />
-            <div class="card">
-                <h2 class="cyan-text text-darken-4 center">List-View</h2>
-                <div class="card-content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, tenetur in? Provident, dignissimos voluptatem? Excepturi nulla magnam atque officiis? Consequatur modi illum ut velit est quae voluptas ab sint odio!
-                </div>
-            </div>
-        </div> -->
-
     <v-container fluid grid-list-sm>
         <v-layout row wrap>
         <v-flex d-flex xs12 sm3 offset-sm2>
@@ -44,8 +34,6 @@
 </template>
 
 <script>
-import TileGallery from '@/components/ListPage/TileGallery'
-
 export default {
     name: 'ListView',
     data() {
@@ -53,9 +41,6 @@ export default {
         
         }
     },
-    components: {
-        TileGallery,
-    }
 }
 </script>
 

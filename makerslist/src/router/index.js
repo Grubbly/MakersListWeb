@@ -7,6 +7,7 @@ import Signup from '@/components/auth/Signup'
 import Login from '@/components/auth/Login'
 import ViewProfile from '@/components/profile/ViewProfile'
 import About from '@/components/About'
+import ListView from '@/components/ListView'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -60,6 +61,14 @@ const router = new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/list/:id',
+      name: 'ListView',
+      component: ListView,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

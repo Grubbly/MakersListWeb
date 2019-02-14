@@ -8,8 +8,8 @@
                     <v-flex v-for="n in 9" :key="n" xs4 d-flex>
                     <v-card flat tile class="d-flex">
                         <v-img
-                        :src="`https://picsum.photos/500/300?image=${n * 2 + 50}`"
-                        :lazy-src="`https://picsum.photos/10/6?image=${n * 2 + 50}`"
+                        :src="`https://picsum.photos/500/300?image=${Math.floor(n * (Math.random()*100) + 50)}`"
+                        :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(n * (Math.random()*100) + 50)}`"
                         aspect-ratio="1"
                         class="cyan darken-4"
                         >
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
+
 export default {
     name: 'ListView',
     data() {

@@ -35,14 +35,28 @@
 
         <v-flex d-flex xs12 sm8 offset-sm2 class="itempanel">
             <v-card>
-                <v-container grid-list-xl fluid grey lighten-3>
+
+                <v-tabs v-model="tab" color="cyan darken-4" grow slider-color="yellow">
+                    <v-tabs-slider color="white"></v-tabs-slider>
+                    <v-tab
+                    v-for="view in viewTypes"
+                    :key="view" class="white-text"
+                    >
+                    {{ view }}
+                    </v-tab>
+                </v-tabs>
+                
+                <v-tabs-items v-model="tab">
+                <v-tab-item>
+                
+                <v-container id="photoView" grid-list-xl fluid grey lighten-3>
                 <v-layout row wrap>
                     <v-flex v-for="(item,index) in list.items" :key="index" xs3 d-flex>
                           <v-card class="card">
                             <div class="card-image">
                                 <v-img
-                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*100) + 50)}`"
-                                    :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*100) + 50)}`"
+                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*20) + 50)}`"
+                                    :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*20) + 50)}`"
                                     aspect-ratio="1"
                                     class="cyan darken-4"
                                     >
@@ -68,6 +82,30 @@
                     </v-flex>
                     </v-layout>
                 </v-container>
+                </v-tab-item>
+
+                <v-tab-item>
+                   <v-expansion-panel expand>
+                    <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                        <div slot="header">
+                        <span> {{item}} </span>
+                        <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                        </div>
+                        <v-card>
+                        <v-card-text class="grey lighten-3">
+                            <ul>
+                            <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
+                            <span v-for="(item,index) in list.items" :key="index" class="first">
+                                <li class="chip waves-effect waves-green btn-large">
+                                <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
+                            </span>
+                            </ul>
+                        </v-card-text>
+                        </v-card>
+                    </v-expansion-panel-content>
+                    </v-expansion-panel>
+                </v-tab-item>
+            </v-tabs-items>
             </v-card>
         </v-flex>
         </v-layout>
@@ -82,6 +120,9 @@ export default {
     data() {
         return {
             list: null,
+            grid: true,
+            viewTypes: ['Photo Grid', 'Icon List'],
+            tab: null,
         }
     },
     created() {

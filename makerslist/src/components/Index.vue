@@ -4,7 +4,8 @@
     <div class="card cyan darken-4" v-for="list in lists" :key="list.id">
       <div class="card-content">
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
-        <h2 class="white-text">{{list.title}}</h2>
+        <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
+        <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h2 class="white-text">{{list.title}}</h2></router-link>
         <ul class="items">
           <div>
             <v-expansion-panel expand>
@@ -21,8 +22,6 @@
                         <li class="chip waves-effect waves-green btn-large">
                           <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
                       </span>
-                      <!-- <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
-                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span> -->
                     </ul>
                   </v-card-text>
                 </v-card>

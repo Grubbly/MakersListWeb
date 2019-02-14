@@ -63,7 +63,7 @@ const router = new Router({
       component: About
     },
     {
-      path: '/list/:id',
+      path: '/list/:list_slug',
       name: 'ListView',
       component: ListView,
       meta: {

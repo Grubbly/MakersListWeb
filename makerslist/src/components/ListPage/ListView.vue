@@ -26,7 +26,8 @@
         <v-flex d-flex xs12 sm5>
             <v-card color="grey lighten-3" dark tile>
             <h2 class="cyan-text text-darken-4 center">List-View</h2>
-            <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia ea consequatur quo possimus! Commodi ex vitae, eaque eum tempore corrupti aut culpa perferendis molestias repellendus.</v-card-text>
+            <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia 
+                ea consequatur quo possimus! Commodi ex vitae, eaque eum tempore corrupti aut culpa perferendis molestias repellendus.</v-card-text>
             </v-card>
         </v-flex>
         </v-layout>
@@ -38,9 +39,17 @@ export default {
     name: 'ListView',
     data() {
         return {
-        
+            list: null,
         }
     },
+    created() {
+        let list = db.collection('lists').where('slug', '==', this.$route.params.list_slug)
+        list.get().then(snapshot => {
+            snapshot.forEach(doc => {
+                this.list = doc.data()
+            })
+        })
+    }
 }
 </script>
 

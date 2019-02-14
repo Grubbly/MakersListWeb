@@ -120,11 +120,11 @@ export default {
   margin: 30px auto;
 }
 
-.index .first li {
+.first li {
   display: inline-block;
 }
 
-.index .first i {
+.first i {
   vertical-align: middle;
 }
 
@@ -144,12 +144,12 @@ export default {
     cursor: pointer;
 }
 
-.index .first .btn-large {
+.first .btn-large {
   text-transform: none;
   background-color:springgreen;
 }
 
-.index .first .btn-large:hover {
+.first .btn-large:hover {
   background-color: chartreuse
 }
 

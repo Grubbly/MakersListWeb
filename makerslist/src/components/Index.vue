@@ -11,8 +11,8 @@
             <v-expansion-panel expand>
               <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
                 <div slot="header">
-                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                   <span> {{item}} </span>
+                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                 </div>
                 <v-card>
                   <v-card-text class="grey lighten-3">

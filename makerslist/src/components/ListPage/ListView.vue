@@ -40,15 +40,29 @@
                     <v-flex v-for="(item,index) in list.items" :key="index" xs3 d-flex>
                           <v-card class="card">
                             <div class="card-image">
-                                <img class="activator" :src="`https://picsum.photos/500/300?image=${Math.floor(n * (Math.random()*30))}`">
+                                <v-img
+                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*100) + 50)}`"
+                                    :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*100) + 50)}`"
+                                    aspect-ratio="1"
+                                    class="cyan darken-4"
+                                    >
+                                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                                        <v-progress-circular indeterminate color="cyan"></v-progress-circular>
+                                    </v-layout>
+                                </v-img>
                             </div>
                             <div class="card-content">
-                                <span class="card-title activator cyan-text text-darken-4">{{item}}<i class="material-icons right">more_vert</i></span>
-                            <p><a href="#">Buy it now</a></p>
+                                <span class="card-title activator cyan-text text-darken-4">{{item}} ({{list.quantities[index]}})<i class="material-icons right">more_vert</i></span>
+                            <p><a href="https://amazon.com">Buy it now</a></p>
+                            <span class="green-text">${{list.prices[index]}}</span>
                             </div>
                             <div class="card-reveal">
-                                <span class="card-title cyan-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                <span class="card-title cyan-text text-darken-4">{{item}}<i class="material-icons right">close</i></span>
+                                <p>This description is full of buzzwords that make the product sound super cool!</p>
+                                <p>Shipping Information</p>
+                                <p>Ratings</p>
+                                <p>Vendors</p>
+                                <p>More...</p>
                             </div>
                         </v-card>
                     </v-flex>

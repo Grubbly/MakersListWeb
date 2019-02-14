@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid grid-list-sm>
+    <v-container v-if="list" fluid grid-list-sm>
         <v-layout row wrap>
         <v-flex d-flex xs12 sm3 offset-sm2>
             <v-card>
@@ -25,9 +25,34 @@
         </v-flex>
         <v-flex d-flex xs12 sm5>
             <v-card color="grey lighten-3" dark tile>
-            <h2 class="cyan-text text-darken-4 center">List-View</h2>
-            <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia 
+            <h2 class="cyan-text text-darken-4 center">{{list.title}}</h2>
+            <v-card-text class="cyan-text text-darken-4">Summary: 
+                <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia 
                 ea consequatur quo possimus! Commodi ex vitae, eaque eum tempore corrupti aut culpa perferendis molestias repellendus.</v-card-text>
+            </v-card-text>
+            </v-card>
+        </v-flex>
+
+        <v-flex d-flex xs12 sm8 offset-sm2 class="itempanel">
+            <v-card>
+                <v-container grid-list-xl fluid grey lighten-3>
+                <v-layout row wrap>
+                    <v-flex v-for="n in 8" :key="n" xs3 d-flex>
+                    <v-card flat tile class="d-flex">
+                        <v-img
+                        :src="`https://picsum.photos/500/300?image=${Math.floor(n * (Math.random()*100) + 50)}`"
+                        :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(n * (Math.random()*100) + 50)}`"
+                        aspect-ratio="1"
+                        class="cyan darken-4"
+                        >
+                        <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                            <v-progress-circular indeterminate color="cyan"></v-progress-circular>
+                        </v-layout>
+                        </v-img>
+                    </v-card>
+                    </v-flex>
+                </v-layout>
+                </v-container>
             </v-card>
         </v-flex>
         </v-layout>
@@ -69,6 +94,10 @@ export default {
 
 .listview h2 {
     font-size: 10em;
+}
+
+.itempanel {
+    margin-top: 30px;
 }
 </style>
 

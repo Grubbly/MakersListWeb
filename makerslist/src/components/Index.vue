@@ -4,14 +4,15 @@
     <div class="card cyan darken-4" v-for="list in lists" :key="list.id">
       <div class="card-content">
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
-        <h2 class="white-text">{{list.title}}</h2>
+        <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
+        <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h2 class="white-text">{{list.title}}</h2></router-link>
         <ul class="items">
           <div>
             <v-expansion-panel expand>
               <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
                 <div slot="header">
-                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                   <span> {{item}} </span>
+                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                 </div>
                 <v-card>
                   <v-card-text class="grey lighten-3">
@@ -21,8 +22,6 @@
                         <li class="chip waves-effect waves-green btn-large">
                           <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
                       </span>
-                      <!-- <span class="second"><li class="chip waves-effect waves-light btn-large">Earbay: ${{list.prices[index]}}</li></span>
-                      <span class="third"><li class="chip waves-effect waves-light btn-large">OldEgg: ${{list.prices[index]}}</li></span> -->
                     </ul>
                   </v-card-text>
                 </v-card>
@@ -121,11 +120,11 @@ export default {
   margin: 30px auto;
 }
 
-.index .first li {
+.first li {
   display: inline-block;
 }
 
-.index .first i {
+.first i {
   vertical-align: middle;
 }
 
@@ -145,12 +144,12 @@ export default {
     cursor: pointer;
 }
 
-.index .first .btn-large {
+.first .btn-large {
   text-transform: none;
   background-color:springgreen;
 }
 
-.index .first .btn-large:hover {
+.first .btn-large:hover {
   background-color: chartreuse
 }
 

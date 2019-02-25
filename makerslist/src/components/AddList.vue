@@ -11,7 +11,7 @@
                 <span class="item-display">
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
-                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">
+                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll" v-model="items[index]">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantities[index]">
                     <i class="material-icons delete" @click="deleteItem(item)">delete</i>
                 </span> 
@@ -35,6 +35,7 @@
 <script>
 import db from '@/firebase/init'
 import slugify from 'slugify'
+import axios from 'axios'
 
 export default {
     name: 'AddList',
@@ -127,7 +128,13 @@ export default {
                         this.prices.push(100)
 
                     // ************ CHANGE PRICE ********* //
-
+                    
+                    axios.get('https://us-central1-makerslist-7f3d8.cloudfunctions.net/findPrice?name=' + this.item)
+                        .then(response => {
+                            console.log(response)
+                        }).catch(error => {
+                            console.log(error)
+                    })
 
                     this.items.push(this.item)
 

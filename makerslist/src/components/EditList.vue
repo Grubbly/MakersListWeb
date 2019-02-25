@@ -7,22 +7,22 @@
                 <input type="text" name="title" @keydown.enter.prevent="" v-model="list.title">
             </div>
             <div v-for="(item, index) in list.items" :key="index" class="field">
+                <label for="item">Item:</label>
                 <span>
-                    <label for="item">Item:</label>
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
                     <input type="text" name="item" @keydown.enter.prevent="" v-model="list.items[index]">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="list.quantities[index]">
-                    <i class="material-icons delete" @click="deleteItem(item)">delete</i>
                 </span>
+                <i class="material-icons delete" @click="deleteItem(item)">delete</i>
             </div>
-            <div class="field add-list">
+            <div class="field">
+                <label for="add-list">Add a list item:</label>
                 <span>
-                    <label for="add-list">Add a list item:</label>
                     <input type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
-                    <i class="material-icons add" @click="addAll">add</i>
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
                 </span>
+                <i class="material-icons add" @click="addAll">add</i>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
@@ -187,14 +187,14 @@ export default {
 .edit-list .add {
     position: absolute;
     cursor: pointer;
-    right: 20px;
-    bottom: 40px;
+    right: 0px;
+    bottom: 16px;
     color: orange;
 }
 
 .edit-list span {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 5fr 1fr;
     grid-gap: 10px;
 }
 </style>

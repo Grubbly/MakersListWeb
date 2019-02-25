@@ -35,8 +35,8 @@
           </div>
         </ul>
       </div>
-      <span class="totalPrice" style="position: absolute;">
-          <h2 class="green-text text-darken-2 chip">${{list.total}}</h2>
+      <span class="totalPrice">
+          <h2 class="green-text text-lighten-3">${{list.total}}</h2>
       </span>
       <span class="btn-floating btn-large halfway-fab orange">
         <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
@@ -144,9 +144,11 @@ export default {
 
 .index .totalPrice {
     position: absolute;
-    bottom: 4px;
-    left: 5px;
+    bottom: -10px;
+    left: 40%;
+    text-align: center;
     cursor: pointer;
+    
 }
 
 .first .btn-large {

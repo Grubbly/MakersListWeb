@@ -11,15 +11,15 @@
                 <span class="item-display">
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
-                    <input type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">
+                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" v-model="items[index]">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantities[index]">
                     <i class="material-icons delete" @click="deleteItem(item)">delete</i>
                 </span> 
             </div>
             <div class="field">
-                <label for="add-list">Add an item:</label>
+                <label for="add-list">Add a list item:</label>
                 <span>
-                    <input placeholder="Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
+                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
                 </span>
                 <i class="material-icons add" @click="addAll">add</i>

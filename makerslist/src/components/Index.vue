@@ -15,14 +15,19 @@
                   <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                 </div>
                 <v-card>
-                  <v-card-text class="grey lighten-3">
+                  <!-- <v-card-text v-for="(item,index) in list.items" :key="index" :class="{grey: index % 2, white: !(index % 2)}">
                     <ul>
-                      <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
-                      <span v-for="(item,index) in list.items" :key="index" class="first">
-                        <li class="chip waves-effect waves-green btn-large">
-                          <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}</li>
-                      </span>
+                      <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! 
+                      <li class="first"> Amazon: ${{list.prices[index]}} </li> 
                     </ul>
+                    
+                    
+            
+                  </v-card-text> -->
+                  <v-card-text class="grey lighten-3">
+                      <div class="collection">
+                        <a v-for="(item,index) in list.items" :key="index" href="https://amazon.com" class="collection-item cyan-text text-darken-4">Amazon: ${{list.prices[index]}}</a>
+                      </div>
                   </v-card-text>
                 </v-card>
               </v-expansion-panel-content>

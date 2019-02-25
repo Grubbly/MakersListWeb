@@ -103,15 +103,10 @@
                         <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                         </div>
                         <v-card>
-                        <v-card-text class="grey lighten-2">
-                            <ul>
-                            <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
-                            <div v-for="(item,index) in list.items" :key="index" class="first">
-                                <li class="chip waves-effect waves-green btn-large">
-                                    <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}
-                                </li>
+                        <v-card-text class="grey lighten-3">
+                            <div class="collection">
+                                <a v-for="(item,index) in list.items" :key="index" href="https://amazon.com" class="collection-item cyan-text text-darken-4">Amazon: ${{list.prices[index]}}</a>
                             </div>
-                            </ul>
                         </v-card-text>
                         </v-card>
                     </v-expansion-panel-content>

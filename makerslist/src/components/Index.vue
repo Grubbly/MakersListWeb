@@ -1,44 +1,96 @@
 <template>
 <!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
   <div class="index bogus2">
-    <div class="card cyan darken-4" v-for="list in lists" :key="list.id">
+    <div class="card cyan darken-4" v-for="(list,index) in lists" :key="list.id">
+
       <div class="card-content">
+
+
+        <v-hover>
+          <v-card
+            slot-scope="{ hover }"
+            class="mx-auto"
+            color="grey lighten-4"
+            max-width="600"
+          >
+            <v-img
+              :aspect-ratio="16/9"
+              :src="`https://picsum.photos/500/300?image=${Math.floor(index * 2)}`"
+              :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * 2)}`"
+            >
+
+            <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+              <v-progress-circular indeterminate color="cyan"></v-progress-circular>
+            </v-layout>
+              <v-expand-transition>
+                <div
+                  v-if="hover"
+                  class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text text-lighten-4"
+                  style="height: 100%;"
+                >
+                  ${{list.total}}
+                </div>
+              </v-expand-transition>
+            </v-img>
+            <v-card-text
+              class="pt-4"
+              style="position: relative;"
+            >
+
+
+            <!-- Drop down menu for edit and delete options here? -->
+
+
+            <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
+              <v-btn
+                absolute
+                color="orange"
+                class="white--text"
+                fab
+                large
+                right
+                top
+              >
+                <i class="material-icons edit">edit</i>
+              </v-btn>
+              </router-link>
+              <div class="font-weight-light grey--text title mb-2">Quick Description</div>
+              <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}">
+                <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3>
+                <h6 class="green-text text-lighten-2">${{list.total}}</h6>
+              </router-link>
+              
+                <v-expansion-panel expand>
+                  <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                    <div slot="header">
+                      <span> {{item}} </span>
+                      <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                    </div>
+                    <v-card>
+                      <v-card-text class="grey lighten-3">
+                          <div class="collection">
+                            <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
+                              class="collection-item cyan-text text-darken-4">
+                              <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
+                              {{list.productNames[3*index + priceIndex]}} 
+                              <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
+                            </a>
+                          </div>
+                      </v-card-text>
+                    </v-card>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-card-text>
+          </v-card>
+        </v-hover>
+
+
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
-        <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h2 class="white-text">{{list.title}}</h2><h6 class="green-text text-lighten-2">${{list.total}}</h6></router-link>
-        <ul class="items">
-          <div>
-            <v-expansion-panel expand>
-              <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
-                <div slot="header">
-                  <span> {{item}} </span>
-                  <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
-                </div>
-                <v-card>
-                  <v-card-text class="grey lighten-3">
-                      <div class="collection">
-                        <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
-                          class="collection-item cyan-text text-darken-4">
-                          <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
-                          {{list.productNames[3*index + priceIndex]}} 
-                          <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
-                        </a>
-                      </div>
-                  </v-card-text>
-                </v-card>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </div>
-        </ul>
       </div>
       <!-- <span class="totalPrice">
           <h2 class="green-text text-lighten-3">${{list.total}}</h2>
       </span> -->
-      <span class="btn-floating btn-large halfway-fab orange">
-        <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
-          <i class="material-icons edit">edit</i>
-        </router-link>
-      </span>
     </div>
   </div>
 </template>
@@ -123,8 +175,9 @@ export default {
 
 .index h6 {
   font-size: 1em;
-  text-align: center;
-  margin-top: -15px;
+  text-align: left;
+  margin-top: -10px;
+  margin-bottom: 20px;
 }
 
 .index .items {
@@ -141,8 +194,8 @@ export default {
 
 .index .delete {
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 32px;
+    right: 32px;
     cursor: pointer;
     color:#f9e4e4;
     font-size: 2em;
@@ -183,5 +236,15 @@ export default {
 .index .third .btn-large:hover {
   background-color:red;
 }
+
+.index .v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+
 
 </style>

@@ -15,15 +15,6 @@
                   <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                 </div>
                 <v-card>
-                  <!-- <v-card-text v-for="(item,index) in list.items" :key="index" :class="{grey: index % 2, white: !(index % 2)}">
-                    <ul>
-                      <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! 
-                      <li class="first"> Amazon: ${{list.prices[index]}} </li> 
-                    </ul>
-                    
-                    
-            
-                  </v-card-text> -->
                   <v-card-text class="grey lighten-3">
                       <div class="collection">
                         <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 

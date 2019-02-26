@@ -47,6 +47,9 @@ export default {
             price: 1,
             items: [],
             prices: [],
+            productNames:[],
+            vendors: [],
+            urls: [],
             total: 0,
             quantities: [],
             feedback: null,
@@ -72,24 +75,54 @@ export default {
                     remove: /[$*_+~.()'"!\-:@]/g, //regex remove symbols for sanitizing,
                     lower: true //capital -> lower-case,
                 });
+                
+                let promises = [];
 
-                let temp = 0
-                this.prices.forEach(price => {
-                    temp += Number(price)
-                });
-                this.total = temp
+                this.items.forEach(item => {
+                    let itemURL = 'https://us-central1-makerslist-7f3d8.cloudfunctions.net/findPrice?name=' + item
+                    promises.push(axios.get(itemURL))
+                })
 
-                db.collection('lists').add({
+                // SOMEHOW MAKE THIS RETURN A PROMISE - or put this back in addAll
+                axios.all(promises).then(results => {
+                results.forEach(priceInfo => {
+                    
+                    // console.log(priceInfo.data.name)
+                    // console.log(priceInfo.data.suppliers.prices[0].url)
+                    // console.log(priceInfo.data.suppliers.prices[0].price)
+                    
+                    this.vendors.push(priceInfo.data.suppliers.supplierName)
+
+                    priceInfo.data.suppliers.prices.forEach(product => {
+                        this.prices.push(product.price)
+                        this.urls.push(product.url)
+                        this.productNames.push(product.productName)
+                        this.total += Number(product.price)
+                    })
+
+                    console.log(this.prices)
+                    console.log(this.total)
+                    })
+                }).then(() => {
+                    console.log("PRICES: " + this.prices)
+                    db.collection('lists').add({
                     title: this.title,
                     slug: this.slug,
                     items: this.items,
                     prices: this.prices,
                     total: this.total,
+                    urls: this.urls,
+                    supplierNames: this.vendors,
+                    productNames: this.productNames,
                     quantities: this.quantities,
                     user_id: this.id,
-                }).then(() => {
-                    this.$router.push({name: 'Index'})
-                }).catch( err => {
+                    }).then(() => {
+                        this.$router.push({name: 'Index'})
+                    }).catch( err => {
+                        console.log(err)
+                    })
+                })
+                .catch(err => {
                     console.log(err)
                 })
             } else {
@@ -121,20 +154,6 @@ export default {
         addAll() {
             if(this.item) {
                 if(!isNaN(this.quantity) && this.quantity >= 1) {
-                    
-
-                    // ************ DEBUG **************** //
-
-                        this.prices.push(100)
-
-                    // ************ CHANGE PRICE ********* //
-                    
-                    axios.get('https://us-central1-makerslist-7f3d8.cloudfunctions.net/findPrice?name=' + this.item)
-                        .then(response => {
-                            console.log(response)
-                        }).catch(error => {
-                            console.log(error)
-                    })
 
                     this.items.push(this.item)
 
@@ -166,7 +185,7 @@ export default {
                 return index !== deleteIndex
             })
             this.prices = this.prices.filter((price, index) => {
-                return index !== deleteIndex
+                return (index !== deleteIndex) || (index !== deleteIndex+1) || (index !== deleteIndex+2)
             })
         }
     }

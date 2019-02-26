@@ -5,7 +5,7 @@
       <div class="card-content">
         <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
-        <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h2 class="white-text">{{list.title}}</h2></router-link>
+        <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h2 class="white-text">{{list.title}}</h2><h6 class="green-text text-lighten-2">${{list.total}}</h6></router-link>
         <ul class="items">
           <div>
             <v-expansion-panel expand>
@@ -26,7 +26,12 @@
                   </v-card-text> -->
                   <v-card-text class="grey lighten-3">
                       <div class="collection">
-                        <a v-for="(item,index) in list.items" :key="index" href="https://amazon.com" class="collection-item cyan-text text-darken-4">Amazon: ${{list.prices[index]}}</a>
+                        <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
+                          class="collection-item cyan-text text-darken-4">
+                          <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
+                          {{list.productNames[3*index + priceIndex]}} 
+                          <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
+                        </a>
                       </div>
                   </v-card-text>
                 </v-card>
@@ -35,9 +40,9 @@
           </div>
         </ul>
       </div>
-      <span class="totalPrice">
+      <!-- <span class="totalPrice">
           <h2 class="green-text text-lighten-3">${{list.total}}</h2>
-      </span>
+      </span> -->
       <span class="btn-floating btn-large halfway-fab orange">
         <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
           <i class="material-icons edit">edit</i>
@@ -118,6 +123,17 @@ export default {
   font-size: 2em;
   text-align: center;
   margin-top: 0px;
+}
+
+.index h5 {
+  font-size: 1em;
+  text-align: left;
+}
+
+.index h6 {
+  font-size: 1em;
+  text-align: center;
+  margin-top: -15px;
 }
 
 .index .items {

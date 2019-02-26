@@ -67,7 +67,7 @@
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator cyan-text text-darken-4">{{item}} ({{list.quantities[index]}})<i class="material-icons right">more_vert</i></span>
-                            <p><a href="https://amazon.com">Buy it now</a></p>
+                            <p><a :href="list.urls[0]">Buy it now</a></p>
                             <span class="green-text">${{list.prices[index]}}</span>
                             </div>
                             <div class="card-reveal">

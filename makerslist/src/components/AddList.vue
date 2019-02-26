@@ -100,11 +100,11 @@ export default {
                         this.total += Number(product.price)
                     })
 
-                    console.log(this.prices)
-                    console.log(this.total)
+                    // console.log(this.prices)
+                    // console.log(this.total)
                     })
                 }).then(() => {
-                    console.log("PRICES: " + this.prices)
+                    // console.log("PRICES: " + this.prices)
                     db.collection('lists').add({
                     title: this.title,
                     slug: this.slug,

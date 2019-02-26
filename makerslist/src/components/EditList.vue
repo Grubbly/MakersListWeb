@@ -82,11 +82,11 @@ export default {
                         this.list.total += Number(product.price)
                     })
 
-                    console.log(this.list.prices)
-                    console.log(this.list.total)
+                    // console.log(this.list.prices)
+                    // console.log(this.list.total)
                     })
                 }).then(() => {
-                    console.log("PRICES: " + this.list.prices)
+                    // console.log("PRICES: " + this.list.prices)
                     db.collection('lists').doc(this.list.id).update({
                     title: this.list.title,
                     slug: this.list.slug,

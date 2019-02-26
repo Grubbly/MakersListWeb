@@ -35,6 +35,7 @@
 <script>
 import db from '@/firebase/init'
 import slugify from 'slugify'
+import axios from 'axios'
 
 export default {
     name: 'EditList',
@@ -50,7 +51,6 @@ export default {
         EditList() {
             if(this.list.title) {
                 this.feedback = null
-
                 // Create slug using slugify
                 // replacement replaces all spaces with specified char
                 this.list.slug = slugify(this.list.title, {
@@ -58,62 +58,63 @@ export default {
                     remove: /[$*_+~.()'"!\-:@]/g, //regex remove symbols for sanitizing,
                     lower: true //capital -> lower-case,
                 });
+                
+                let promises = [];
 
-                let temp = 0
-                this.list.prices.forEach(price => {
-                    temp += Number(price)
-                });
-                this.list.total = temp
+                this.list.items.forEach(item => {
+                    let itemURL = 'https://us-central1-makerslist-7f3d8.cloudfunctions.net/findPrice?name=' + item
+                    promises.push(axios.get(itemURL))
+                })
 
-                db.collection('lists').doc(this.list.id).update({
+                axios.all(promises).then(results => {
+                results.forEach(priceInfo => {
+                    
+                    // console.log(priceInfo.data.name)
+                    // console.log(priceInfo.data.suppliers.prices[0].url)
+                    // console.log(priceInfo.data.suppliers.prices[0].price)
+                    
+                    this.list.vendors.push(priceInfo.data.suppliers.supplierName)
+
+                    priceInfo.data.suppliers.prices.forEach(product => {
+                        this.list.prices.push(product.price)
+                        this.list.urls.push(product.url)
+                        this.list.productNames.push(product.productName)
+                        this.list.total += Number(product.price)
+                    })
+
+                    console.log(this.list.prices)
+                    console.log(this.list.total)
+                    })
+                }).then(() => {
+                    console.log("PRICES: " + this.list.prices)
+                    db.collection('lists').doc(this.list.id).update({
                     title: this.list.title,
                     slug: this.list.slug,
-                    items: this.list.items, 
+                    items: this.list.items,
                     prices: this.list.prices,
                     total: this.list.total,
-                    quantities: this.list.quantities
-                }).then(() => {
-                    this.$router.go(-1)
-                }).catch( err => {
+                    urls: this.list.urls,
+                    supplierNames: this.list.vendors,
+                    productNames: this.list.productNames,
+                    quantities: this.list.quantities,
+                    user_id: this.list.id,
+                    }).then(() => {
+                        this.$router.go(-1)
+                    }).catch( err => {
+                        console.log(err)
+                    })
+                })
+                .catch(err => {
                     console.log(err)
                 })
             } else {
                 this.feedback = 'Please enter a title'
             }
-        },
-        addItem() {
-            if(this.item) {
-                this.list.items.push(this.item)
 
-                // Update the item value which re-renders the field to be blank
-                this.item = null
-                this.feedback = null
-            } else {
-                this.feedback = 'A list item cannot be blank!'
-            }
-        },
-        addQuantity() {
-            if(!isNaN(this.quantity) && this.quantity >= 1) {
-                this.list.quantities.push(Number(this.quantity))
-
-                // Update the item value which re-renders the field to be blank
-                this.quantity = 1
-                this.feedback = null
-            } else {
-                this.feedback = 'Please enter a valid quantity.'
-            }
         },
         addAll() {
             if(this.item) {
                 if(!isNaN(this.quantity) && this.quantity >= 1) {
-                    
-
-                    // ************ DEBUG **************** //
-
-                        this.list.prices.push(100)
-
-                    // ************ CHANGE PRICE ********* //
-
 
                     this.list.items.push(this.item)
 
@@ -144,10 +145,14 @@ export default {
             this.list.quantities = this.list.quantities.filter((quantity, index) => {
                 return index !== deleteIndex
             })
-            this.list.prices = this.list.prices.filter((price, index) => {
-                return index !== deleteIndex
-            })
-        }
+        },
+        clearScrapeFields() {
+            this.list.vendors = []
+            this.list.prices = []
+            this.list.urls = []
+            this.list.productNames = []
+            this.list.total = 0
+        },
     },
     created() {
         let list = db.collection('lists').where('slug', '==', this.$route.params.list_slug)
@@ -155,6 +160,7 @@ export default {
             snapshot.forEach(doc => {
                 this.list = doc.data()
                 this.list.id = doc.id
+                this.clearScrapeFields()
             })
         })
     }

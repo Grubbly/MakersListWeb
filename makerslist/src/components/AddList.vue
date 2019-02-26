@@ -129,28 +129,6 @@ export default {
                 this.feedback = 'Please enter a title'
             }
         },
-        addItem() {
-            if(this.item) {
-                this.items.push(this.item)
-
-                // Update the item value which re-renders the field to be blank
-                this.item = null
-                this.feedback = null
-            } else {
-                this.feedback = 'A list item cannot be blank!'
-            }
-        },
-        addQuantity() {
-            if(!isNaN(this.quantity) && this.quantity >= 1) {
-                this.quantities.push(Number(this.quantity))
-
-                // Update the item value which re-renders the field to be blank
-                this.quantity = 1
-                this.feedback = null
-            } else {
-                this.feedback = 'Please enter a valid quantity.'
-            }
-        },
         addAll() {
             if(this.item) {
                 if(!isNaN(this.quantity) && this.quantity >= 1) {
@@ -183,9 +161,6 @@ export default {
             })
             this.quantities = this.quantities.filter((quantity, index) => {
                 return index !== deleteIndex
-            })
-            this.prices = this.prices.filter((price, index) => {
-                return (index !== deleteIndex) || (index !== deleteIndex+1) || (index !== deleteIndex+2)
             })
         }
     }

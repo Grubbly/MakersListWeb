@@ -92,7 +92,7 @@ export default {
                     slug: this.list.slug,
                     items: this.list.items,
                     prices: this.list.prices,
-                    total: this.list.total,
+                    total: Math.round(this.list.total*100)/100,
                     urls: this.list.urls,
                     supplierNames: this.list.vendors,
                     productNames: this.list.productNames,

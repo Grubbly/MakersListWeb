@@ -59,7 +59,11 @@
                 <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3>
                 <h6 class="green-text text-lighten-2">${{list.total}}</h6>
               </router-link>
-              
+
+                <!-- Maybe take this out? -->
+                <div class="font-weight-light grey--text title mb-2">Items:</div>
+
+
                 <v-expansion-panel expand>
                   <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
                     <div slot="header">

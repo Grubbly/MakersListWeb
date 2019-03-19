@@ -20,6 +20,17 @@
                 <label for="add-list">Add a list item:</label>
                 <span>
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
+                    <!-- <v-autocomplete
+                        v-model="item"
+                        :items="states"
+                        persistent-hint
+                        prepend-icon="mdi-database-search"
+                        label="Add a list item:"
+                        placeholder="Item Name"
+                        type="text"
+                        @keydown.enter.prevent="addAll"
+                        allow-overflow="false"
+                    ></v-autocomplete> -->
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
                 </span>
                 <i class="material-icons add" @click="addAll">add</i>
@@ -39,7 +50,7 @@
                 </div>
                 <button v-else class="btn orange" @click="submit = true">Add List</button>
             </div>
-        </form>
+        </form>  
     </div>
 </template>
 
@@ -67,6 +78,23 @@ export default {
             slug: null,
             id: null,
             submit: false,
+
+            states: [
+                'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+                'Arkansas', 'California', 'Colorado', 'Connecticut',
+                'Delaware', 'District of Columbia', 'Federated States of Micronesia',
+                'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
+                'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+                'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+                'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+                'Missouri', 'Montana', 'Nebraska', 'Nevada',
+                'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+                'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
+                'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
+                'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+                'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
+                'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+            ]
         }
     },
     created() {
@@ -97,7 +125,7 @@ export default {
                 })
 
                 // SOMEHOW MAKE THIS RETURN A PROMISE - or put this back in addAll
-                axios.all(promises).then(results => {
+                axios.all(promises).then((results,index) => {
                 results.forEach(priceInfo => {
                     
                     // console.log(priceInfo.data.name)
@@ -106,7 +134,8 @@ export default {
                     
                     this.vendors.push(priceInfo.data.suppliers.supplierName)
 
-                    this.total += priceInfo.data.suppliers.prices[0].price;
+                    // TODO: Multiply by quantity when endpoint is up (*this.quantities[index] below)
+                    this.total += Number(priceInfo.data.suppliers.prices[0].price);
                     priceInfo.data.suppliers.prices.forEach(product => {
                         this.prices.push(product.price)
                         this.urls.push(product.url)
@@ -176,8 +205,8 @@ export default {
             this.quantities = this.quantities.filter((quantity, index) => {
                 return index !== deleteIndex
             })
-        }
-    }
+        },
+    },
 }
 </script>
 

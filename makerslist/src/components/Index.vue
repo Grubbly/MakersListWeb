@@ -61,27 +61,33 @@
               </router-link>
 
                 <!-- Maybe take this out? -->
-                <div class="font-weight-light grey--text title mb-2">Items:</div>
-
+                <!-- <div class="font-weight-light grey--text title mb-2">Items:</div> -->
 
                 <v-expansion-panel expand>
-                  <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                  <v-expansion-panel-content class="grey lighten-2">
                     <div slot="header">
-                      <span> {{item}} </span>
-                      <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                      <span> Items </span>
                     </div>
-                    <v-card>
-                      <v-card-text class="grey lighten-3">
-                          <div class="collection">
-                            <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
-                              class="collection-item cyan-text text-darken-4">
-                              <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
-                              {{list.productNames[3*index + priceIndex]}} 
-                              <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
-                            </a>
-                          </div>
-                      </v-card-text>
-                    </v-card>
+                    <v-expansion-panel expand>
+                      <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                        <div slot="header">
+                          <span> {{item}} </span>
+                          <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                        </div>
+                        <v-card>
+                          <v-card-text class="grey lighten-3">
+                              <div class="collection">
+                                <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
+                                  class="collection-item cyan-text text-darken-4">
+                                  <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
+                                  {{list.productNames[3*index + priceIndex]}} 
+                                  <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
+                                </a>
+                              </div>
+                          </v-card-text>
+                        </v-card>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-card-text>

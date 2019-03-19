@@ -9,6 +9,7 @@ import firebase from 'firebase'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
+import 'vuetify/dist/vuetify.min.css'
 
 let app = null
 

@@ -26,7 +26,18 @@
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
-                <button class="btn orange">Update List</button>
+                <div v-if="submit && !feedback" class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-cyan-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                    </div>
+                </div>
+                <button v-else class="btn orange" @click="submit = true">Update List</button>
             </div>
         </form>
     </div>
@@ -45,6 +56,7 @@ export default {
             item: null,
             quantity: null,
             feedback: null,
+            submit: false,
         }
     },
     methods: {

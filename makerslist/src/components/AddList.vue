@@ -26,7 +26,18 @@
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
-                <button class="btn orange">Add List</button>
+                <div v-if="submit && !feedback" class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-cyan-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                    </div>
+                </div>
+                <button v-else class="btn orange" @click="submit = true">Add List</button>
             </div>
         </form>
     </div>
@@ -55,6 +66,7 @@ export default {
             feedback: null,
             slug: null,
             id: null,
+            submit: false,
         }
     },
     created() {
@@ -68,6 +80,7 @@ export default {
         AddList() {
             if(this.title) {
                 this.feedback = null
+
                 // Create slug using slugify
                 // replacement replaces all spaces with specified char
                 this.slug = slugify(this.title, {
@@ -93,11 +106,12 @@ export default {
                     
                     this.vendors.push(priceInfo.data.suppliers.supplierName)
 
+                    this.total += priceInfo.data.suppliers.prices[0].price;
                     priceInfo.data.suppliers.prices.forEach(product => {
                         this.prices.push(product.price)
                         this.urls.push(product.url)
                         this.productNames.push(product.productName)
-                        this.total += Number(product.price)
+                        //this.total += Number(product.price)
                     })
 
                     // console.log(this.prices)
@@ -209,4 +223,14 @@ export default {
     grid-template-columns: 5fr 1fr;
     grid-gap: 10px;
 }
+
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+
+  .add-list .loading-circle {
+      margin-top: 5px;
+      margin-bottom: 5px;
+  }
 </style>

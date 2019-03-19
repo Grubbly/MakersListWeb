@@ -87,11 +87,12 @@ export default {
                     
                     this.list.vendors.push(priceInfo.data.suppliers.supplierName)
 
+                    this.total += priceInfo.data.suppliers.prices[0].price;
                     priceInfo.data.suppliers.prices.forEach(product => {
                         this.list.prices.push(product.price)
                         this.list.urls.push(product.url)
                         this.list.productNames.push(product.productName)
-                        this.list.total += Number(product.price)
+                        // this.list.total += Number(product.price)
                     })
 
                     // console.log(this.list.prices)

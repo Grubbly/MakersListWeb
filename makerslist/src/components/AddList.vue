@@ -1,6 +1,6 @@
 <template>
     <div class="add-list bogus">
-        <h2 class="center-align cyan-text text-darken-4">Add New List</h2>
+        <h2 class="center-align cyan-text text-darken-4">New List</h2>
         <form @submit.prevent="AddList">
             <div class="field title">
                 <label for="title">List Title</label>
@@ -19,7 +19,7 @@
             <div class="field">
                 <label for="add-list">Add a list item:</label>
                 <span>
-                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
+                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" @change="addAll" v-model="item">
                     <!-- <v-autocomplete
                         v-model="item"
                         :items="states"
@@ -31,7 +31,15 @@
                         @keydown.enter.prevent="addAll"
                         allow-overflow="false"
                     ></v-autocomplete> -->
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                </span>
+                <i class="material-icons add" @click="addAll">add</i>
+            </div>
+            <div v-if="item" class="field">
+                <label for="add-list">Add a list item:</label>
+                <span>
+                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item2">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
                 </span>
                 <i class="material-icons add" @click="addAll">add</i>
             </div>
@@ -65,7 +73,9 @@ export default {
         return {
             title: null,
             item: '',
+            item2: ' ',
             quantity: null,
+            quantity2: null,
             price: 1,
             items: [],
             prices: [],
@@ -179,6 +189,7 @@ export default {
                     this.items.push(this.item)
 
                     // Update the item value which re-renders the field to be blank
+                    console.log("1:" + this.item + ",Q" + this.quantity + "2:" + this.item2 + ",Q" + this.quantity2 + "ALL: " + this.items)
                     this.item = null
                     this.feedback = null
 

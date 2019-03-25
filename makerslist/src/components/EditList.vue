@@ -1,6 +1,6 @@
 <template>
     <div v-if="list" class="edit-list bogus">
-        <h2 class="cyan-text text-darken-4 center-align">Edit {{ list.title }} List</h2>
+        <h2 class="cyan-text text-darken-4 center-align">{{ list.title }}</h2>
         <form @submit.prevent="EditList">
             <div class="field title">
                 <label for="title">List Title</label>

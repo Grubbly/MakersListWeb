@@ -12,8 +12,14 @@
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
                     <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="items[index]">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantities[index]">
+                    <input placeholder="Quantity" type="text" name="add-quantity" v-model="quantities[index]">
                     <i class="material-icons delete" @click="deleteItem(item)">delete</i>
+                    <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
+                        <v-icon dark color="white">remove</v-icon>
+                    </v-btn>
+                    <v-btn fab white small @click="adjustExistingQuantity(item, 1)" color="cyan darken-4" class="add">
+                        <v-icon dark color="white">add</v-icon>
+                    </v-btn>
                 </span> 
             </div>
             <div class="field">
@@ -33,7 +39,12 @@
                     ></v-autocomplete> -->
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
                 </span>
-                <i class="material-icons add" @click="addAll">add</i>
+                <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
+                    <v-icon dark color="white">remove</v-icon>
+                </v-btn>
+                <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
+                    <v-icon dark color="white">add</v-icon>
+                </v-btn>
             </div>
             <div v-if="item" class="field">
                 <label for="add-list">Add a list item:</label>
@@ -66,6 +77,7 @@
 import db from '@/firebase/init'
 import slugify from 'slugify'
 import axios from 'axios'
+import vue from 'vue'
 
 export default {
     name: 'AddList',
@@ -74,7 +86,7 @@ export default {
             title: null,
             item: '',
             item2: ' ',
-            quantity: null,
+            quantity: 1,
             quantity2: null,
             price: 1,
             items: [],
@@ -117,7 +129,6 @@ export default {
     methods: {
         AddList() {
             if(this.title) {
-
                 this.feedback = null
 
                 // Create slug using slugify
@@ -218,6 +229,32 @@ export default {
                 return index !== deleteIndex
             })
         },
+        adjustQuantity(val) {
+            this.quantity = Number(this.quantity)
+            this.quantity += val
+
+            if(this.quantity <= 0) {
+                this.quantity = null
+                this.item = null
+                return
+            }
+        },
+        adjustExistingQuantity(item,val) {
+            var itemIndex
+            this.items.filter((_item,index) => {
+                if (_item === item)
+                    itemIndex = index
+            })
+            let newVal = Number(this.quantities[itemIndex]) + val
+
+            if(newVal <= 0) {
+                newVal = null
+                this.deleteItem(item)
+                return
+            }
+
+            vue.set(this.quantities, itemIndex, newVal)
+        }
     },
 }
 </script>
@@ -249,6 +286,14 @@ export default {
     position: absolute;
     cursor: pointer;
     right: 0px;
+    bottom: 16px;
+    color: orange;
+}
+
+.add-list .subtract {
+    position: absolute;
+    cursor: pointer;
+    right: 50px;
     bottom: 16px;
     color: orange;
 }

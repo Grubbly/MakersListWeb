@@ -11,16 +11,24 @@
                 <span>
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
-                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" v-model="list.items[index]">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="list.quantities[index]">
+                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" @change="addAll" v-model="list.items[index]">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="list.quantities[index]">
                 </span>
                 <i class="material-icons delete" @click="deleteItem(item)">delete</i>
             </div>
             <div class="field">
                 <label for="add-list">Add a list item:</label>
                 <span>
-                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity">
+                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll"  @change="addAll" v-model="item">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                </span>
+                <i class="material-icons add" @click="addAll">add</i>
+            </div>
+            <div v-if="item" class="field">
+                <label for="add-list">Add a list item:</label>
+                <span>
+                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item2">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
                 </span>
                 <i class="material-icons add" @click="addAll">add</i>
             </div>
@@ -54,7 +62,9 @@ export default {
         return {
             list: null,
             item: null,
+            item2: null,
             quantity: null,
+            quantity2: null,
             feedback: null,
             submit: false,
         }

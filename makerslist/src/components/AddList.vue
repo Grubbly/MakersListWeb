@@ -11,8 +11,8 @@
                 <span class="item-display">
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
-                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll" v-model="items[index]">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantities[index]">
+                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="items[index]">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantities[index]">
                     <i class="material-icons delete" @click="deleteItem(item)">delete</i>
                 </span> 
             </div>
@@ -117,6 +117,7 @@ export default {
     methods: {
         AddList() {
             if(this.title) {
+
                 this.feedback = null
 
                 // Create slug using slugify
@@ -189,7 +190,7 @@ export default {
                     this.items.push(this.item)
 
                     // Update the item value which re-renders the field to be blank
-                    console.log("1:" + this.item + ",Q" + this.quantity + "2:" + this.item2 + ",Q" + this.quantity2 + "ALL: " + this.items)
+                    // console.log("1:" + this.item + ",Q" + this.quantity + "2:" + this.item2 + ",Q" + this.quantity2 + "ALL: " + this.items)
                     this.item = null
                     this.feedback = null
 

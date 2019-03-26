@@ -1,11 +1,14 @@
 <template>
 <!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
-  <div class="index bogus2">
-    <div class="card cyan darken-4" v-for="(list,index) in lists" :key="list.id">
-
+  <div class="bogus2 card grey lighten-3">
+    <nav class="cyan darken-4">
+      <div class="navbar-fixed cyan darken-4">
+        <router-link class="brand-logo">Lists</router-link>
+      </div>
+    </nav>
+    <div class="index bogus2">
+    <div v-for="(list,index) in lists" :key="list.id">
       <div class="card-content">
-
-
         <v-hover>
           <v-card
             slot-scope="{ hover }"
@@ -41,7 +44,7 @@
             <!-- Drop down menu for edit and delete options here? -->
 
 
-            <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
+            <!-- <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
               <v-btn
                 absolute
                 color="orange"
@@ -53,7 +56,8 @@
               >
                 <i class="material-icons edit">edit</i>
               </v-btn>
-              </router-link>
+              </router-link> -->
+              <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
               <div class="font-weight-light grey--text title mb-2">Quick Description</div>
               <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}">
                 <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3>
@@ -102,11 +106,13 @@
           <h2 class="green-text text-lighten-3">${{list.total}}</h2>
       </span> -->
     </div>
+        </div>
   </div>
 </template>
 
 <script>
 import db from '@/firebase/init'
+import RadialButton from '@/components/RadialButton'
 
 export default {
   name: 'Index',
@@ -117,6 +123,9 @@ export default {
         // slug: is a URL friendly version of the title.
       ],
     }
+  },
+  components: {
+    RadialButton,
   },
   methods: {
     deleteList(id) {
@@ -211,6 +220,12 @@ export default {
     font-size: 2em;
 }
 
+.index .edit{
+    position: absolute;
+    right: 15px;
+    top: -25px;
+}
+
 .index .totalPrice {
     position: absolute;
     bottom: -10px;
@@ -255,6 +270,4 @@ export default {
   position: absolute;
   width: 100%;
 }
-
-
 </style>

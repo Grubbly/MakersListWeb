@@ -13,7 +13,6 @@
                     <!-- Updates in the list display update elements in the items array -->
                     <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="items[index]">
                     <input placeholder="Quantity" type="text" name="add-quantity" v-model="quantities[index]">
-                    <i class="material-icons delete" @click="deleteItem(item)">delete</i>
                     <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>

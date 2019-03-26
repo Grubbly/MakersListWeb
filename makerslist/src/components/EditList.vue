@@ -14,7 +14,12 @@
                     <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" @change="addAll" v-model="list.items[index]">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="list.quantities[index]">
                 </span>
-                <i class="material-icons delete" @click="deleteItem(item)">delete</i>
+                <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
+                    <v-icon dark color="white">remove</v-icon>
+                </v-btn>
+                <v-btn fab white small @click="adjustExistingQuantity(item, 1)" color="cyan darken-4" class="add">
+                    <v-icon dark color="white">add</v-icon>
+                </v-btn>
             </div>
             <div class="field">
                 <label for="add-list">Add a list item:</label>
@@ -22,7 +27,12 @@
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll"  @change="addAll" v-model="item">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
                 </span>
-                <i class="material-icons add" @click="addAll">add</i>
+                <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
+                    <v-icon dark color="white">remove</v-icon>
+                </v-btn>
+                <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
+                    <v-icon dark color="white">add</v-icon>
+                </v-btn>
             </div>
             <div v-if="item" class="field">
                 <label for="add-list">Add a list item:</label>
@@ -30,7 +40,12 @@
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item2">
                     <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
                 </span>
-                <i class="material-icons add" @click="addAll">add</i>
+                <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
+                    <v-icon dark color="white">remove</v-icon>
+                </v-btn>
+                <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
+                    <v-icon dark color="white">add</v-icon>
+                </v-btn>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
@@ -55,6 +70,7 @@
 import db from '@/firebase/init'
 import slugify from 'slugify'
 import axios from 'axios'
+import vue from 'vue'
 
 export default {
     name: 'EditList',
@@ -176,6 +192,32 @@ export default {
             this.list.productNames = []
             this.list.total = 0
         },
+        adjustQuantity(val) {
+            this.quantity = Number(this.quantity)
+            this.quantity += val
+
+            if(this.quantity <= 0) {
+                this.quantity = null
+                this.item = null
+                return
+            }
+        },
+        adjustExistingQuantity(item,val) {
+            var itemIndex
+            this.list.items.filter((_item,index) => {
+                if (_item === item)
+                    itemIndex = index
+            })
+            let newVal = Number(this.list.quantities[itemIndex]) + val
+
+            if(newVal <= 0) {
+                newVal = null
+                this.deleteItem(item)
+                return
+            }
+
+            vue.set(this.list.quantities, itemIndex, newVal)
+        }
     },
     created() {
         let list = db.collection('lists').where('slug', '==', this.$route.params.list_slug)
@@ -217,6 +259,14 @@ export default {
     position: absolute;
     cursor: pointer;
     right: 0px;
+    bottom: 16px;
+    color: orange;
+}
+
+.edit-list .subtract {
+    position: absolute;
+    cursor: pointer;
+    right: 50px;
     bottom: 16px;
     color: orange;
 }

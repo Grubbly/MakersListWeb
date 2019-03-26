@@ -1,13 +1,24 @@
 <template>
 <!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
-  <div class="bogus2 card grey lighten-3">
-    <nav class="cyan darken-4">
-      <div class="navbar-fixed cyan darken-4">
-        <router-link class="brand-logo">Lists</router-link>
+  <div class="bogus2 card grey lighten-3" style="padding-top: 0.01px;">
+    <nav class="cyan grey lighten-4" style="max-width: 90%; margin-left: 5%;">
+      <div class="navbar grey lighten-4">
+        <div class="bogus2">
+          <v-text-field
+            hide-details
+            prepend-icon="search"
+            single-line
+            v-model="search"
+            placeholder="Search Lists"
+            autofocus="true"
+            color="cyan darken-4"
+            class="text-white"
+          ></v-text-field>
+        </div>
       </div>
     </nav>
     <div class="index bogus2">
-    <div v-for="(list,index) in lists" :key="list.id">
+    <div v-for="(list,index) in filteredLists" :key="list.id">
       <div class="card-content">
         <v-hover>
           <v-card
@@ -97,9 +108,6 @@
             </v-card-text>
           </v-card>
         </v-hover>
-
-
-        <i class="material-icons delete" @click="deleteList(list.id)">delete</i>
         <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
       </div>
       <!-- <span class="totalPrice">
@@ -122,6 +130,7 @@ export default {
       lists: [
         // slug: is a URL friendly version of the title.
       ],
+      search: ''
     }
   },
   components: {
@@ -162,6 +171,13 @@ export default {
       })
     }
   },
+  computed: {
+    filteredLists: function() {
+      return this.lists.filter((list) => {
+        return list.title.toLowerCase().match(this.search.toLowerCase())
+      })
+    }
+  }
 }
 </script>
 

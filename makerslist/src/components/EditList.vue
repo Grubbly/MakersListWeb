@@ -1,5 +1,5 @@
 <template>
-    <div v-if="list" class="edit-list bogus">
+    <div v-if="list" class="edit-list bogus" style="margin-top: 60px;">
         <h2 class="cyan-text text-darken-4 center-align">{{ list.title }}</h2>
         <form @submit.prevent="EditList">
             <div class="field title">
@@ -273,7 +273,7 @@ export default {
 
 .edit-list span {
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 3fr 1fr;
     grid-gap: 10px;
 }
 </style>

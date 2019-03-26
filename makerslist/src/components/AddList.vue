@@ -1,5 +1,5 @@
 <template>
-    <div class="card add-list bogus grey lighten-3">
+    <div class="card add-list bogus grey lighten-3" style="margin-top: 60px;">
         <h2 class="center-align cyan-text text-darken-4">New List</h2>
         <form @submit.prevent="AddList">
             <div class="field title">
@@ -299,13 +299,13 @@ export default {
 
 .add-list span {
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 3fr 1fr;
     grid-gap: 10px;
 }
 
 .add-list .item-display {
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 3fr 1fr;
     grid-gap: 10px;
 }
 

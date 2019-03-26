@@ -4,7 +4,17 @@
         <form @submit.prevent="AddList">
             <div class="field title">
                 <label for="title">List Title</label>
-                <input placeholder="Title" type="text" name="title" @keydown.enter.prevent="" v-model="title">
+                <v-text-field
+                    single-line
+                    v-model="title"
+                    placeholder="Title"
+                    autofocus="true"
+                    color="cyan darken-4"
+                    class="text-white"
+                    label="List Title"
+                    name="title"
+                    @keydown.enter.prevent=""
+                ></v-text-field>
             </div>
             <div v-for="(item, index) in items" :key="index" class="field">
                 <label for="item">Item:</label>

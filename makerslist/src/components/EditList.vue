@@ -1,10 +1,21 @@
 <template>
-    <div v-if="list" class="edit-list bogus" style="margin-top: 60px;">
+    <div v-if="list" class="card grey lighten-3 edit-list bogus" style="margin-top: 60px;">
         <h2 class="cyan-text text-darken-4 center-align">{{ list.title }}</h2>
         <form @submit.prevent="EditList">
             <div class="field title">
                 <label for="title">List Title</label>
-                <input placeholder="Title" type="text" name="title" @keydown.enter.prevent="" v-model="list.title">
+                <v-text-field
+                    single-line
+                    v-model="list.title"
+                    placeholder="Title"
+                    autofocus="true"
+                    color="cyan darken-4"
+                    class="text-white"
+                    label="List Title"
+                    name="title"
+                    @keydown.enter.prevent=""
+                ></v-text-field>
+                <!-- <input autofocus="true" placeholder="Title" type="text" name="title" @keydown.enter.prevent="" v-model="list.title"> -->
             </div>
             <div v-for="(item, index) in list.items" :key="index" class="field">
                 <label for="item">Item:</label>

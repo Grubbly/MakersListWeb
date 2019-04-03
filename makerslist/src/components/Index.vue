@@ -121,6 +121,7 @@
 <script>
 import db from '@/firebase/init'
 import RadialButton from '@/components/RadialButton'
+import Vue from 'vue'
 
 export default {
   name: 'Index',
@@ -152,6 +153,21 @@ export default {
   created() {
     // fetch data from firestore
     // snapshot refers to the state of the lists collection at a certain point in time
+
+    let reference = db.collection('lists')
+
+    // Listen for changes in the collection
+    // Every CUD operation on the database calls this function
+    // docChanges() returns a snapshot of the whole database
+    reference.onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          this.lists.forEach((list,index) => {
+            if(list.title == change.doc.data().title) {
+              Vue.set(this.lists, index, change.doc.data())
+            }
+          })
+        });
+    })
 
     if(this.filter) {
       db.collection('lists').where('user_id', '==', this.filter).get().then(snapshot => {

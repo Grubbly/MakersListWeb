@@ -8,7 +8,7 @@
                     <v-flex v-for="n in 9" :key="n" xs4 d-flex>
                     <v-card flat tile class="d-flex">
                         <v-img
-                        :src="`https://picsum.photos/500/300?image=${Math.floor(n * (Math.random()*100) + 50)}`"
+                        :src=randomPic()
                         :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(n * (Math.random()*100) + 50)}`"
                         aspect-ratio="1"
                         class="cyan darken-4"
@@ -55,7 +55,7 @@
                           <v-card class="card">
                             <div class="card-image">
                                 <v-img
-                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*20) + 50)}`"
+                                    :src=list.itemDetails[index][0].imageUrl
                                     :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*20) + 50)}`"
                                     aspect-ratio="1"
                                     class="cyan darken-4"
@@ -67,7 +67,7 @@
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator cyan-text text-darken-4">{{item}} ({{list.quantities[index]}})<i class="material-icons right">more_vert</i></span>
-                                <h6 class="green-text text-lighten-1">Starting at: ${{list.prices[3*index]}}</h6>
+                                <h6 class="green-text text-lighten-1">Starting at: ${{list.itemDetails[index][0].price}}</h6>
 
                             <div class="text-xs-left">
                                 <v-dialog
@@ -92,11 +92,11 @@
 
                                     <v-card-text class="grey-text text-darken-1">
                                         <div class="collection">
-                                            <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
+                                            <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
                                             class="collection-item cyan-text text-darken-4">
-                                            <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
-                                            {{list.productNames[3*index + priceIndex]}} 
-                                            <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
+                                            <h5 class="orange-text">{{detail.supplierName}}</h5> 
+                                            {{detail.productName}} 
+                                            <p class="green-text">${{detail.price}}</p>
                                             </a>
                                         </div>
                                     </v-card-text>
@@ -119,11 +119,11 @@
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title cyan-text text-darken-4">{{item}}<i class="material-icons right">close</i></span>
-                                <p>This description is full of buzzwords that make the product sound super cool!</p>
-                                <p>Shipping Information</p>
+                                <p>{{list.itemDetails[index][0].description}}</p>
+                                <!-- <p>Shipping Information</p>
                                 <p>Ratings</p>
                                 <p>Vendors</p>
-                                <p>More...</p>
+                                <p>More...</p> -->
                             </div>
                         </v-card>
                     </v-flex>
@@ -141,11 +141,11 @@
                         <v-card>
                         <v-card-text class="grey lighten-3">
                             <div class="collection">
-                                <a v-for="(item,priceIndex) in 3" :key="priceIndex" :href="list.urls[3*index + priceIndex]" 
+                                <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
                                 class="collection-item cyan-text text-darken-4">
-                                <h5 class="orange-text">{{list.supplierNames[index]}}</h5> 
-                                {{list.productNames[3*index + priceIndex]}} 
-                                <p class="green-text">${{list.prices[3*index + priceIndex]}}</p>
+                                <h5 class="orange-text">{{detail.supplierName}}</h5> 
+                                {{detail.productName}} 
+                                <p class="green-text">${{detail.price}}</p>
                                 </a>
                             </div>
                         </v-card-text>
@@ -172,6 +172,19 @@ export default {
             viewTypes: ['Photo Grid', 'Icon List'],
             tab: null,
             dialog: false,
+        }
+    },
+    methods: {
+        randomPic() {
+            let images = []
+            this.list.itemDetails.forEach(item => {
+                for (let index = 0; index < 3; index++) {
+                    if(item[index] !== undefined) {
+                        images.push(item[index].imageUrl)
+                    }
+                }
+            })
+            return images[Math.floor(Math.random()*images.length)]
         }
     },
     created() {

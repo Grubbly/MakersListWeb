@@ -109,6 +109,7 @@ export default {
             slug: null,
             id: null,
             submit: false,
+            itemDetails: [],
 
             states: [
                 'Alabama', 'Alaska', 'American Samoa', 'Arizona',
@@ -151,53 +152,50 @@ export default {
                 let promises = [];
 
                 this.items.forEach(item => {
-                    let itemURL = 'https://us-central1-makerslist-7f3d8.cloudfunctions.net/findPrice?name=' + item
+                    let itemURL = 'http://us-central1-makerslist-7f3d8.cloudfunctions.net/centralQueue/api/append?name=' + item + '&key=whatever'
                     promises.push(axios.get(itemURL))
                 })
 
                 // SOMEHOW MAKE THIS RETURN A PROMISE - or put this back in addAll
-                axios.all(promises).then((results,index) => {
-                results.forEach(priceInfo => {
-                    
-                    // console.log(priceInfo.data.name)
-                    // console.log(priceInfo.data.suppliers.prices[0].url)
-                    // console.log(priceInfo.data.suppliers.prices[0].price)
-                    
-                    this.vendors.push(priceInfo.data.suppliers.supplierName)
+                axios.all(promises).catch(err => {
+                    console.log(err)
+                })
 
-                    // TODO: Multiply by quantity when endpoint is up (*this.quantities[index] below)
-                    this.total += Number(priceInfo.data.suppliers.prices[0].price);
-                    priceInfo.data.suppliers.prices.forEach(product => {
-                        this.prices.push(product.price)
-                        this.urls.push(product.url)
-                        this.productNames.push(product.productName)
-                        //this.total += Number(product.price)
-                    })
+                this.items.forEach((item,index) => {
+                    this.itemDetails.push({
+                                description: "Loading...",
+                                imageUrl: "Loading...",
+                                price: "Loading...",
+                                productName: "Loading...",
+                                supplierName: "Loading...",
+                                url: "Loading"
+                                })
+                })
 
-                    // console.log(this.prices)
-                    // console.log(this.total)
+
+                db.collection('items').get().then(snapshot => {
+                    snapshot.forEach(item => {
+                        this.items.forEach((listItem,index) => {
+                          if(item.id === listItem) {
+                            // console.log("Found", listItem, "Pairing With", item.data())
+                            this.itemDetails[index] = (item.data())
+                            }
+                        })
                     })
                 }).then(() => {
-                    // console.log("PRICES: " + this.prices)
                     db.collection('lists').add({
-                    title: this.title,
-                    slug: this.slug,
-                    items: this.items,
-                    prices: this.prices,
-                    total: Math.round(this.total*100)/100,
-                    urls: this.urls,
-                    supplierNames: this.vendors,
-                    productNames: this.productNames,
-                    quantities: this.quantities,
-                    user_id: this.id,
+                        title: this.title,
+                        items: this.items,
+                        itemDetails: this.itemDetails,
+                        quantities: this.quantities,
+                        slug: this.slug,
+                        total: Number(0),
+                        user_id: this.id,
                     }).then(() => {
                         this.$router.push({name: 'Index'})
                     }).catch( err => {
                         console.log(err)
                     })
-                })
-                .catch(err => {
-                    console.log(err)
                 })
             } else {
                 this.feedback = 'Please enter a title'

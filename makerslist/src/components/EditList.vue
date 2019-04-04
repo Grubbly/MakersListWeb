@@ -111,43 +111,45 @@ export default {
                 let promises = [];
 
                 this.list.items.forEach(item => {
-                    let itemURL = 'https://us-central1-makerslist-7f3d8.cloudfunctions.net/findPrice?name=' + item
+                    let itemURL = 'http://us-central1-makerslist-7f3d8.cloudfunctions.net/centralQueue/api/append?name=' + item + '&key=whatever'
                     promises.push(axios.get(itemURL))
                 })
 
-                axios.all(promises).then(results => {
-                results.forEach(priceInfo => {
-                    
-                    // console.log(priceInfo.data.name)
-                    // console.log(priceInfo.data.suppliers.prices[0].url)
-                    // console.log(priceInfo.data.suppliers.prices[0].price)
-                    
-                    this.list.vendors.push(priceInfo.data.suppliers.supplierName)
+                // SOMEHOW MAKE THIS RETURN A PROMISE - or put this back in addAll
+                axios.all(promises).catch(err => {
+                    console.log(err)
+                })
 
-                    this.total += priceInfo.data.suppliers.prices[0].price;
-                    priceInfo.data.suppliers.prices.forEach(product => {
-                        this.list.prices.push(product.price)
-                        this.list.urls.push(product.url)
-                        this.list.productNames.push(product.productName)
-                        // this.list.total += Number(product.price)
+                this.list.items.forEach((item,index) => {
+                    this.list.itemDetails.push({
+                        description: "Loading...",
+                        imageUrl: "Loading...",
+                        price: "Loading...",
+                        productName: "Loading...",
+                        supplierName: "Loading...",
+                        url: "Loading"
                     })
+                })
 
-                    // console.log(this.list.prices)
-                    // console.log(this.list.total)
+                db.collection('items').get().then(snapshot => {
+                    snapshot.forEach(item => {
+                        this.list.items.forEach((listItem,index) => {
+                          if(item.id === listItem) {
+                            // console.log("Found", listItem, "Pairing With", item.data())
+                            this.list.itemDetails[index] = (item.data())
+                            }
+                        })
                     })
                 }).then(() => {
                     // console.log("PRICES: " + this.list.prices)
                     db.collection('lists').doc(this.list.id).update({
-                    title: this.list.title,
-                    slug: this.list.slug,
-                    items: this.list.items,
-                    prices: this.list.prices,
-                    total: Math.round(this.list.total*100)/100,
-                    urls: this.list.urls,
-                    supplierNames: this.list.vendors,
-                    productNames: this.list.productNames,
-                    quantities: this.list.quantities,
-                    user_id: this.list.id,
+                        title: this.list.title,
+                        items: this.list.items,
+                        itemDetails: this.list.itemDetails,
+                        quantities: this.list.quantities,
+                        slug: this.list.slug,
+                        total: Number(0),
+                        user_id: this.list.id,
                     }).then(() => {
                         this.$router.go(-1)
                     }).catch( err => {
@@ -163,7 +165,7 @@ export default {
 
         },
         addAll() {
-            if(this.item) {
+            if(this.item2) {
                 if(!isNaN(this.quantity) && this.quantity >= 1) {
 
                     this.list.items.push(this.item)

@@ -22,10 +22,11 @@
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
                     <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="items[index]">
-                    <input placeholder="Quantity" type="text" name="add-quantity" v-model="quantities[index]">
+                    
                     <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
+                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" v-model="quantities[index]">
                     <v-btn fab white small @click="adjustExistingQuantity(item, 1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
                     </v-btn>
@@ -46,14 +47,15 @@
                         @keydown.enter.prevent="addAll"
                         allow-overflow="false"
                     ></v-autocomplete> -->
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
-                </span>
+                    
                 <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                     <v-icon dark color="white">remove</v-icon>
                 </v-btn>
+                <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
                 <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                     <v-icon dark color="white">add</v-icon>
                 </v-btn>
+                </span>
             </div>
             <div v-if="item" class="field">
                 <label for="add-list">Add a list item:</label>
@@ -290,31 +292,33 @@ export default {
 }
 
 .add-list .add {
-    position: absolute;
+    cursor: pointer;
+    bottom: 16px;
+    color: orange;
+}
+
+.add-list .subtract {
     cursor: pointer;
     right: 0px;
     bottom: 16px;
     color: orange;
 }
 
-.add-list .subtract {
-    position: absolute;
-    cursor: pointer;
-    right: 50px;
-    bottom: 16px;
-    color: orange;
-}
-
 .add-list span {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 100fr .1fr 10fr .1fr;
     grid-gap: 10px;
 }
 
 .add-list .item-display {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 100fr .1fr 10fr .1fr;
     grid-gap: 10px;
+}
+
+.add-list .quantity {
+    text-align: center;
+    font-size: 35px;
 }
 
   .custom-loader {

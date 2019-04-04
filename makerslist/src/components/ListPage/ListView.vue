@@ -87,15 +87,15 @@
                                     class="headline cyan darken-4"
                                     primary-title
                                     >
-                                    Buying Options
+                                    Puchasing Options
                                     </v-card-title>
 
                                     <v-card-text class="grey-text text-darken-1">
                                         <div class="collection">
                                             <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
                                             class="collection-item cyan-text text-darken-4">
-                                            <h5 class="orange-text">{{detail.supplierName}}</h5> 
-                                            {{detail.productName}} 
+                                            <h5 class="orange-text">{{detail.productName}} </h5>                                             
+                                            {{detail.supplierName}}
                                             <p class="green-text">${{detail.price}}</p>
                                             </a>
                                         </div>

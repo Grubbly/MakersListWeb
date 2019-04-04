@@ -23,40 +23,45 @@
                     <!-- Bind to the position in items array -->
                     <!-- Updates in the list display update elements in the items array -->
                     <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" @change="addAll" v-model="list.items[index]">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="list.quantities[index]">
+                
+                    <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
+                        <v-icon dark color="white">remove</v-icon>
+                    </v-btn>
+                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="list.quantities[index]">
+                    <v-btn fab white small @click="adjustExistingQuantity(item, 1)" color="cyan darken-4" class="add">
+                        <v-icon dark color="white">add</v-icon>
+                    </v-btn>
                 </span>
-                <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
-                    <v-icon dark color="white">remove</v-icon>
-                </v-btn>
-                <v-btn fab white small @click="adjustExistingQuantity(item, 1)" color="cyan darken-4" class="add">
-                    <v-icon dark color="white">add</v-icon>
-                </v-btn>
             </div>
             <div class="field">
                 <label for="add-list">Add a list item:</label>
                 <span>
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll"  @change="addAll" v-model="item">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                
+                    <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
+                        <v-icon dark color="white">remove</v-icon>
+                    </v-btn>
+                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                    <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
+                        <v-icon dark color="white">add</v-icon>
+                    </v-btn>
                 </span>
-                <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
-                    <v-icon dark color="white">remove</v-icon>
-                </v-btn>
-                <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
-                    <v-icon dark color="white">add</v-icon>
-                </v-btn>
             </div>
             <div v-if="item" class="field">
                 <label for="add-list">Add a list item:</label>
                 <span>
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item2">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
+                
+                    <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
+                        <v-icon dark color="white">remove</v-icon>
+                    </v-btn>
+
+                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
+
+                    <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
+                        <v-icon dark color="white">add</v-icon>
+                    </v-btn>
                 </span>
-                <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
-                    <v-icon dark color="white">remove</v-icon>
-                </v-btn>
-                <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
-                    <v-icon dark color="white">add</v-icon>
-                </v-btn>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>
@@ -268,26 +273,28 @@ export default {
     color:#f9e4e4; 
 }
 
-.edit-list .add {
-    position: absolute;
+.edit-list .add {    
+    cursor: pointer;
+    bottom: 16px;
+    color: orange;
+}
+
+.edit-list .subtract {
     cursor: pointer;
     right: 0px;
     bottom: 16px;
     color: orange;
 }
 
-.edit-list .subtract {
-    position: absolute;
-    cursor: pointer;
-    right: 50px;
-    bottom: 16px;
-    color: orange;
-}
-
 .edit-list span {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 100fr .1fr 10fr .1fr;
     grid-gap: 10px;
+}
+
+.edit-list .quantity {
+    text-align: center;
+    font-size: 35px;
 }
 </style>
 

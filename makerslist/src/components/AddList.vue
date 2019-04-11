@@ -51,11 +51,11 @@
             <div v-if="item" class="field">
                 <label for="add-list">Add a list item:</label>
                     <span>
-                        <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" @change="addAll" v-model="item">
+                        <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" @change="addAll" v-model="item2">
                     <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
-                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity2">
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
                     </v-btn>

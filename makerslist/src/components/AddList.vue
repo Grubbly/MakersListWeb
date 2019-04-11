@@ -39,18 +39,6 @@
                 <label for="add-list">Add a list item:</label>
                 <span>
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" @change="addAll" v-model="item">
-                    <!-- <v-autocomplete
-                        v-model="item"
-                        :items="states"
-                        persistent-hint
-                        prepend-icon="mdi-database-search"
-                        label="Add a list item:"
-                        placeholder="Item Name"
-                        type="text"
-                        @keydown.enter.prevent="addAll"
-                        allow-overflow="false"
-                    ></v-autocomplete> -->
-                    
                 <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                     <v-icon dark color="white">remove</v-icon>
                 </v-btn>
@@ -62,11 +50,16 @@
             </div>
             <div v-if="item" class="field">
                 <label for="add-list">Add a list item:</label>
-                <span>
-                    <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item2">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
+                    <span>
+                        <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" @change="addAll" v-model="item">
+                    <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
+                        <v-icon dark color="white">remove</v-icon>
+                    </v-btn>
+                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                    <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
+                        <v-icon dark color="white">add</v-icon>
+                    </v-btn>
                 </span>
-                <i class="material-icons add" @click="addAll">add</i>
             </div>
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{feedback}}</p>

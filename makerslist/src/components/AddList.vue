@@ -16,22 +16,25 @@
                     @keydown.enter.prevent=""
                 ></v-text-field>
             </div>
-            <div v-for="(item, index) in items" :key="index" class="field">
-                <label for="item">Item:</label>
-                <span class="item-display">
-                    <!-- Bind to the position in items array -->
-                    <!-- Updates in the list display update elements in the items array -->
-                    <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="items[index]">
-                    
-                    <v-btn fab white small @click="adjustExistingQuantity(item, -1)" color="cyan darken-4" class="subtract">
-                        <v-icon dark color="white">remove</v-icon>
-                    </v-btn>
-                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" v-model="quantities[index]">
-                    <v-btn fab white small @click="adjustExistingQuantity(item, 1)" color="cyan darken-4" class="add">
-                        <v-icon dark color="white">add</v-icon>
-                    </v-btn>
-                </span> 
-            </div>
+            <draggable v-model="itemsAndQuantities" handle=".handle" ghost-class="ghost">
+                <div v-for="(itemPair,index) in itemsAndQuantities" :key="index" class="field">
+                    <label for="item">Item:</label>
+                    <span class="item-display">
+                        <v-icon class="handle">drag_handle</v-icon>
+                        <!-- Bind to the position in items array -->
+                        <!-- Updates in the list display update elements in the items array -->
+                        <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="itemPair.item">
+                        
+                        <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, -1)" color="cyan darken-4" class="subtract">
+                            <v-icon dark color="white">remove</v-icon>
+                        </v-btn>
+                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" v-model="itemPair.quantity">
+                        <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, 1)" color="cyan darken-4" class="add">
+                            <v-icon dark color="white">add</v-icon>
+                        </v-btn>
+                    </span> 
+                </div>
+            </draggable>
             <div class="field">
                 <label for="add-list">Add a list item:</label>
                 <span>
@@ -89,6 +92,7 @@ import db from '@/firebase/init'
 import slugify from 'slugify'
 import axios from 'axios'
 import vue from 'vue'
+import draggable from 'vuedraggable'
 
 export default {
     name: 'AddList',
@@ -112,6 +116,7 @@ export default {
             id: null,
             submit: false,
             itemDetails: [],
+            itemsAndQuantities: [],
 
             states: [
                 'Alabama', 'Alaska', 'American Samoa', 'Arizona',
@@ -131,18 +136,23 @@ export default {
             ]
         }
     },
+    components: {
+        draggable,
+    },
     created() {
         let ref = db.collection('users')
         ref.doc(this.$route.params.id).get()
         .then(user => {
             this.id = user.data().user_id
         })
+
+        this.itemsAndQuantities = this.combinedItemsAndQuantities()
     },
     methods: {
         AddList() {
             if(this.title) {
                 this.feedback = null
-
+                this.updateIndividualItemsAndQuantities()
                 // Create slug using slugify
                 // replacement replaces all spaces with specified char
                 this.slug = slugify(this.title, {
@@ -170,7 +180,7 @@ export default {
                                 price: "Loading...",
                                 productName: "Loading...",
                                 supplierName: "Loading...",
-                                url: "Loading"
+                                url: "Loading..."
                                 })
                 })
 
@@ -206,7 +216,6 @@ export default {
         addAll() {
             if(this.item) {
                 if(!isNaN(this.quantity) && this.quantity >= 1) {
-
                     this.items.push(this.item)
 
                     // Update the item value which re-renders the field to be blank
@@ -219,6 +228,8 @@ export default {
                     // Update the item value which re-renders the field to be blank
                     this.quantity = 1
                     this.feedback = null
+
+                    this.itemsAndQuantities = this.combinedItemsAndQuantities();
                 } else {
                     this.feedback = 'Please enter a valid quantity.'
                 }
@@ -227,15 +238,8 @@ export default {
             }
         },
         deleteItem(item) {
-            var deleteIndex
-            this.items = this.items.filter((_item,index) => {
-                if (_item === item)
-                    deleteIndex = index
-
-                return _item !== item 
-            })
-            this.quantities = this.quantities.filter((quantity, index) => {
-                return index !== deleteIndex
+            this.itemsAndQuantities = this.itemsAndQuantities.filter((itemPair,index) => {
+                return itemPair.item !== item 
             })
         },
         adjustQuantity(val) {
@@ -250,11 +254,11 @@ export default {
         },
         adjustExistingQuantity(item,val) {
             var itemIndex
-            this.items.filter((_item,index) => {
-                if (_item === item)
+            this.itemsAndQuantities.filter((itemPair,index) => {
+                if (itemPair.item === item)
                     itemIndex = index
             })
-            let newVal = Number(this.quantities[itemIndex]) + val
+            let newVal = Number(this.itemsAndQuantities[itemIndex].quantity) + val
 
             if(newVal <= 0) {
                 newVal = null
@@ -262,8 +266,29 @@ export default {
                 return
             }
 
-            vue.set(this.quantities, itemIndex, newVal)
-        }
+            vue.set(this.itemsAndQuantities, itemIndex, {
+                item: this.itemsAndQuantities[itemIndex].item,
+                quantity: newVal,
+            })
+        },
+        combinedItemsAndQuantities() {
+            let itemQuantityPairs = [];
+            this.items.forEach((item,index) => {
+                itemQuantityPairs.push({
+                    item: item,
+                    quantity: this.quantities[index],
+                })
+            })
+            return itemQuantityPairs;
+        },
+        updateIndividualItemsAndQuantities() {
+            this.items = []
+            this.quantities = []
+            this.itemsAndQuantities.forEach((itemPair) => {
+                this.items.push(itemPair.item)
+                this.quantities.push(itemPair.quantity)
+            })
+        },
     },
 }
 </script>
@@ -312,7 +337,7 @@ export default {
 
 .add-list .item-display {
     display: grid;
-    grid-template-columns: 100fr .1fr 10fr .1fr;
+    grid-template-columns: .1fr 100fr .1fr 10fr .1fr;
     grid-gap: 10px;
 }
 
@@ -329,5 +354,17 @@ export default {
   .add-list .loading-circle {
       margin-top: 5px;
       margin-bottom: 5px;
+  }
+
+  .add-list .handle {
+    float: left;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    cursor: grab;
+  }
+
+  .add-list .ghost {
+    opacity: 0.5;
+    background: #006064;
   }
 </style>

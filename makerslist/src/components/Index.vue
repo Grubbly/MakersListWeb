@@ -35,9 +35,9 @@
               height="200px"
             >
             <v-carousel-item
-              v-for="(item,i) in getPics(list)"
+              v-for="(item,i) in 1"
               :key="i"
-              :src="item"
+              :src="getPics(list)[i]"
             >
             </v-carousel-item>
 
@@ -58,34 +58,12 @@
               class="pt-4"
               style="position: relative;"
             >
-
-
-            <!-- Drop down menu for edit and delete options here? -->
-
-
-            <!-- <router-link :to="{name: 'EditList', params: {list_slug: list.slug} }">
-              <v-btn
-                absolute
-                color="orange"
-                class="white--text"
-                fab
-                large
-                right
-                top
-              >
-                <i class="material-icons edit">edit</i>
-              </v-btn>
-              </router-link> -->
               <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
               <div class="font-weight-light grey--text title mb-2">Quick Description</div>
               <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}">
                 <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3>
                 <h6 class="green-text text-lighten-2">${{list.total}}</h6>
               </router-link>
-
-                <!-- Maybe take this out? -->
-                <!-- <div class="font-weight-light grey--text title mb-2">Items:</div> -->
-
                 <v-expansion-panel expand>
                   <v-expansion-panel-content class="grey lighten-2">
                     <div slot="header">

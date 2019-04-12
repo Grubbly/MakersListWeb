@@ -8,7 +8,7 @@
                     <v-flex v-for="n in 9" :key="n" xs4 d-flex>
                     <v-card flat tile class="d-flex">
                         <v-img
-                        :src="`https://picsum.photos/500/300?image=${Math.floor(n * (Math.random()*100) + 50)}`"
+                        :src=randomPic()
                         :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(n * (Math.random()*100) + 50)}`"
                         aspect-ratio="1"
                         class="cyan darken-4"
@@ -55,7 +55,7 @@
                           <v-card class="card">
                             <div class="card-image">
                                 <v-img
-                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*20) + 50)}`"
+                                    :src=list.itemDetails[index][0].imageUrl
                                     :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*20) + 50)}`"
                                     aspect-ratio="1"
                                     class="cyan darken-4"
@@ -67,16 +67,63 @@
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator cyan-text text-darken-4">{{item}} ({{list.quantities[index]}})<i class="material-icons right">more_vert</i></span>
-                            <p><a href="https://amazon.com">Buy it now</a></p>
-                            <span class="green-text">${{list.prices[index]}}</span>
+                                <h6 class="green-text text-lighten-1">Starting at: ${{list.itemDetails[index][0].price}}</h6>
+
+                            <div class="text-xs-left">
+                                <v-dialog
+                                v-model="dialog"
+                                width="500"
+                                >
+                                <v-btn
+                                    slot="activator"
+                                    color="cyan darken-3"
+                                    dark
+                                >
+                                    Puchasing options
+                                </v-btn>
+
+                                <v-card class="white-text">
+                                    <v-card-title
+                                    class="headline cyan darken-4"
+                                    primary-title
+                                    >
+                                    Puchasing Options
+                                    </v-card-title>
+
+                                    <v-card-text class="grey-text text-darken-1">
+                                        <div class="collection">
+                                            <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
+                                            class="collection-item cyan-text text-darken-4">
+                                            <h5 class="orange-text">{{detail.productName}} </h5>                                             
+                                            {{detail.supplierName}}
+                                            <p class="green-text">${{detail.price}}</p>
+                                            </a>
+                                        </div>
+                                    </v-card-text>
+
+                                    <v-divider></v-divider>
+
+                                    <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        color="primary"
+                                        flat
+                                        @click="dialog = false"
+                                    >
+                                        Exit
+                                    </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                                </v-dialog>
+                            </div>
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title cyan-text text-darken-4">{{item}}<i class="material-icons right">close</i></span>
-                                <p>This description is full of buzzwords that make the product sound super cool!</p>
-                                <p>Shipping Information</p>
+                                <p>{{list.itemDetails[index][0].description}}</p>
+                                <!-- <p>Shipping Information</p>
                                 <p>Ratings</p>
                                 <p>Vendors</p>
-                                <p>More...</p>
+                                <p>More...</p> -->
                             </div>
                         </v-card>
                     </v-flex>
@@ -88,30 +135,19 @@
                    <v-expansion-panel expand>
                     <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
                         <div slot="header">
-                        <!-- WIP -->
-                        <!-- <v-img
-                                    :src="`https://picsum.photos/500/300?image=${Math.floor(index * (Math.random()*20) + 50)}`"
-                                    :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*20) + 50)}`"
-                                    aspect-ratio="1"
-                                    class="circle cyan darken-4"
-                                    >
-                                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                                        <v-progress-circular indeterminate color="cyan"></v-progress-circular>
-                                    </v-layout>
-                        </v-img> -->
                         <span> {{item}} </span>
                         <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
                         </div>
                         <v-card>
-                        <v-card-text class="grey lighten-2">
-                            <ul>
-                            <!-- !!!!! THIS IS TEMPORARY DEBUG CHANGE ME !!!!! -->
-                            <div v-for="(item,index) in list.items" :key="index" class="first">
-                                <li class="chip waves-effect waves-green btn-large">
-                                    <i class="material-icons">attach_money</i> Amazon: ${{list.prices[index]}}
-                                </li>
+                        <v-card-text class="grey lighten-3">
+                            <div class="collection">
+                                <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
+                                class="collection-item cyan-text text-darken-4">
+                                <h5 class="orange-text">{{detail.supplierName}}</h5> 
+                                {{detail.productName}} 
+                                <p class="green-text">${{detail.price}}</p>
+                                </a>
                             </div>
-                            </ul>
                         </v-card-text>
                         </v-card>
                     </v-expansion-panel-content>
@@ -135,6 +171,20 @@ export default {
             grid: true,
             viewTypes: ['Photo Grid', 'Icon List'],
             tab: null,
+            dialog: false,
+        }
+    },
+    methods: {
+        randomPic() {
+            let images = []
+            this.list.itemDetails.forEach(item => {
+                for (let index = 0; index < 3; index++) {
+                    if(item[index] !== undefined) {
+                        images.push(item[index].imageUrl)
+                    }
+                }
+            })
+            return images[Math.floor(Math.random()*images.length)]
         }
     },
     created() {

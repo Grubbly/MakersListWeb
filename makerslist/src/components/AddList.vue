@@ -28,7 +28,9 @@
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, -1)" color="cyan darken-4" class="subtract">
                             <v-icon dark color="white">remove</v-icon>
                         </v-btn>
-                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" v-model="itemPair.quantity">
+                        <div class="quantity">
+                            <input placeholder="Quantity" type="text" name="add-quantity" v-model="itemPair.quantity">
+                        </div>  
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, 1)" color="cyan darken-4" class="add">
                             <v-icon dark color="white">add</v-icon>
                         </v-btn>
@@ -42,7 +44,9 @@
                 <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                     <v-icon dark color="white">remove</v-icon>
                 </v-btn>
-                <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                <div class="quantity">
+                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                </div>
                 <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                     <v-icon dark color="white">add</v-icon>
                 </v-btn>
@@ -55,7 +59,9 @@
                     <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
-                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity2">
+                    <div class="quantity">
+                        <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity2">
+                    </div>
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
                     </v-btn>
@@ -301,6 +307,15 @@ export default {
     position: relative;
 }
 
+.quantity input[type=text] {
+    font-size: 40px;
+    text-align: center;
+    bottom: 19px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
 .add-list .delete {
     position: absolute;
     right: 0px;
@@ -311,14 +326,14 @@ export default {
 
 .add-list .add {
     cursor: pointer;
-    bottom: 16px;
+    bottom: 0px;
     color: orange;
 }
 
 .add-list .subtract {
     cursor: pointer;
     right: 0px;
-    bottom: 16px;
+    bottom: 0px;
     color: orange;
 }
 
@@ -339,25 +354,25 @@ export default {
     font-size: 35px;
 }
 
-  .custom-loader {
+.custom-loader {
     animation: loader 1s infinite;
     display: flex;
-  }
+}
 
-  .add-list .loading-circle {
-      margin-top: 5px;
-      margin-bottom: 5px;
-  }
+.add-list .loading-circle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
-  .add-list .handle {
+.add-list .handle {
     float: left;
     padding-top: 8px;
     padding-bottom: 8px;
     cursor: grab;
-  }
+}
 
-  .add-list .ghost {
+.add-list .ghost {
     opacity: 0.5;
     background: #006064;
-  }
+}
 </style>

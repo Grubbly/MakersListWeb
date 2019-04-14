@@ -20,7 +20,7 @@
             <v-card-title primary-title>
                 <div>
                   <div class="headline white-text">Monroe Makerlist</div>
-                  <span class="grey-text text-lighten-2">Edit profile</span>
+                  <span class="grey-text text-lighten-2">Profile details</span>
                 </div>
               </v-card-title>
         </v-card>

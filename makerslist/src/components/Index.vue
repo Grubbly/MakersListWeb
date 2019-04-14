@@ -37,7 +37,7 @@
             <v-carousel-item
               v-for="(item,i) in 1"
               :key="i"
-              :src="getPics(list)[i]"
+              :src="getPics(list)[0]"
             >
             </v-carousel-item>
 
@@ -59,7 +59,7 @@
               style="position: relative;"
             >
               <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
-              <div class="font-weight-light grey--text title mb-2">Quick Description</div>
+              <div class="font-weight-light grey--text title mb-2">Quick Description<Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/></div>
               <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}">
                 <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3>
                 <h6 class="green-text text-lighten-2">${{list.total}}</h6>
@@ -116,6 +116,7 @@
 import db from '@/firebase/init'
 import RadialButton from '@/components/RadialButton'
 import Vue from 'vue'
+import Favorite from '@/components/Favorite'
 
 export default {
   name: 'Index',
@@ -131,6 +132,7 @@ export default {
   },
   components: {
     RadialButton,
+    Favorite,
   },
   methods: {
     deleteList(id) {
@@ -164,12 +166,16 @@ export default {
       let images = []
       list.itemDetails.forEach(item => {
           for (let index = 0; index < 3; index++) {
-              if(item[index] !== undefined && item[index].imageUrl !== '') {
+              if(item[index] !== undefined && item[index].imageUrl.length > 5) {
                   images.push(item[index].imageUrl)
               }
           }
       })
       return images
+    },
+
+    handleListFavorite(id) {
+      console.log("Favorited: " + id)
     }
   },
   created() {

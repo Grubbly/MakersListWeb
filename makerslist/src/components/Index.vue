@@ -164,7 +164,7 @@ export default {
       let images = []
       list.itemDetails.forEach(item => {
           for (let index = 0; index < 3; index++) {
-              if(item[index] !== undefined) {
+              if(item[index] !== undefined && item[index].imageUrl !== '') {
                   images.push(item[index].imageUrl)
               }
           }

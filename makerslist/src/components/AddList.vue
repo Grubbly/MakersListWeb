@@ -308,7 +308,7 @@ export default {
 }
 
 .quantity input[type=text] {
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     vertical-align: middle;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */

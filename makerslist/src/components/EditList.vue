@@ -29,7 +29,9 @@
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, -1)" color="cyan darken-4" class="subtract">
                             <v-icon dark color="white">remove</v-icon>
                         </v-btn>
-                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="itemPair.quantity">
+                        <div class="quantity">
+                            <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="itemPair.quantity">
+                        </div>
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, 1)" color="cyan darken-4" class="add">
                             <v-icon dark color="white">add</v-icon>
                         </v-btn>
@@ -44,7 +46,9 @@
                     <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
-                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                    <div class="quantity">
+                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                    </div>
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
                     </v-btn>
@@ -59,7 +63,9 @@
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
 
-                    <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
+                    <div class="quantity">
+                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
+                    </div>
 
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
@@ -302,14 +308,14 @@ export default {
 
 .edit-list .add {    
     cursor: pointer;
-    bottom: 16px;
+    bottom: 0px;
     color: orange;
 }
 
 .edit-list .subtract {
     cursor: pointer;
     right: 0px;
-    bottom: 16px;
+    bottom: 0px;
     color: orange;
 }
 

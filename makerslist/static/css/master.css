@@ -1,0 +1,41 @@
+div.navbar div.navbar-fixed {
+  height: 100px;
+}
+div.navbar nav {
+  height: 100px;
+}
+div.navbar nav div.nav-wrapper {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+div.navbar nav div.nav-wrapper a.brand-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper nav.search {
+  width: auto;
+  position: relative;
+  flex: 1;
+  margin: 0 25px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper nav.search div.v-input {
+  padding: 10px;
+  margin: 0;
+  background-color: whitesmoke;
+}
+div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot::before {
+  border: none;
+}
+div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}

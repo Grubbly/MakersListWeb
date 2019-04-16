@@ -1,22 +1,6 @@
 <template>
 <!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
   <div class="bogus2 card grey lighten-3" style="padding-top: 0.01px;">
-    <nav class="cyan grey lighten-4" style="max-width: 90%; margin-left: 5%;">
-      <div class="navbar grey lighten-4">
-        <div class="bogus2">
-          <v-text-field
-            hide-details
-            prepend-icon="search"
-            single-line
-            v-model="search"
-            placeholder="Search Lists"
-            autofocus="true"
-            color="cyan darken-4"
-            class="text-white"
-          ></v-text-field>
-        </div>
-      </div>
-    </nav>
     <div class="index bogus2">
     <div v-for="(list,index) in filteredLists.slice((this.page-1)*6, this.page*6 < filteredLists.length ? this.page*6 : filteredLists.length)" :key="list.id">
       <div class="card-content">
@@ -78,10 +62,10 @@
                         <v-card>
                           <v-card-text class="grey lighten-3">
                               <div class="collection">
-                                <a v-for="(itemDetail, detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="itemDetail.url" 
+                                <a v-for="(itemDetail, detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="itemDetail.url"
                                   class="collection-item cyan-text text-darken-4">
-                                  <h5 class="orange-text">{{itemDetail.supplierName}}</h5> 
-                                  {{itemDetail.productName}} 
+                                  <h5 class="orange-text">{{itemDetail.supplierName}}</h5>
+                                  {{itemDetail.productName}}
                                   <p class="green-text">${{itemDetail.price}}</p>
                                 </a>
                               </div>
@@ -194,7 +178,7 @@ export default {
                   if(item === change.doc.id) {
                     // console.log(dbList.data().title, "item update with change.id", change.doc.id)
                     newItems[index] = change.doc.data()
-                    
+
                       let keysSorted = Object.keys(newItems[index]).sort(function(a,b){
                       let price1 = Number(newItems[index][a].price)
                       let price2 = Number(newItems[index][b].price)
@@ -205,9 +189,9 @@ export default {
                         return 1
                       return -1
                     })
-                    
+
                     let temp = newItems[index]
-                    
+
                     keysSorted.forEach((key,keyIndex) => {
                       temp[keyIndex] = newItems[index][key]
                     })
@@ -339,7 +323,7 @@ export default {
     left: 40%;
     text-align: center;
     cursor: pointer;
-    
+
 }
 
 .first .btn-large {

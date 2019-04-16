@@ -1,0 +1,53 @@
+@import "variables";
+
+div.navbar {
+  div.navbar-fixed {
+    height: 100px;
+  }
+
+  nav {
+    height: 100px;
+
+    div.nav-wrapper {
+      display: flex;
+      align-items: center;
+      width: 90%;
+      margin: auto;
+
+      a.brand-logo {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      nav.search {
+        width: auto;
+        position: relative;
+        flex: 1;
+        margin: 0 25px;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+
+        div.v-input {
+          padding: 10px;
+          margin: 0;
+          background-color: @input-color;
+          div.v-input__slot::before {
+            border: none;
+          }
+
+          div.v-input__slot {
+            input {
+              margin: 0;
+              border: none;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

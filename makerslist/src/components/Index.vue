@@ -43,9 +43,9 @@
               style="position: relative;"
             >
               <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
-              <div class="font-weight-light grey--text title mb-2">Quick Description<Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/></div>
               <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}">
-                <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3>
+                <h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}<Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/></h3>
+                <div class="font-weight-light grey--text title mb-2">Quick Description</div>
                 <h6 class="green-text text-lighten-2">${{list.total}}</h6>
               </router-link>
                 <v-expansion-panel expand>

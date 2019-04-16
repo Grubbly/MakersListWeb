@@ -1,3 +1,5 @@
+@import "variables";
+
 div.navbar {
   div.navbar-fixed {
     height: 100px;
@@ -9,7 +11,8 @@ div.navbar {
     div.nav-wrapper {
       display: flex;
       align-items: center;
-      width: 90%;
+      width: @container-width;
+      max-width: @max-container-width;
       margin: auto;
 
       a.brand-logo {

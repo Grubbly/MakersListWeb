@@ -16,7 +16,6 @@
                     single-line
                     v-model="search"
                     placeholder="Search Lists"
-                    autofocus
                     color="cyan darken-4"
                     class="text-white"
                   ></v-text-field>

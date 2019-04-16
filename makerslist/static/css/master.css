@@ -8,6 +8,7 @@ div.navbar nav div.nav-wrapper {
   display: flex;
   align-items: center;
   width: 90%;
+  max-width: 1250px;
   margin: auto;
 }
 div.navbar nav div.nav-wrapper a.brand-logo {
@@ -86,8 +87,35 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
 div.view-profile div.container div.layout div.flex div.v-card {
   margin-bottom: 15px;
 }
-div.index div.card-content div#app.edit {
+div#app > div.bogus2 {
+  margin: auto;
+  margin-top: 50px;
+  width: 75%;
+  max-width: 1250px;
+}
+div#app > div.bogus2 div.index {
+  width: auto;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+div#app > div.bogus2 div.index > div {
+  flex: 1;
+  width: 30%;
+  min-width: 300px;
+}
+div#app > div.bogus2 div.index > div div.card-content div.edit {
   cursor: pointer;
+}
+div#app > div.bogus2 div.index > div div.card-content a h3 {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+div#app > div.bogus2 div.index > div div.card-content a h3 button {
+  margin: 0;
 }
 div.v-input {
   padding: 10px;

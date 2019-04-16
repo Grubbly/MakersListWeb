@@ -1,5 +1,5 @@
 <template>
-    <div class="view-profile bogus2">
+  <div class="view-profile bogus2">
         <!-- <div v-if="profile" class="card title">
             <h2 class="cyan-text text-darken-4 center">{{profile.alias}}'s Profile</h2>
         </div> -->
@@ -167,10 +167,9 @@
         </material-card>
       </v-flex>
     </v-layout>
-</v-container>
-
-        <Index v-if="profile" :filter="profile.user_id"/>
-    </div>
+  </v-container>
+  <Index v-if="profile" :filter="profile.user_id"/>
+  </div>
 </template>
 
 <script>
@@ -245,5 +244,3 @@ export default {
     max-width: 100%;
 }
 </style>
-
-

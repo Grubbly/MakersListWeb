@@ -39,6 +39,25 @@ div.navbar nav div.nav-wrapper ul li.create a:hover {
   color: white;
   background-color: #ff9800;
 }
+div.navbar nav div.nav-wrapper ul li {
+  font-family: "Audiowide";
+}
+div.navbar nav div.nav-wrapper ul li a {
+  transition: all 0.5s ease;
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper ul li a img.account {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+div.navbar nav div.nav-wrapper ul li a:hover {
+  transition: all 0.5s ease;
+  color: #ff9800;
+  background-color: inherit;
+}
 div.navbar nav div.nav-wrapper nav.search {
   width: auto;
   position: relative;

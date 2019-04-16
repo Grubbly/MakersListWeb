@@ -47,6 +47,29 @@ div.navbar {
             background-color: @button-color;
           }
         }
+
+        li {
+          font-family: "Audiowide";
+
+          a {
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+
+            img.account {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              margin-right: 5px;
+            }
+          }
+
+          a:hover {
+            transition: all 0.5s ease;
+            color: @button-color;
+            background-color: inherit;
+          }
+        }
       }
 
       nav.search {

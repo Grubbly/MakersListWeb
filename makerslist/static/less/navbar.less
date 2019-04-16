@@ -1,0 +1,105 @@
+div.navbar {
+  div.navbar-fixed {
+    height: 100px;
+  }
+
+  nav {
+    height: 100px;
+
+    div.nav-wrapper {
+      display: flex;
+      align-items: center;
+      width: 90%;
+      margin: auto;
+
+      a.brand-logo {
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-family: "Audiowide";
+
+        img {
+          margin-right: 15px;
+        }
+      }
+
+      ul {
+        display: flex;
+        align-items: center;
+
+        li.create {
+          font-family: "Audiowide";
+
+          a {
+            border-radius: 5px;
+            background-color: @input-color;
+            color: black;
+            line-height: normal;
+            padding: 15px 10px;
+            transition: all 0.5s ease;
+          }
+
+          a:hover {
+            transition: all 0.5s ease;
+            color: white;
+            background-color: @button-color;
+          }
+        }
+
+        li {
+          font-family: "Audiowide";
+
+          a {
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+
+            img.account {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              margin: 0 5px;
+            }
+          }
+
+          a:hover {
+            transition: all 0.5s ease;
+            color: @button-color;
+            background-color: inherit;
+          }
+        }
+      }
+
+      nav.search {
+        width: auto;
+        position: relative;
+        flex: 1;
+        margin: 0 25px;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+
+        div.v-input {
+          padding: 10px;
+          margin: 0;
+          background-color: @input-color;
+          border-radius: 5px;
+
+          div.v-input__slot::before {
+            border: none;
+          }
+
+          div.v-input__slot {
+            input {
+              margin: 0;
+              border: none;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

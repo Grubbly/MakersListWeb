@@ -157,7 +157,6 @@ export default {
       })
       return images
     },
-
     handleListFavorite(id) {
       console.log("Favorited: " + id)
     }

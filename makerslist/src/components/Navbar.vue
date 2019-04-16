@@ -20,7 +20,7 @@
                     class="text-white"
                   ></v-text-field>
                 </nav>
-                <ul class="right hide-on-med-and-down">
+                <ul class="right">
                     <li v-if="!user"><router-link :to="{name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
                     <li class="create"><router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">

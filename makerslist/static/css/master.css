@@ -90,6 +90,7 @@ div.view-profile div.container div.layout div.flex div.v-card {
 div#app > div.bogus2 {
   margin: auto;
   margin-top: 50px;
+  margin-bottom: 15px;
   width: 75%;
   max-width: 1250px;
 }
@@ -129,4 +130,10 @@ div.v-input div.v-input__slot input {
   margin: 0;
   border: none;
   box-shadow: none;
+}
+@media only screen and (max-width: 992px) {
+  div.navbar div.nav-wrapper a.brand-logo {
+    transform: none;
+    left: 0;
+  }
 }

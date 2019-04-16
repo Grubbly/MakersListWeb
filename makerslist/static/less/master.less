@@ -6,6 +6,7 @@ div#app {
   > div.bogus2 {
     margin: auto;
     margin-top: 50px;
+    margin-bottom: 15px;
     width: @inner-container-width;
     max-width: @max-container-width;
 
@@ -59,6 +60,17 @@ div.v-input {
       margin: 0;
       border: none;
       box-shadow: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  div.navbar {
+    div.nav-wrapper {
+      a.brand-logo {
+        transform: none;
+        left: 0;
+      }
     }
   }
 }

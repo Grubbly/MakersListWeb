@@ -4,7 +4,7 @@
             <nav class="cyan darken-4">
             <div class="nav-wrapper" style="max-width=">
                 <router-link :to="{name: 'Index'}" class="brand-logo">
-                    <img src='/static/DepthLogo.png' width=80px height=80px/>
+                    <img src='/static/img/logo.png' width=50px height=50px/>
                 </router-link>
                 <router-link :to="{name: 'Index'}" class="brand-logo">
                     MakersList

@@ -14,6 +14,10 @@ div.navbar nav div.nav-wrapper a.brand-logo {
   position: relative;
   display: flex;
   align-items: center;
+  font-family: "Audiowide";
+}
+div.navbar nav div.nav-wrapper a.brand-logo img {
+  margin-right: 15px;
 }
 div.navbar nav div.nav-wrapper nav.search {
   width: auto;

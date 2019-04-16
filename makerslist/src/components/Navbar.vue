@@ -24,17 +24,18 @@
                 <ul class="right hide-on-med-and-down">
                     <li v-if="!user"><router-link :to="{name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
-                    <li><router-link :to="{name: 'About'}">About</router-link></li>
+                    <li class="create"><router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">
+                        CREATE
+                    </router-link></li>
                     <li v-if="user && id && alias"><router-link :to="{name: 'ViewProfile', params: {id: this.alias}}">{{user.email}}</router-link></li>
                     <li v-if="user && id && alias"><a @click="logout">Logout</a></li>
                 </ul>
 
-                <a v-if="user" href="" class="btn-floating btn-large halfway-fab orange">
+                <!-- <a v-if="user" href="" class="btn-floating btn-large halfway-fab orange">
                     <router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">
-                        <!-- <i> for icon "add" is the name of the icon -->
                         <i class="material-icons">add</i>
                     </router-link>
-                </a>
+                </a> -->
             </div>
             </nav>
         </div>

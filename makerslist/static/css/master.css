@@ -19,6 +19,26 @@ div.navbar nav div.nav-wrapper a.brand-logo {
 div.navbar nav div.nav-wrapper a.brand-logo img {
   margin-right: 15px;
 }
+div.navbar nav div.nav-wrapper ul {
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper ul li.create {
+  font-family: "Audiowide";
+}
+div.navbar nav div.nav-wrapper ul li.create a {
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: black;
+  line-height: normal;
+  padding: 15px 10px;
+  transition: all 0.5s ease;
+}
+div.navbar nav div.nav-wrapper ul li.create a:hover {
+  transition: all 0.5s ease;
+  color: white;
+  background-color: #ff9800;
+}
 div.navbar nav div.nav-wrapper nav.search {
   width: auto;
   position: relative;
@@ -34,6 +54,7 @@ div.navbar nav div.nav-wrapper nav.search div.v-input {
   padding: 10px;
   margin: 0;
   background-color: whitesmoke;
+  border-radius: 5px;
 }
 div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot::before {
   border: none;

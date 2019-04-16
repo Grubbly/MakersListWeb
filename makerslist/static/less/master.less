@@ -25,6 +25,30 @@ div.navbar {
         }
       }
 
+      ul {
+        display: flex;
+        align-items: center;
+
+        li.create {
+          font-family: "Audiowide";
+
+          a {
+            border-radius: 5px;
+            background-color: @input-color;
+            color: black;
+            line-height: normal;
+            padding: 15px 10px;
+            transition: all 0.5s ease;
+          }
+
+          a:hover {
+            transition: all 0.5s ease;
+            color: white;
+            background-color: @button-color;
+          }
+        }
+      }
+
       nav.search {
         width: auto;
         position: relative;
@@ -40,6 +64,8 @@ div.navbar {
           padding: 10px;
           margin: 0;
           background-color: @input-color;
+          border-radius: 5px;
+
           div.v-input__slot::before {
             border: none;
           }

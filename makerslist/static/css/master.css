@@ -105,6 +105,7 @@ div#app > div.bogus2 div.index > div {
   flex: 1;
   width: 30%;
   min-width: 300px;
+  max-width: 450px;
 }
 div#app > div.bogus2 div.index > div div.card-content div.edit {
   cursor: pointer;
@@ -144,6 +145,33 @@ div.v-input div.v-input__slot input {
   margin: 0;
   border: none;
   box-shadow: none;
+}
+div.card.add-list {
+  width: 50%;
+  min-width: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+div.card.add-list form div.field span {
+  display: flex;
+  align-items: center;
+}
+div.card.add-list form div.field div.quantity {
+  display: flex;
+  align-items: center;
+}
+div.card.add-list form div.field input[name="add-quantity"] {
+  width: 50px;
+  text-align: center;
+  margin: 0;
+}
+div.card.add-list form div.field input[type="number"]::-webkit-inner-spin-button,
+div.card.add-list form div.field input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+div.card.add-list form div.field input[name="item"] {
+  margin-left: 10px;
 }
 @media only screen and (max-width: 992px) {
   div.navbar div.nav-wrapper a.brand-logo {

@@ -1,5 +1,5 @@
 <template>
-    <div class="card add-list bogus grey lighten-3" style="margin-top: 60px;">
+    <div class="card add-list bogus grey lighten-3">
         <h2 class="center-align cyan-text text-darken-4">New List</h2>
         <form @submit.prevent="AddList">
             <div class="field title">
@@ -8,7 +8,7 @@
                     single-line
                     v-model="title"
                     placeholder="Title"
-                    autofocus="true"
+                    autofocus
                     color="cyan darken-4"
                     class="text-white"
                     label="List Title"
@@ -24,17 +24,17 @@
                         <!-- Bind to the position in items array -->
                         <!-- Updates in the list display update elements in the items array -->
                         <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="addAll"  @change="addAll" v-model="itemPair.item">
-                        
+
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, -1)" color="cyan darken-4" class="subtract">
                             <v-icon dark color="white">remove</v-icon>
                         </v-btn>
                         <div class="quantity">
-                            <input placeholder="Quantity" type="text" name="add-quantity" v-model="itemPair.quantity">
-                        </div>  
+                            <input autocomplete="off" type="number" name="add-quantity" v-model="itemPair.quantity">
+                        </div>
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, 1)" color="cyan darken-4" class="add">
                             <v-icon dark color="white">add</v-icon>
                         </v-btn>
-                    </span> 
+                    </span>
                 </div>
             </draggable>
             <div class="field">
@@ -45,7 +45,7 @@
                     <v-icon dark color="white">remove</v-icon>
                 </v-btn>
                 <div class="quantity">
-                    <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                    <input type="number" autocomplete="off" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
                 </div>
                 <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                     <v-icon dark color="white">add</v-icon>
@@ -60,7 +60,7 @@
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
                     <div class="quantity">
-                        <input placeholder="Quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity2">
+                        <input type="number" autocomplete="off" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity2">
                     </div>
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
@@ -82,7 +82,7 @@
                 </div>
                 <button v-else class="btn orange" @click="submit = true">Add List</button>
             </div>
-        </form>  
+        </form>
     </div>
 </template>
 
@@ -159,7 +159,7 @@ export default {
                     remove: /[$*_+~.()'"!\-:@]/g, //regex remove symbols for sanitizing,
                     lower: true //capital -> lower-case,
                 });
-                
+
                 let promises = [];
 
                 this.items.forEach(item => {
@@ -238,7 +238,7 @@ export default {
         },
         deleteItem(item) {
             this.itemsAndQuantities = this.itemsAndQuantities.filter((itemPair,index) => {
-                return itemPair.item !== item 
+                return itemPair.item !== item
             })
         },
         adjustQuantity(val) {
@@ -294,7 +294,6 @@ export default {
 
 <style>
 .add-list {
-    margin-top: 60px;
     padding: 20px;
 }
 .add-list h2 {
@@ -321,7 +320,7 @@ export default {
     right: 0px;
     bottom: 16px;
     cursor: pointer;
-    color:#f9e4e4; 
+    color:#f9e4e4;
 }
 
 .add-list .add {

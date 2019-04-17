@@ -21,6 +21,7 @@ div#app {
         flex: 1;
         width: 30%;
         min-width: 300px;
+        max-width: 450px;
 
         div.card-content {
 
@@ -76,6 +77,43 @@ div.v-input {
       margin: 0;
       border: none;
       box-shadow: none;
+    }
+  }
+}
+
+div.card.add-list {
+  width: 50%;
+  min-width: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+
+  form {
+    div.field {
+      span {
+        display: flex;
+        align-items: center;
+      }
+
+      div.quantity {
+        display: flex;
+        align-items: center;
+      }
+
+      input[name="add-quantity"] {
+        width: 50px;
+        text-align: center;
+        margin: 0;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[name="item"] {
+        margin-left: 10px;
+      }
     }
   }
 }

@@ -8,7 +8,7 @@
                     single-line
                     v-model="list.title"
                     placeholder="Title"
-                    autofocus="true"
+                    autofocus
                     color="cyan darken-4"
                     class="text-white"
                     label="List Title"
@@ -25,12 +25,12 @@
                         <!-- Bind to the position in items array -->
                         <!-- Updates in the list display update elements in the items array -->
                         <input placeholder="Item Name" type="text" name="item" @keydown.enter.prevent="" @change="addAll" v-model="itemPair.item">
-                    
+
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, -1)" color="cyan darken-4" class="subtract">
                             <v-icon dark color="white">remove</v-icon>
                         </v-btn>
                         <div class="quantity">
-                            <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="itemPair.quantity">
+                            <input class="quantity" type="number" autocomplete="off" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="itemPair.quantity">
                         </div>
                         <v-btn fab white small @click="adjustExistingQuantity(itemPair.item, 1)" color="cyan darken-4" class="add">
                             <v-icon dark color="white">add</v-icon>
@@ -42,12 +42,12 @@
                 <label for="add-list">Add a list item:</label>
                 <span>
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll"  @change="addAll" v-model="item">
-                
+
                     <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
                     <div class="quantity">
-                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
+                        <input class="quantity" type="number" autocomplete="off" name="add-quantity" @keydown.enter.prevent="addAll" @change="addAll" v-model="quantity">
                     </div>
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
                         <v-icon dark color="white">add</v-icon>
@@ -58,13 +58,13 @@
                 <label for="add-list">Add a list item:</label>
                 <span>
                     <input placeholder="Item Name" type="text" name="add-list" @keydown.enter.prevent="addAll" v-model="item2">
-                
+
                     <v-btn fab white small @click="adjustQuantity(-1)" color="cyan darken-4" class="subtract">
                         <v-icon dark color="white">remove</v-icon>
                     </v-btn>
 
                     <div class="quantity">
-                        <input placeholder="Quantity" class="quantity" type="text" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
+                        <input class="quantity" autocomplete="off" type="number" name="add-quantity" @keydown.enter.prevent="addAll" v-model="quantity2">
                     </div>
 
                     <v-btn fab white small @click="adjustQuantity(1)" color="cyan darken-4" class="add">
@@ -127,7 +127,7 @@ export default {
                     remove: /[$*_+~.()'"!\-:@]/g, //regex remove symbols for sanitizing,
                     lower: true //capital -> lower-case,
                 });
-                
+
                 let promises = [];
 
                 this.list.items.forEach(item => {
@@ -210,7 +210,7 @@ export default {
         },
         deleteItem(item) {
             this.itemsAndQuantities = this.itemsAndQuantities.filter((itemPair,index) => {
-                return itemPair.item !== item 
+                return itemPair.item !== item
             })
         },
         clearScrapeFields() {
@@ -303,10 +303,10 @@ export default {
     right: 0px;
     bottom: 16px;
     cursor: pointer;
-    color:#f9e4e4; 
+    color:#f9e4e4;
 }
 
-.edit-list .add {    
+.edit-list .add {
     cursor: pointer;
     bottom: 0px;
     color: orange;
@@ -348,4 +348,3 @@ export default {
     background: #006064;
   }
 </style>
-

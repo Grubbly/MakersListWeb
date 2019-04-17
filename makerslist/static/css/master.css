@@ -110,20 +110,25 @@ div#app > div.bogus2 div.index > div {
 div#app > div.bogus2 div.index > div div.card-content div.edit {
   cursor: pointer;
 }
-div#app > div.bogus2 div.index > div div.card-content a h3 {
+div#app > div.bogus2 div.index > div div.card-content div.title {
+  display: flex;
+  align-items: center;
+}
+div#app > div.bogus2 div.index > div div.card-content div.title a h3 {
   margin: 0 !important;
   padding: 0;
   display: flex;
   align-items: center;
+  font-size: 30px !important;
 }
-div#app > div.bogus2 div.index > div div.card-content a h3 button {
+div#app > div.bogus2 div.index > div div.card-content div.title button {
   margin: 0;
 }
-div#app > div.bogus2 div.index > div div.card-content a h4 {
+div#app > div.bogus2 div.index > div div.card-content div.title h4 {
   margin: 0 !important;
   padding: 5px 0;
 }
-div#app > div.bogus2 div.index > div div.card-content a h6 {
+div#app > div.bogus2 div.index > div div.card-content div.title h6 {
   margin: 0 !important;
   padding: 0;
   padding-bottom: 5px;

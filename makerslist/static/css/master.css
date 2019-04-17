@@ -107,6 +107,9 @@ div#app > div.bogus2 div.index > div {
   min-width: 300px;
   max-width: 450px;
 }
+div#app > div.bogus2 div.index > div div.card-content div.v-card {
+  border-radius: 5px;
+}
 div#app > div.bogus2 div.index > div div.card-content div.edit {
   cursor: pointer;
 }
@@ -132,6 +135,10 @@ div#app > div.bogus2 div.index > div div.card-content div.title h6 {
   margin: 0 !important;
   padding: 0;
   padding-bottom: 5px;
+}
+div#app > div.bogus2 div.index > div div.card-content ul,
+div#app > div.bogus2 div.index > div div.card-content ul li {
+  border-radius: 5px;
 }
 div#app footer {
   text-align: center;

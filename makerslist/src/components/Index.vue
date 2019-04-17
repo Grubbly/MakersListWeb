@@ -151,7 +151,9 @@ export default {
       list.itemDetails.forEach(item => {
           for (let index = 0; index < 3; index++) {
               if(item[index] !== undefined && item[index].imageUrl.length > 5) {
-                  images.push(item[index].imageUrl)
+                if (item[index].imageUrl.substr(0,4) != "http")
+                  item[index].imageUrl = `http://${item[index].imageUrl}`;
+                images.push(item[index].imageUrl)
               }
           }
       })

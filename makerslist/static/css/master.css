@@ -127,6 +127,11 @@ div#app > div.bogus2 div.index > div div.card-content a h6 {
   padding: 0;
   padding-bottom: 5px;
 }
+div#app footer {
+  text-align: center;
+  margin: auto;
+  padding: 15px;
+}
 div.v-input {
   padding: 10px;
   margin: 0;

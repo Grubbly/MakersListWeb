@@ -2,6 +2,7 @@
   <div id="app">
     <Navbar />
     <router-view/>
+    <footer>&copy; 2019 MakersList</footer>
   </div>
 </template>
 

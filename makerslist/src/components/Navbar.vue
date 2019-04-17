@@ -31,12 +31,6 @@
                     </li>
                     <li v-if="user && id && alias"><a @click="logout">Logout</a></li>
                 </ul>
-
-                <!-- <a v-if="user" href="" class="btn-floating btn-large halfway-fab orange">
-                    <router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">
-                        <i class="material-icons">add</i>
-                    </router-link>
-                </a> -->
             </div>
             </nav>
         </div>

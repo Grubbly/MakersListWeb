@@ -7,6 +7,7 @@ div#app {
     margin: auto;
     margin-top: 50px;
     margin-bottom: 15px;
+    padding-bottom: 15px;
     width: @inner-container-width;
     max-width: @max-container-width;
 
@@ -131,12 +132,50 @@ div.card.add-list {
   }
 }
 
+div.view-profile {
+  div.container.grid-list-xl {
+    div.flex {
+      material-card.v-card-profile {
+        display: flex;
+        flex-direction: column;
+
+        div.v-avatar {
+          img {
+            width: 200px;
+            height: 200px;
+          }
+        }
+
+        div.v-card__text {
+          padding: 0;
+
+          h4.card-title, p.card-description {
+            margin: 0;
+            overflow-wrap: break-word;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 992px) {
   div.navbar {
     div.nav-wrapper {
       a.brand-logo {
         transform: none;
         left: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 959px) {
+  div.view-profile {
+    div.container.grid-list-xl {
+      > div.layout {
+        display: flex;
+        flex-direction: column-reverse;
       }
     }
   }

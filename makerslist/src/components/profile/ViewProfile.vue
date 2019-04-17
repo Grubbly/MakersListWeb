@@ -19,7 +19,7 @@
         <v-card class="cyan darken-4" hover @click="$vuetify.goTo(target, options)">
             <v-card-title primary-title>
                 <div>
-                  <div class="headline white-text">Monroe Makerlist</div>
+                  <div class="headline white-text">{{profile.first}} {{profile.last}}</div>
                   <span class="grey-text text-lighten-2">Profile details</span>
                 </div>
               </v-card-title>
@@ -148,15 +148,15 @@
           <v-avatar
             slot="offset"
             class="mx-auto d-block"
-            size="130"
+            size="200"
           >
             <img
               :src="test"
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">MakersList Premium Member</h6>
             <h4 class="card-title font-weight-light">{{profile.alias}}</h4>
+            <h6 class="category text-gray font-weight-thin mb-3">MakersList Premium Member</h6>
             <p class="card-description font-weight-light">{{this.profile.about}}</p>
             <v-btn
               color="success"

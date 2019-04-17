@@ -91,6 +91,7 @@ div#app > div.bogus2 {
   margin: auto;
   margin-top: 50px;
   margin-bottom: 15px;
+  padding-bottom: 15px;
   width: 75%;
   max-width: 1250px;
 }
@@ -185,9 +186,31 @@ div.card.add-list form div.field input[type="number"]::-webkit-outer-spin-button
 div.card.add-list form div.field input[name="item"] {
   margin-left: 10px;
 }
+div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profile {
+  display: flex;
+  flex-direction: column;
+}
+div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profile div.v-avatar img {
+  width: 200px;
+  height: 200px;
+}
+div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profile div.v-card__text {
+  padding: 0;
+}
+div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profile div.v-card__text h4.card-title,
+div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profile div.v-card__text p.card-description {
+  margin: 0;
+  overflow-wrap: break-word;
+}
 @media only screen and (max-width: 992px) {
   div.navbar div.nav-wrapper a.brand-logo {
     transform: none;
     left: 0;
+  }
+}
+@media only screen and (max-width: 959px) {
+  div.view-profile div.container.grid-list-xl > div.layout {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }

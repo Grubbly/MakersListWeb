@@ -1,0 +1,148 @@
+div.navbar div.navbar-fixed {
+  height: 100px;
+}
+div.navbar nav {
+  height: 100px;
+}
+div.navbar nav div.nav-wrapper {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 1250px;
+  margin: auto;
+}
+div.navbar nav div.nav-wrapper a.brand-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-family: "Audiowide";
+}
+div.navbar nav div.nav-wrapper a.brand-logo img {
+  margin-right: 15px;
+}
+div.navbar nav div.nav-wrapper ul {
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper ul li.create {
+  font-family: "Audiowide";
+}
+div.navbar nav div.nav-wrapper ul li.create a {
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: black;
+  line-height: normal;
+  padding: 15px 10px;
+  transition: all 0.5s ease;
+}
+div.navbar nav div.nav-wrapper ul li.create a:hover {
+  transition: all 0.5s ease;
+  color: white;
+  background-color: #ff9800;
+}
+div.navbar nav div.nav-wrapper ul li {
+  font-family: "Audiowide";
+}
+div.navbar nav div.nav-wrapper ul li a {
+  transition: all 0.5s ease;
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper ul li a img.account {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+div.navbar nav div.nav-wrapper ul li a:hover {
+  transition: all 0.5s ease;
+  color: #ff9800;
+  background-color: inherit;
+}
+div.navbar nav div.nav-wrapper nav.search {
+  width: auto;
+  position: relative;
+  flex: 1;
+  margin: 0 25px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+div.navbar nav div.nav-wrapper nav.search div.v-input {
+  padding: 10px;
+  margin: 0;
+  background-color: whitesmoke;
+  border-radius: 5px;
+}
+div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot::before {
+  border: none;
+}
+div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+div.view-profile div.container div.layout div.flex div.v-card {
+  margin-bottom: 15px;
+}
+div#app > div.bogus2 {
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  width: 75%;
+  max-width: 1250px;
+}
+div#app > div.bogus2 div.index {
+  width: auto;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+div#app > div.bogus2 div.index > div {
+  flex: 1;
+  width: 30%;
+  min-width: 300px;
+}
+div#app > div.bogus2 div.index > div div.card-content div.edit {
+  cursor: pointer;
+}
+div#app > div.bogus2 div.index > div div.card-content a h3 {
+  margin: 0 !important;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+div#app > div.bogus2 div.index > div div.card-content a h3 button {
+  margin: 0;
+}
+div#app > div.bogus2 div.index > div div.card-content a h4 {
+  margin: 0 !important;
+  padding: 5px 0;
+}
+div#app > div.bogus2 div.index > div div.card-content a h6 {
+  margin: 0 !important;
+  padding: 0;
+  padding-bottom: 5px;
+}
+div.v-input {
+  padding: 10px;
+  margin: 0;
+  border-radius: 5px;
+}
+div.v-input div.v-input__slot::before {
+  border: none;
+}
+div.v-input div.v-input__slot input {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+@media only screen and (max-width: 992px) {
+  div.navbar div.nav-wrapper a.brand-logo {
+    transform: none;
+    left: 0;
+  }
+}

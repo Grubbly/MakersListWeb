@@ -14,15 +14,25 @@ div.navbar {
       width: @container-width;
       max-width: @max-container-width;
       margin: auto;
-
-      a.brand-logo {
-        position: relative;
+      div.brand {
         display: flex;
-        align-items: center;
-        font-family: "Audiowide";
 
-        img {
-          margin-right: 15px;
+        a.brand-logo {
+          position: relative;
+          display: flex;
+          align-items: center;
+          font-family: "Audiowide";
+          transition: all 0.5s ease;
+          cursor: pointer;
+
+          img {
+            margin-right: 15px;
+          }
+        }
+
+        a.brand-logo.text-title:hover {
+          transition: all 0.5s ease;
+          color: @button-color;
         }
       }
 
@@ -103,6 +113,40 @@ div.navbar {
           }
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  div#app {
+    div.navbar {
+      div.navbar-fixed {
+        height: auto;
+
+        nav {
+          height: auto;
+          position: relative;
+
+          div.nav-wrapper {
+            flex-direction: column;
+
+            div.brand {
+              margin-top: 5px;
+              margin-bottom: 15px;
+            }
+          }
+
+          ul.right {
+            margin: 15px 0;
+          }
+        }
+      }
+    }
+
+    > div.bogus2.card {
+      background: none !important;
+      width: 100%;
+      box-shadow: none;
     }
   }
 }

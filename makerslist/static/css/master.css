@@ -11,14 +11,23 @@ div.navbar nav div.nav-wrapper {
   max-width: 1250px;
   margin: auto;
 }
-div.navbar nav div.nav-wrapper a.brand-logo {
+div.navbar nav div.nav-wrapper div.brand {
+  display: flex;
+}
+div.navbar nav div.nav-wrapper div.brand a.brand-logo {
   position: relative;
   display: flex;
   align-items: center;
   font-family: "Audiowide";
+  transition: all 0.5s ease;
+  cursor: pointer;
 }
-div.navbar nav div.nav-wrapper a.brand-logo img {
+div.navbar nav div.nav-wrapper div.brand a.brand-logo img {
   margin-right: 15px;
+}
+div.navbar nav div.nav-wrapper div.brand a.brand-logo.text-title:hover {
+  transition: all 0.5s ease;
+  color: #ff9800;
 }
 div.navbar nav div.nav-wrapper ul {
   display: flex;
@@ -83,6 +92,30 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
   margin: 0;
   border: none;
   box-shadow: none;
+}
+@media only screen and (max-width: 870px) {
+  div#app div.navbar div.navbar-fixed {
+    height: auto;
+  }
+  div#app div.navbar div.navbar-fixed nav {
+    height: auto;
+    position: relative;
+  }
+  div#app div.navbar div.navbar-fixed nav div.nav-wrapper {
+    flex-direction: column;
+  }
+  div#app div.navbar div.navbar-fixed nav div.nav-wrapper div.brand {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  div#app div.navbar div.navbar-fixed nav ul.right {
+    margin: 15px 0;
+  }
+  div#app > div.bogus2.card {
+    background: none !important;
+    width: 100%;
+    box-shadow: none;
+  }
 }
 div.view-profile div.container div.layout div.flex div.v-card {
   margin-bottom: 15px;
@@ -201,6 +234,12 @@ div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profil
 div.view-profile div.container.grid-list-xl div.flex material-card.v-card-profile div.v-card__text p.card-description {
   margin: 0;
   overflow-wrap: break-word;
+}
+div.view-profile div.container.grid-list-xl div.flex.save-btn {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  border-radius: 5px;
 }
 @media only screen and (max-width: 992px) {
   div.navbar div.nav-wrapper a.brand-logo {

@@ -127,13 +127,14 @@
                 <v-flex
                   xs12
                   text-xs-right
+                  class="save-btn"
                 >
                   <v-btn
                     class="mx-0 font-weight-light cyan darken-4"
                     color="success"
                     @click="updateProfile()"
                   >
-                    Update Profile
+                    Save
                   </v-btn>
                 </v-flex>
               </v-layout>

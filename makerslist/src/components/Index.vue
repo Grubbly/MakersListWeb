@@ -360,7 +360,7 @@ export default {
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: .5;
+  opacity: .75;
   position: absolute;
   width: 100%;
 }

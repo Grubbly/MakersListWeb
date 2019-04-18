@@ -171,11 +171,11 @@ div#app > div.bogus2 div.index > div div.card-content div.title a h3 {
 div#app > div.bogus2 div.index > div div.card-content div.title button {
   margin: 0;
 }
-div#app > div.bogus2 div.index > div div.card-content div.title h4 {
+div#app > div.bogus2 div.index > div div.card-content h4 {
   margin: 0 !important;
   padding: 5px 0;
 }
-div#app > div.bogus2 div.index > div div.card-content div.title h6 {
+div#app > div.bogus2 div.index > div div.card-content h6 {
   margin: 0 !important;
   padding: 0;
   padding-bottom: 5px;

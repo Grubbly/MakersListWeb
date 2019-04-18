@@ -94,6 +94,9 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
   box-shadow: none;
 }
 @media only screen and (max-width: 870px) {
+  div#app {
+    background-color: #eee !important;
+  }
   div#app div.navbar div.navbar-fixed {
     height: auto;
   }
@@ -108,6 +111,9 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
     margin-top: 5px;
     margin-bottom: 15px;
   }
+  div#app div.navbar div.navbar-fixed nav div.nav-wrapper nav.search {
+    width: 100%;
+  }
   div#app div.navbar div.navbar-fixed nav ul.right {
     margin: 15px 0;
   }
@@ -115,6 +121,10 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
     background: none !important;
     width: 100%;
     box-shadow: none;
+    margin-top: 0;
+  }
+  div#app > div.login.bogus {
+    margin-top: 15px;
   }
 }
 div.view-profile div.container div.layout div.flex div.v-card {

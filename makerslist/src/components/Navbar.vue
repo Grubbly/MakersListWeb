@@ -5,7 +5,7 @@
             <div class="nav-wrapper" style="max-width=">
               <div class="brand">
                 <router-link :to="{name: 'Index'}" class="brand-logo">
-                    <img src='/static/img/logo.png' width=50px height=50px/>
+                    <img src='/static/img/logo.svg' width=50px height=50px/>
                 </router-link>
                 <router-link :to="{name: 'Index'}" class="brand-logo text-title">
                     MakersList

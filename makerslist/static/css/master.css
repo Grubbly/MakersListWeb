@@ -13,6 +13,7 @@ div.navbar nav div.nav-wrapper {
 }
 div.navbar nav div.nav-wrapper div.brand {
   display: flex;
+  cursor: pointer;
 }
 div.navbar nav div.nav-wrapper div.brand a.brand-logo {
   position: relative;
@@ -24,10 +25,12 @@ div.navbar nav div.nav-wrapper div.brand a.brand-logo {
 }
 div.navbar nav div.nav-wrapper div.brand a.brand-logo img {
   margin-right: 15px;
+  cursor: pointer;
 }
 div.navbar nav div.nav-wrapper div.brand a.brand-logo.text-title:hover {
   transition: all 0.5s ease;
   color: #ff9800;
+  cursor: pointer;
 }
 div.navbar nav div.nav-wrapper ul {
   display: flex;

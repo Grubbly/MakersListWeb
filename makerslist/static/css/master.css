@@ -129,6 +129,9 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
   div#app > div.login.bogus {
     margin-top: 15px;
   }
+  div#app.edit {
+    background: none !important;
+  }
 }
 div.view-profile div.container div.layout div.flex div.v-card {
   margin-bottom: 15px;

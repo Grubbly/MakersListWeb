@@ -103,6 +103,7 @@ import db from '@/firebase/init'
 import RadialButton from '@/components/RadialButton'
 import Vue from 'vue'
 import Favorite from '@/components/Favorite'
+import { EventBus } from '../event.js'
 
 export default {
   name: 'Index',
@@ -161,6 +162,7 @@ export default {
       })
       return images
     },
+
     handleListFavorite(id) {
       console.log("Favorited: " + id)
     }
@@ -248,6 +250,11 @@ export default {
         })
       })
     }
+  },
+  mounted() {
+    EventBus.$on('searchChange', data => {
+      this.search = data
+    })
   },
   computed: {
     filteredLists: function() {

@@ -20,6 +20,8 @@
                     placeholder="Search Lists"
                     color="cyan darken-4"
                     class="text-white"
+                    @change="searchChange"
+                    @input="searchChange"
                   ></v-text-field>
                 </nav>
                 <ul class="right">
@@ -42,6 +44,7 @@
 <script>
 import firebase from 'firebase'
 import db from '@/firebase/init'
+import { EventBus } from '../event.js'
 
 export default {
     name: 'Navbar',
@@ -58,6 +61,10 @@ export default {
           firebase.auth().signOut().then(() => {
             this.$router.push({name: 'Login'})
           })
+        },
+
+        searchChange() {
+          EventBus.$emit('searchChange', this.search)
         }
     },
     created() {

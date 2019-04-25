@@ -1,6 +1,6 @@
 <template>
   <div class="lower">
-    <LandingBanner/>
+    <LandingBanner v-if="$route.path == '/'"/>
     <div class="bogus2 card grey lighten-3" style="padding-top: 0.01px;">
       <div class="index bogus2">
       <div v-for="(list,index) in filteredLists.slice((this.page-1)*6, this.page*6 < filteredLists.length ? this.page*6 : filteredLists.length)" :key="list.id">
@@ -182,7 +182,7 @@ export default {
               this.favorites = this.favorites.filter(fav => {
                 return fav !== id
               })
-            } 
+            }
           })
         }
       }).then(() => {

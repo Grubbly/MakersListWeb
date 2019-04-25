@@ -30,6 +30,9 @@
                     <li class="create"><router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">
                         CREATE
                     </router-link></li>
+                    <li v-if="user && id && alias">
+                      <router-link :to="{name: 'YourLists', params: {id: this.alias}}"> Your Lists </router-link>
+                    </li>
                     <li v-if="user && id && alias"><router-link :to="{name: 'ViewProfile', params: {id: this.alias}}">
                       <img class="account" src='/static/img/placeholder.png'/>Account</router-link>
                     </li>

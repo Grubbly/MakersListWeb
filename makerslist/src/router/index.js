@@ -10,6 +10,7 @@ import About from '@/components/About'
 import ListView from '@/components/ListPage/ListView'
 import Test from '@/components/Test'
 import firebase from 'firebase'
+import YourLists from '@/components/YourLists'
 
 Vue.use(Router)
 
@@ -54,6 +55,14 @@ const router = new Router({
       path: '/profile/:id',
       name: 'ViewProfile',
       component: ViewProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/lists/:id',
+      name: 'YourLists',
+      component: YourLists,
       meta: {
         requiresAuth: true
       }

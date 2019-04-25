@@ -16,6 +16,21 @@
                     @keydown.enter.prevent=""
                 ></v-text-field>
             </div>
+            <div class="field title">
+                <label for="description">Description</label>
+                <v-text-field
+                    multi-line
+                    v-model="description"
+                    placeholder="Description"
+                    color="cyan darken-4"
+                    class="text-white"
+                    name="description"
+                    :rules="rules"
+                    counter="100"
+                    maxlength="100"
+                    @keydown.enter.prevent=""
+                ></v-text-field>
+            </div>
             <draggable v-model="itemsAndQuantities" handle=".handle" ghost-class="ghost">
                 <div v-for="(itemPair,index) in itemsAndQuantities" :key="index" class="field">
                     <label for="item">Item:</label>
@@ -116,6 +131,8 @@ export default {
             submit: false,
             itemDetails: [],
             itemsAndQuantities: [],
+            description: '',
+            rules: [v => v.length <= 100 || 'Max 100 characters'],
 
             states: [
                 'Alabama', 'Alaska', 'American Samoa', 'Arizona',
@@ -196,6 +213,7 @@ export default {
                 }).then(() => {
                     db.collection('lists').add({
                         title: this.title,
+                        description: this.description == undefined ? '' : this.description,
                         items: this.items,
                         itemDetails: this.itemDetails,
                         quantities: this.quantities,

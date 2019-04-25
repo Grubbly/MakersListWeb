@@ -169,7 +169,6 @@
       </v-flex>
     </v-layout>
   </v-container>
-  <Index v-if="profile" :filter="profile.user_id"/>
   </div>
 </template>
 

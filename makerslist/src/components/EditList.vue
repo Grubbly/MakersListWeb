@@ -15,7 +15,21 @@
                     name="title"
                     @keydown.enter.prevent=""
                 ></v-text-field>
-                <!-- <input autofocus="true" placeholder="Title" type="text" name="title" @keydown.enter.prevent="" v-model="list.title"> -->
+            </div>
+            <div class="field title">
+                <label for="description">Description</label>
+                <v-text-field
+                    single-line
+                    v-model="list.description"
+                    placeholder="Description"
+                    color="cyan darken-4"
+                    class="text-white"
+                    name="description"
+                    :rules="rules"
+                    counter="100"
+                    maxlength="100"
+                    @keydown.enter.prevent=""
+                ></v-text-field>
             </div>
             <draggable v-model="itemsAndQuantities" handle=".handle" ghost-class="ghost">
                 <div v-for="(itemPair, index) in itemsAndQuantities" :key="index" class="field">
@@ -110,6 +124,7 @@ export default {
             feedback: null,
             submit: false,
             itemsAndQuantities: [],
+            rules: [v => v.length <= 100 || 'Max 100 characters'],
         }
     },
     components: {
@@ -164,6 +179,7 @@ export default {
                     // console.log("PRICES: " + this.list.prices)
                     db.collection('lists').doc(this.list.id).update({
                         title: this.list.title,
+                        description: this.list.description == undefined ? '' : this.list.description,
                         items: this.list.items,
                         itemDetails: this.list.itemDetails,
                         quantities: this.list.quantities,

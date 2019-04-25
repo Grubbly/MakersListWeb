@@ -107,10 +107,11 @@ import LandingBanner from '@/components/LandingBanner'
 import Vue from 'vue'
 import Favorite from '@/components/Favorite'
 import { EventBus } from '../event.js'
+import firebase from 'firebase'
 
 export default {
   name: 'Index',
-  props: ['filter'],
+  props: ['filter', 'filterType'],
   data () {
     return {
       lists: [
@@ -118,6 +119,8 @@ export default {
       ],
       search: '',
       page: 1,
+      uid: null,
+      favorites: [],
     }
   },
   components: {
@@ -150,7 +153,7 @@ export default {
         // console.log(itemDetails, " ---- ", quantities, " ---- min: ", Math.min(Number(item[0].price),Number(item[1].price),Number(item[2].price)), " quantity: ", Number(quantities[index]), "TOTAL:", Math.min(Number(item[0].price),Number(item[1].price),Number(item[2].price))*Number(quantities[index]))
         sum += Math.min(Number(item[0].price),Number(item[1].price),Number(item[2].price))*Number(quantities[index])
       })
-      return Math.round(sum*100)/100
+      return parseFloat(Math.round(sum*100)/100).toFixed(2)
     },
 
     getPics(list) {
@@ -168,10 +171,45 @@ export default {
     },
 
     handleListFavorite(id) {
-      console.log("Favorited: " + id)
-    }
+      this.favorites.push(id)
+      let userDoc = db.collection('users').doc(this.uid)
+
+      userDoc.get().then(doc => {
+        if(doc.data().favorites !== undefined) {
+          doc.data().favorites.forEach(favorite => {
+            if(favorite === id) {
+              console.log("Match found")
+              this.favorites = this.favorites.filter(fav => {
+                return fav !== id
+              })
+            } 
+          })
+        }
+      }).then(() => {
+        userDoc.update({
+          favorites: this.favorites,
+        })
+      })
+    },
   },
   created() {
+    firebase.auth().onAuthStateChanged((user) => {
+          if(user) {
+            db.collection('users').where('user_id', '==', user.uid).get()
+            .then(snapshot => {
+              snapshot.forEach(doc => {
+                if(doc.data().favorites !== undefined) {
+                  this.favorites = doc.data().favorites
+                }
+                this.uid = doc.id
+              });
+            });
+          }
+          else {
+            this.uid = null
+          }
+      })
+
     // fetch data from firestore
     // snapshot refers to the state of the lists collection at a certain point in time
 
@@ -245,6 +283,14 @@ export default {
           this.lists.push(list)
         })
       })
+    } if(this.favoritesFilter) {
+      this.favoritesFilter.forEach(favorite => {
+        db.collection('lists').doc(favorite).get().then(dbList => {
+          let list = dbList.data()
+          list.id = dbList.id
+          this.lists.push(list)
+        })
+      })
     } else {
       db.collection('lists').get().then(snapshot => {
         snapshot.forEach(dbList => {
@@ -254,6 +300,28 @@ export default {
         })
       })
     }
+  },
+  watch: {
+    filterType: function() {
+      this.lists = []
+      if(this.filterType == 'profile') {
+        db.collection('lists').where('user_id', '==', this.filter).get().then(snapshot => {
+          snapshot.forEach(dbList => {
+            let list = dbList.data()
+            list.id = dbList.id
+            this.lists.push(list)
+          })
+        })
+      } else if(this.filterType == 'favorites') {
+        this.filter.forEach(favorite => {
+          db.collection('lists').doc(favorite).get().then(dbList => {
+            let list = dbList.data()
+            list.id = dbList.id
+            this.lists.push(list)
+          })
+        })
+      }
+    },
   },
   mounted() {
     EventBus.$on('searchChange', data => {

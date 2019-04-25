@@ -27,11 +27,11 @@
                 <ul class="right">
                     <li v-if="!user"><router-link :to="{name: 'Signup'}">Signup</router-link></li>
                     <li v-if="!user"><router-link :to="{name: 'Login'}">Login</router-link></li>
-                    <li class="create"><router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">
-                        CREATE
-                    </router-link></li>
-                    <li v-if="user && id && alias">
-                      <router-link :to="{name: 'YourLists', params: {id: this.alias}}"> Your Lists </router-link>
+                    <li class="create">
+                      <router-link v-if="user && id" :to="{name: 'AddList', params: {id: this.alias}}">CREATE</router-link>
+                    </li>
+                    <li class="list" v-if="user && id && alias">
+                      <router-link :to="{name: 'YourLists', params: {id: this.alias}}">My Lists</router-link>
                     </li>
                     <li v-if="user && id && alias"><router-link :to="{name: 'ViewProfile', params: {id: this.alias}}">
                       <img class="account" src='/static/img/placeholder.png'/>Account</router-link>

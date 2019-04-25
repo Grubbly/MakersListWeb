@@ -52,6 +52,9 @@ div.navbar nav div.nav-wrapper ul li.create a:hover {
   color: white;
   background-color: #ff9800;
 }
+div.navbar nav div.nav-wrapper ul li.list a {
+  padding-right: 7.5px;
+}
 div.navbar nav div.nav-wrapper ul li {
   font-family: "Audiowide";
 }
@@ -59,6 +62,7 @@ div.navbar nav div.nav-wrapper ul li a {
   transition: all 0.5s ease;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 div.navbar nav div.nav-wrapper ul li a img.account {
   width: 30px;
@@ -119,6 +123,9 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
   }
   div#app div.navbar div.navbar-fixed nav ul.right {
     margin: 15px 0;
+  }
+  div#app div.navbar div.navbar-fixed nav ul.right li.list a {
+    padding-right: 3px;
   }
   div#app > div.bogus2.card {
     background: none !important;

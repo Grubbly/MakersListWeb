@@ -13,7 +13,7 @@
                 color="cyan darken-4"
                 flat
                 value="yourlists"
-                @click="flipToggle()"
+                @click="toggle = true"
             >
                 <span>Your Lists</span>
                 <v-icon>account_circle</v-icon>
@@ -23,7 +23,7 @@
                 color="pink"
                 flat
                 value="favorites"
-                @click="flipToggle()"
+                @click="toggle = false"
             >
                 <span>Favorites</span>
                 <v-icon>favorite</v-icon>
@@ -59,11 +59,6 @@ export default {
             this.profile = user.data()
         })
     },
-    methods: {
-        flipToggle() {
-            this.toggle = !this.toggle
-        }
-    }
 }
 </script>
 

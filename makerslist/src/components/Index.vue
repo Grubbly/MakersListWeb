@@ -1,106 +1,109 @@
 <template>
-<!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
-  <div class="bogus2 card grey lighten-3" style="padding-top: 0.01px;">
-    <div class="index bogus2">
-    <div v-for="(list,index) in filteredLists.slice((this.page-1)*6, this.page*6 < filteredLists.length ? this.page*6 : filteredLists.length)" :key="list.id">
-      <div class="card-content">
-        <v-hover>
-          <v-card
-            slot-scope="{ hover }"
-            class="mx-auto"
-            color="grey lighten-4"
-            max-width="600"
-          >
-            <v-carousel
-              hide-delimiters="true"
-              delimiter-icon="stop"
-              prev-icon="mdi-arrow-left"
-              next-icon="mdi-arrow-right"
-              height="200px"
+  <div class="lower">
+    <LandingBanner/>
+    <div class="bogus2 card grey lighten-3" style="padding-top: 0.01px;">
+      <div class="index bogus2">
+      <div v-for="(list,index) in filteredLists.slice((this.page-1)*6, this.page*6 < filteredLists.length ? this.page*6 : filteredLists.length)" :key="list.id">
+        <div class="card-content">
+          <v-hover>
+            <v-card
+              slot-scope="{ hover }"
+              class="mx-auto"
+              color="grey lighten-4"
+              max-width="600"
             >
-            <v-carousel-item
-              v-for="(item,i) in 1"
-              :key="i"
-              :src="getPics(list)[0]"
-            >
-            </v-carousel-item>
+              <v-carousel
+                hide-delimiters="true"
+                delimiter-icon="stop"
+                prev-icon="mdi-arrow-left"
+                next-icon="mdi-arrow-right"
+                height="200px"
+              >
+              <v-carousel-item
+                v-for="(item,i) in 1"
+                :key="i"
+                :src="getPics(list)[0]"
+              >
+              </v-carousel-item>
 
-            <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-              <v-progress-circular indeterminate color="cyan"></v-progress-circular>
-            </v-layout>
-              <v-expand-transition>
-                <div
-                  v-if="hover"
-                  class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text text-lighten-4"
-                  style="height: 100%;"
-                >
-                  ${{list.total}}
+              <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="cyan"></v-progress-circular>
+              </v-layout>
+                <v-expand-transition>
+                  <div
+                    v-if="hover"
+                    class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text text-lighten-4"
+                    style="height: 100%;"
+                  >
+                    ${{list.total}}
+                  </div>
+                </v-expand-transition>
+             </v-carousel>
+              <v-card-text
+                class="pt-4"
+                style="position: relative;"
+              >
+                <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
+                <div class="title">
+                  <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3></router-link>
+                  <Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/>
                 </div>
-              </v-expand-transition>
-           </v-carousel>
-            <v-card-text
-              class="pt-4"
-              style="position: relative;"
-            >
-              <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
-              <div class="title">
-                <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3></router-link>
-                <Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/>
-              </div>
-              <h4 class="font-weight-light grey--text title mb-2">Quick Description</h4>
-              <h6 class="green-text text-lighten-2">${{list.total}}</h6>
-              </router-link>
-                <v-expansion-panel expand>
-                  <v-expansion-panel-content class="grey lighten-2">
-                    <div slot="header">
-                      <span> Items </span>
-                    </div>
-                    <v-expansion-panel expand>
-                      <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
-                        <div slot="header">
-                          <span> {{item}} </span>
-                          <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
-                        </div>
-                        <v-card>
-                          <v-card-text class="grey lighten-3">
-                              <div class="collection">
-                                <a v-for="(itemDetail, detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="itemDetail.url"
-                                  class="collection-item cyan-text text-darken-4">
-                                  <h5 class="orange-text">{{itemDetail.supplierName}}</h5>
-                                  {{itemDetail.productName}}
-                                  <p class="green-text">${{itemDetail.price}}</p>
-                                </a>
-                              </div>
-                          </v-card-text>
-                        </v-card>
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-            </v-card-text>
-          </v-card>
-        </v-hover>
-        <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
+                <h4 class="font-weight-light grey--text title mb-2">Quick Description</h4>
+                <h6 class="green-text text-lighten-2">${{list.total}}</h6>
+                </router-link>
+                  <v-expansion-panel expand>
+                    <v-expansion-panel-content class="grey lighten-2">
+                      <div slot="header">
+                        <span> Items </span>
+                      </div>
+                      <v-expansion-panel expand>
+                        <v-expansion-panel-content v-for="(item, index) in list.items" :key="index">
+                          <div slot="header">
+                            <span> {{item}} </span>
+                            <span class="cyan-text text-darken-4"> ({{list.quantities[index]}}) </span>
+                          </div>
+                          <v-card>
+                            <v-card-text class="grey lighten-3">
+                                <div class="collection">
+                                  <a v-for="(itemDetail, detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="itemDetail.url"
+                                    class="collection-item cyan-text text-darken-4">
+                                    <h5 class="orange-text">{{itemDetail.supplierName}}</h5>
+                                    {{itemDetail.productName}}
+                                    <p class="green-text">${{itemDetail.price}}</p>
+                                  </a>
+                                </div>
+                            </v-card-text>
+                          </v-card>
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+              </v-card-text>
+            </v-card>
+          </v-hover>
+          <!-- !!!!! NEED TO ENSURE SLUGS ARE UNIQUE !!!!! -->
+        </div>
+        <!-- <span class="totalPrice">
+            <h2 class="green-text text-lighten-3">${{list.total}}</h2>
+        </span> -->
+        </div>
       </div>
-      <!-- <span class="totalPrice">
-          <h2 class="green-text text-lighten-3">${{list.total}}</h2>
-      </span> -->
-      </div>
+        <div class="text-xs-center">
+          <v-pagination
+            v-model="page"
+            :length="Math.ceil(lists.length/6)"
+            :total-visible="7"
+            color="cyan darken-4"
+          ></v-pagination>
+        </div>
     </div>
-      <div class="text-xs-center">
-        <v-pagination
-          v-model="page"
-          :length="Math.ceil(lists.length/6)"
-          :total-visible="7"
-          color="cyan darken-4"
-        ></v-pagination>
-      </div>
   </div>
 </template>
 
 <script>
 import db from '@/firebase/init'
 import RadialButton from '@/components/RadialButton'
+import LandingBanner from '@/components/LandingBanner'
 import Vue from 'vue'
 import Favorite from '@/components/Favorite'
 import { EventBus } from '../event.js'
@@ -118,8 +121,9 @@ export default {
     }
   },
   components: {
+    LandingBanner,
     RadialButton,
-    Favorite,
+    Favorite
   },
   methods: {
     deleteList(id) {

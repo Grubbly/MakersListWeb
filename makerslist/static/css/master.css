@@ -140,6 +140,27 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
 div.view-profile div.container div.layout div.flex div.v-card {
   margin-bottom: 15px;
 }
+div#app div#photoView {
+  display: flex;
+}
+div#app div#photoView div.layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+div#app div#photoView div.layout div.flex {
+  max-width: 30%;
+  min-width: 300px;
+}
+div#app div#photoView div.layout div.flex div.card {
+  width: 100%;
+}
+div#app div#photoView div.layout div.flex div.card div.card-content div.v-dialog__container {
+  width: 100%;
+}
+div#app div#photoView div.layout div.flex div.card div.card-content div.v-dialog__container button {
+  width: 100%;
+}
 div#app div.yourLists div.bogus2.v-card {
   padding: 0;
   margin: auto;

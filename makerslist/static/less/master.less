@@ -3,6 +3,35 @@
 @import "profile";
 
 div#app {
+  div#photoView {
+    display: flex;
+
+    div.layout {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      div.flex {
+        max-width: 30%;
+        min-width: 300px;
+
+        div.card {
+          width: 100%;
+
+          div.card-content {
+            div.v-dialog__container {
+              width: 100%;
+
+              button {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   div.yourLists {
     div.bogus2.v-card {
       padding: 0;

@@ -2,7 +2,7 @@
     <v-container v-if="list" fluid grid-list-sm>
         <v-layout row wrap>
         <v-flex d-flex xs12 sm3 offset-sm2>
-            <v-card>
+            <v-card class="listview-grid">
                 <v-container grid-list-sm fluid grey lighten-3>
                 <v-layout row wrap>
                     <v-flex v-for="n in 9" :key="n" xs4 d-flex>
@@ -26,8 +26,8 @@
         <v-flex d-flex xs12 sm5>
             <v-card color="grey lighten-3" dark tile>
             <h2 class="cyan-text text-darken-4 center">{{list.title}}</h2>
-            <v-card-text class="cyan-text text-darken-4">Summary: 
-                <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia 
+            <v-card-text class="cyan-text text-darken-4">Summary:
+                <v-card-text class="grey-text text-darken-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ex voluptate sit repudiandae officia
                 ea consequatur quo possimus! Commodi ex vitae, eaque eum tempore corrupti aut culpa perferendis molestias repellendus.</v-card-text>
             </v-card-text>
             </v-card>
@@ -45,10 +45,10 @@
                     {{ view }}
                     </v-tab>
                 </v-tabs>
-                
+
                 <v-tabs-items v-model="tab">
                 <v-tab-item>
-                
+
                 <v-container id="photoView" grid-list-xl fluid grey lighten-3>
                 <v-layout row wrap>
                     <v-flex v-for="(item,index) in list.items" :key="index" xs3 d-flex>
@@ -92,9 +92,9 @@
 
                                     <v-card-text class="grey-text text-darken-1">
                                         <div class="collection">
-                                            <a v-for="(detail,detailIndex) in detailList(list.itemDetails[index])" :key="detailIndex" :href="detail.url" 
+                                            <a v-for="(detail,detailIndex) in detailList(list.itemDetails[index])" :key="detailIndex" :href="detail.url"
                                             class="collection-item cyan-text text-darken-4">
-                                            <h5 class="orange-text">{{detail.productName}} </h5>                                             
+                                            <h5 class="orange-text">{{detail.productName}} </h5>
                                             {{detail.supplierName}}
                                             <p class="green-text">${{detail.price}}</p>
                                             </a>
@@ -137,10 +137,10 @@
                         <v-card>
                         <v-card-text class="grey lighten-3">
                             <div class="collection">
-                                <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
+                                <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url"
                                 class="collection-item cyan-text text-darken-4">
-                                <h5 class="orange-text">{{detail.supplierName}}</h5> 
-                                {{detail.productName}} 
+                                <h5 class="orange-text">{{detail.supplierName}}</h5>
+                                {{detail.productName}}
                                 <p class="green-text">${{parseFloat(detail.price).toFixed(2)}}</p>
                                 </a>
                             </div>
@@ -262,4 +262,3 @@ export default {
     margin-top: 30px;
 }
 </style>
-

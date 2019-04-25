@@ -161,6 +161,10 @@ div#app div#photoView div.layout div.flex div.card div.card-content div.v-dialog
 div#app div#photoView div.layout div.flex div.card div.card-content div.v-dialog__container button {
   width: 100%;
 }
+div#app div.container div.layout div.flex div.listview-grid {
+  display: flex;
+  background: #eee;
+}
 div#app div.yourLists div.bogus2.v-card {
   padding: 0;
   margin: auto;

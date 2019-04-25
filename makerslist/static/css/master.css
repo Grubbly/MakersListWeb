@@ -144,6 +144,15 @@ div#app div.lower {
 div#app div.lower section.landingBanner {
   margin-top: 15px;
 }
+div#app div.lower section.landingBanner div.v-window {
+  height: 340px !important;
+}
+div#app div.lower section.landingBanner div.v-window div.v-window__container div.v-window-item div.v-image {
+  height: 340px !important;
+}
+div#app div.lower section.landingBanner div.v-image__image {
+  background-size: contain;
+}
 div#app div.lower > div.bogus2 {
   margin: auto;
   margin-top: 15px;
@@ -273,5 +282,12 @@ div.view-profile div.container.grid-list-xl div.flex.save-btn {
   div.view-profile div.container.grid-list-xl > div.layout {
     display: flex;
     flex-direction: column-reverse;
+  }
+  div#app div.lower section.landingBanner div.v-window {
+    background: white;
+    height: 200px !important;
+  }
+  div#app div.lower section.landingBanner div.v-window div.v-window__container div.v-window-item div.v-image {
+    height: 200px !important;
   }
 }

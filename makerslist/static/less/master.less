@@ -10,6 +10,21 @@ div#app {
 
     section.landingBanner {
       margin-top: 15px;
+
+      div.v-window {
+        height: @normal-banner-height!important;
+        div.v-window__container {
+          div.v-window-item {
+            div.v-image {
+              height: @normal-banner-height!important;
+            }
+          }
+        }
+      }
+
+      div.v-image__image {
+        background-size: contain;
+      }
     }
 
     > div.bogus2 {
@@ -186,11 +201,27 @@ div.view-profile {
 }
 
 @media only screen and (max-width: 959px) {
-  div.view-profile {
-    div.container.grid-list-xl {
-      > div.layout {
-        display: flex;
-        flex-direction: column-reverse;
+    div.view-profile {
+      div.container.grid-list-xl {
+        > div.layout {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+      }
+    }
+
+  div#app div.lower {
+    section.landingBanner {
+      div.v-window {
+        background: white;
+        height: @small-banner-height!important;
+        div.v-window__container {
+          div.v-window-item {
+            div.v-image {
+              height: @small-banner-height!important;
+            }
+          }
+        }
       }
     }
   }

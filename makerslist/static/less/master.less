@@ -3,67 +3,93 @@
 @import "profile";
 
 div#app {
-  > div.bogus2 {
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+  div.lower {
     width: @inner-container-width;
     max-width: @max-container-width;
+    margin: auto;
 
-    div.index {
-      width: auto;
+    section.landingBanner {
+      margin-top: 15px;
+
+      div.v-window {
+        height: @normal-banner-height!important;
+        div.v-window__container {
+          div.v-window-item {
+            div.v-image {
+              height: @normal-banner-height!important;
+            }
+          }
+        }
+      }
+
+      div.v-image__image {
+        background-size: contain;
+      }
+    }
+
+    > div.bogus2 {
       margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      width: 90%;
 
-      > div {
-        width: 31%;
-        min-width: 300px;
-        max-width: 450px;
+      div.index {
+        width: auto;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
-        div.card-content {
-          div.v-card {
-            border-radius: 5px;
-          }
+        > div {
+          width: 31%;
+          min-width: 300px;
+          max-width: 450px;
 
-          div.edit {
-            cursor: pointer;
-          }
+          div.card-content {
+            div.v-card {
+              border-radius: 5px;
+            }
 
-          div.title {
-            display: flex;
-            align-items: center;
+            div.edit {
+              cursor: pointer;
+            }
 
-            a {
-              h3 {
-                margin: 0 !important;
-                padding: 0;
-                display: flex;
-                align-items: center;
-                font-size: 30px !important;
+            div.title {
+              display: flex;
+              align-items: center;
+
+              a {
+                flex: 1;
+
+                h3 {
+                  margin: 0 !important;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                  font-size: 30px !important;
+                }
+              }
+
+              button {
+                margin: 0;
               }
             }
 
-            button {
-              margin: 0;
+            h4 {
+              margin: 0 !important;
+              padding: 5px 0;
             }
-          }
 
-          h4 {
-            margin: 0 !important;
-            padding: 5px 0;
-          }
+            h6 {
+              margin: 0 !important;
+              padding: 0;
+              padding-bottom: 5px;
+            }
 
-          h6 {
-            margin: 0 !important;
-            padding: 0;
-            padding-bottom: 5px;
-          }
-
-          ul, ul li {
-            border-radius: 5px;
+            ul, ul li {
+              border-radius: 5px;
+            }
           }
         }
       }
@@ -177,11 +203,27 @@ div.view-profile {
 }
 
 @media only screen and (max-width: 959px) {
-  div.view-profile {
-    div.container.grid-list-xl {
-      > div.layout {
-        display: flex;
-        flex-direction: column-reverse;
+    div.view-profile {
+      div.container.grid-list-xl {
+        > div.layout {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+      }
+    }
+
+  div#app div.lower {
+    section.landingBanner {
+      div.v-window {
+        background: white;
+        height: @small-banner-height!important;
+        div.v-window__container {
+          div.v-window-item {
+            div.v-image {
+              height: @small-banner-height!important;
+            }
+          }
+        }
       }
     }
   }

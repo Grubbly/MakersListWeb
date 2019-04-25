@@ -45,7 +45,7 @@
               <RadialButton class="edit" v-on:delete="deleteList($event)" :list="list"/>
               <div class="title">
                 <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3></router-link>
-                <Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/>
+                <Favorite v-on:toggleFav="handleListFavorite($event)" :list="list" />
               </div>
               <h4 class="font-weight-light grey--text title mb-2">{{list.description}}</h4>
               <h6 class="green-text text-lighten-2">${{list.total}}</h6>
@@ -168,7 +168,7 @@ export default {
     handleListFavorite(id) {
       this.favorites.push(id)
       let userDoc = db.collection('users').doc(this.uid)
-      
+
       userDoc.get().then(doc => {
         if(doc.data().favorites !== undefined) {
           doc.data().favorites.forEach(favorite => {
@@ -185,7 +185,7 @@ export default {
           favorites: this.favorites,
         })
       })
-    }
+    },
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {

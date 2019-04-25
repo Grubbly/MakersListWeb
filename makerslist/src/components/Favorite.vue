@@ -8,6 +8,9 @@
 </template>
  
 <script>
+import db from '@/firebase/init'
+import firebase from 'firebase'
+
 export default {
     name: 'Favorite',
     data() {
@@ -25,6 +28,24 @@ export default {
         this.favorited = !this.favorited
         this.$emit('toggleFav', this.$props.list.id)
       }
+    },
+    created() {
+      firebase.auth().onAuthStateChanged((user) => {
+          if(user) {
+            db.collection('users').where('user_id', '==', user.uid).get()
+            .then(snapshot => {
+              snapshot.forEach(doc => {
+                if(doc.data().favorites !== undefined) {
+                  doc.data().favorites.forEach(fav => {
+                    if(fav === this.$props.list.id) {
+                      this.favorited = true
+                    }
+                  })
+                }
+              });
+            });
+          }
+      })
     }
 }
 </script>

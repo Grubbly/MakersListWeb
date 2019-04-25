@@ -21,7 +21,7 @@ const router = new Router({
       name: 'Index',
       component: Index,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {

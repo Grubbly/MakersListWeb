@@ -9,6 +9,7 @@ div#app {
       margin: auto;
       width: 68%;
       height: auto!important;
+      background: none!important;
 
       div.headline {
         padding: 0!important;
@@ -217,14 +218,22 @@ div.view-profile {
 }
 
 @media only screen and (max-width: 959px) {
-    div.view-profile {
-      div.container.grid-list-xl {
-        > div.layout {
-          display: flex;
-          flex-direction: column-reverse;
-        }
+  div.view-profile {
+    div.container.grid-list-xl {
+      > div.layout {
+        display: flex;
+        flex-direction: column-reverse;
       }
     }
+  }
+
+  div#app div.yourLists {
+    div.bogus2.v-card {
+      div.v-item-group {
+        background: white!important;
+      }
+    }
+  }
 
   div#app div.lower {
     section.landingBanner {

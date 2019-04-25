@@ -101,9 +101,6 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
   box-shadow: none;
 }
 @media only screen and (max-width: 870px) {
-  div#app {
-    background-color: #eee !important;
-  }
   div#app div.navbar div.navbar-fixed {
     height: auto;
   }
@@ -148,6 +145,7 @@ div#app div.yourLists div.bogus2.v-card {
   margin: auto;
   width: 68%;
   height: auto!important;
+  background: none!important;
 }
 div#app div.yourLists div.bogus2.v-card div.headline {
   padding: 0!important;
@@ -302,6 +300,9 @@ div.view-profile div.container.grid-list-xl div.flex.save-btn {
   div.view-profile div.container.grid-list-xl > div.layout {
     display: flex;
     flex-direction: column-reverse;
+  }
+  div#app div.yourLists div.bogus2.v-card div.v-item-group {
+    background: white!important;
   }
   div#app div.lower section.landingBanner div.v-window {
     background: white;

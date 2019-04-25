@@ -15,7 +15,7 @@
                 value="yourlists"
                 @click="toggle = true"
             >
-                <span>Your Lists</span>
+                <span>My Lists</span>
                 <v-icon>account_circle</v-icon>
             </v-btn>
 
@@ -30,9 +30,9 @@
             </v-btn>
             </v-bottom-nav>
         </v-card>
-       
+
         <Index v-if="profile" :filter="toggle ? profile.user_id : profile.favorites" :filterType="toggle ? 'profile' : 'favorites'"/>
-        
+
     </div>
 </template>
 
@@ -68,4 +68,3 @@ export default {
         width:90%
     }
 </style>
-

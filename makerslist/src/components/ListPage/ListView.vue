@@ -55,7 +55,7 @@
                           <v-card class="card">
                             <div class="card-image">
                                 <v-img
-                                    :src=list.itemDetails[index][0].imageUrl
+                                    :src="itemPic(list.itemDetails[index])"
                                     :lazy-src="`https://picsum.photos/10/6?image=${Math.floor(index * (Math.random()*20) + 50)}`"
                                     aspect-ratio="1"
                                     class="cyan darken-4"
@@ -67,7 +67,7 @@
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator cyan-text text-darken-4">{{item}} ({{list.quantities[index]}})<i class="material-icons right">more_vert</i></span>
-                                <h6 class="green-text text-lighten-1">Starting at: ${{list.itemDetails[index][0].price}}</h6>
+                                <h6 class="green-text text-lighten-1">Starting at: ${{minPrice(list.itemDetails[index])}}</h6>
 
                             <div class="text-xs-left">
                                 <v-dialog
@@ -119,7 +119,7 @@
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title cyan-text text-darken-4">{{item}}<i class="material-icons right">close</i></span>
-                                <p>{{list.itemDetails[index][0].description}}</p>
+                                <p>{{itemDescription(list.itemDetails[index])}}</p>
                                 <!-- <p>Shipping Information</p>
                                 <p>Ratings</p>
                                 <p>Vendors</p>
@@ -185,6 +185,33 @@ export default {
                 }
             })
             return images[Math.floor(Math.random()*images.length)]
+        },
+        itemPic(item) {
+            let url
+            Object.values(item).forEach(detail => {
+                if(detail.imageUrl !== undefined && detail.imageUrl !== null) {
+                    url = detail.imageUrl
+                }
+            })
+            return url === undefined ? "https://grubsy.xyz/static/DepthLogo.png" : url
+        },
+        minPrice(item) {
+            let price = Infinity
+            Object.values(item).forEach(detail => {
+                if(detail.price !== undefined && detail.price !== null) {
+                    price = Math.min(detail.price,price)
+                }
+            })
+            return price === Infinity ? parseFloat(0).toFixed(2) : parseFloat(price).toFixed(2)
+        },
+        itemDescription(item) {
+            let desc = ''
+            Object.values(item).forEach(detail => {
+                if(detail.description !== undefined && detail.description !== null) {
+                    desc = detail.description
+                }
+            })
+            return desc === undefined ? '' : desc
         }
     },
     created() {

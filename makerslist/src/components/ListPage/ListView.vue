@@ -71,7 +71,7 @@
 
                             <div class="text-xs-left">
                                 <v-dialog
-                                v-model="dialog"
+                                v-model="dialog[index]"
                                 width="500"
                                 >
                                 <v-btn
@@ -92,7 +92,7 @@
 
                                     <v-card-text class="grey-text text-darken-1">
                                         <div class="collection">
-                                            <a v-for="(detail,detailIndex) in list.itemDetails[index]" :key="detailIndex" :href="detail.url" 
+                                            <a v-for="(detail,detailIndex) in detailList(list.itemDetails[index])" :key="detailIndex" :href="detail.url" 
                                             class="collection-item cyan-text text-darken-4">
                                             <h5 class="orange-text">{{detail.productName}} </h5>                                             
                                             {{detail.supplierName}}
@@ -108,7 +108,7 @@
                                     <v-btn
                                         color="primary"
                                         flat
-                                        @click="dialog = false"
+                                        @click="resetDialog(index)"
                                     >
                                         Exit
                                     </v-btn>
@@ -120,10 +120,6 @@
                             <div class="card-reveal">
                                 <span class="card-title cyan-text text-darken-4">{{item}}<i class="material-icons right">close</i></span>
                                 <p>{{itemDescription(list.itemDetails[index])}}</p>
-                                <!-- <p>Shipping Information</p>
-                                <p>Ratings</p>
-                                <p>Vendors</p>
-                                <p>More...</p> -->
                             </div>
                         </v-card>
                     </v-flex>
@@ -145,7 +141,7 @@
                                 class="collection-item cyan-text text-darken-4">
                                 <h5 class="orange-text">{{detail.supplierName}}</h5> 
                                 {{detail.productName}} 
-                                <p class="green-text">${{detail.price}}</p>
+                                <p class="green-text">${{parseFloat(detail.price).toFixed(2)}}</p>
                                 </a>
                             </div>
                         </v-card-text>
@@ -162,6 +158,7 @@
 
 <script>
 import db from '@/firebase/init'
+import Vue from 'vue'
 
 export default {
     name: 'ListView',
@@ -171,7 +168,7 @@ export default {
             grid: true,
             viewTypes: ['Photo Grid', 'Icon List'],
             tab: null,
-            dialog: false,
+            dialog: []
         }
     },
     methods: {
@@ -188,6 +185,7 @@ export default {
         },
         itemPic(item) {
             let url
+            if(item !== undefined)
             Object.values(item).forEach(detail => {
                 if(detail.imageUrl !== undefined && detail.imageUrl !== null) {
                     url = detail.imageUrl
@@ -197,21 +195,36 @@ export default {
         },
         minPrice(item) {
             let price = Infinity
-            Object.values(item).forEach(detail => {
-                if(detail.price !== undefined && detail.price !== null) {
-                    price = Math.min(detail.price,price)
-                }
-            })
+            if(item !== undefined)
+                Object.values(item).forEach(detail => {
+                    if(detail.price !== undefined && detail.price !== null) {
+                        price = Math.min(detail.price,price)
+                    }
+                })
             return price === Infinity ? parseFloat(0).toFixed(2) : parseFloat(price).toFixed(2)
         },
         itemDescription(item) {
             let desc = ''
+            if(item !== undefined)
             Object.values(item).forEach(detail => {
                 if(detail.description !== undefined && detail.description !== null) {
                     desc = detail.description
                 }
             })
             return desc === undefined ? '' : desc
+        },
+        detailList(item) {
+            let detailList = []
+            if(item !== undefined)
+            Object.values(item).forEach(detail => {
+                if(detail.description !== undefined && detail.description !== null) {
+                    detailList.push(detail)
+                }
+            })
+            return detailList
+        },
+        resetDialog(index) {
+            Vue.set(this.dialog, index, false)
         }
     },
     created() {
@@ -219,6 +232,10 @@ export default {
         list.get().then(snapshot => {
             snapshot.forEach(doc => {
                 this.list = doc.data()
+            })
+        }).then(() => {
+            this.list.itemDetails.forEach(item => {
+                this.dialog.push(false)
             })
         })
     }

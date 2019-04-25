@@ -25,6 +25,9 @@
                     color="cyan darken-4"
                     class="text-white"
                     name="description"
+                    :rules="rules"
+                    counter="100"
+                    maxlength="100"
                     @keydown.enter.prevent=""
                 ></v-text-field>
             </div>
@@ -129,6 +132,7 @@ export default {
             itemDetails: [],
             itemsAndQuantities: [],
             description: '',
+            rules: [v => v.length <= 100 || 'Max 100 characters'],
 
             states: [
                 'Alabama', 'Alaska', 'American Samoa', 'Arizona',
@@ -209,7 +213,7 @@ export default {
                 }).then(() => {
                     db.collection('lists').add({
                         title: this.title,
-                        description: this.description,
+                        description: this.description == undefined ? '' : this.description,
                         items: this.items,
                         itemDetails: this.itemDetails,
                         quantities: this.quantities,

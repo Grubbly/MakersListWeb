@@ -107,7 +107,7 @@ import firebase from 'firebase'
 
 export default {
   name: 'Index',
-  props: ['filter'],
+  props: ['filter', 'filterType'],
   data () {
     return {
       lists: [
@@ -278,6 +278,14 @@ export default {
           this.lists.push(list)
         })
       })
+    } if(this.favoritesFilter) {
+      this.favoritesFilter.forEach(favorite => {
+        db.collection('lists').doc(favorite).get().then(dbList => {
+          let list = dbList.data()
+          list.id = dbList.id
+          this.lists.push(list)
+        })
+      })
     } else {
       db.collection('lists').get().then(snapshot => {
         snapshot.forEach(dbList => {
@@ -287,6 +295,28 @@ export default {
         })
       })
     }
+  },
+  watch: {
+    filterType: function() {
+      this.lists = []
+      if(this.filterType == 'profile') {
+        db.collection('lists').where('user_id', '==', this.filter).get().then(snapshot => {
+          snapshot.forEach(dbList => {
+            let list = dbList.data()
+            list.id = dbList.id
+            this.lists.push(list)
+          })
+        })
+      } else if(this.filterType == 'favorites') {
+        this.filter.forEach(favorite => {
+          db.collection('lists').doc(favorite).get().then(dbList => {
+            let list = dbList.data()
+            list.id = dbList.id
+            this.lists.push(list)
+          })
+        })
+      }
+    },
   },
   mounted() {
     EventBus.$on('searchChange', data => {

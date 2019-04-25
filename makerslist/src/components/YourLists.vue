@@ -13,22 +13,26 @@
                 color="cyan darken-4"
                 flat
                 value="yourlists"
+                @click="flipToggle()"
             >
                 <span>Your Lists</span>
                 <v-icon>account_circle</v-icon>
             </v-btn>
 
             <v-btn
-                color="cyan darken-4"
+                color="pink"
                 flat
                 value="favorites"
+                @click="flipToggle()"
             >
                 <span>Favorites</span>
                 <v-icon>favorite</v-icon>
             </v-btn>
             </v-bottom-nav>
         </v-card>
-        <Index v-if="profile && bottomNav == 'yourlists'" :filter="profile.user_id"/>
+       
+        <Index v-if="profile" :filter="toggle ? profile.user_id : profile.favorites" :filterType="toggle ? 'profile' : 'favorites'"/>
+        
     </div>
 </template>
 
@@ -41,7 +45,8 @@ export default {
     data() {
         return {
             profile: null,
-            bottomNav: 'favorites',
+            bottomNav: 'yourlists',
+            toggle: true,
         }
     },
     components: {
@@ -54,6 +59,11 @@ export default {
             this.profile = user.data()
         })
     },
+    methods: {
+        flipToggle() {
+            this.toggle = !this.toggle
+        }
+    }
 }
 </script>
 

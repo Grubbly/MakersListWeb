@@ -2,6 +2,8 @@
   <section class="landingBanner">
     <v-carousel
       height="340px"
+      light=true
+      interval=10000
     >
     <v-carousel-item
       v-for="(item,i) in getLandingBanners()"
@@ -30,7 +32,11 @@ export default {
   },
   methods: {
     getLandingBanners(index) {
-      return ["/static/img/logo.svg", "/static/img/logo.svg", "/static/img/logo.svg"]
+      return [
+        "/static/img/welcome-banner.png",
+        "/static/img/welcome-banner.png",
+        "/static/img/welcome-banner.png"
+      ]
     }
   },
 }

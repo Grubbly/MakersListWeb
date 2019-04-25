@@ -182,6 +182,9 @@ div#app div.lower > div.bogus2 div.index > div div.card-content div.title {
   display: flex;
   align-items: center;
 }
+div#app div.lower > div.bogus2 div.index > div div.card-content div.title a {
+  flex: 1;
+}
 div#app div.lower > div.bogus2 div.index > div div.card-content div.title a h3 {
   margin: 0 !important;
   padding: 0;

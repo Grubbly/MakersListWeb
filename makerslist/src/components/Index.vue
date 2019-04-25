@@ -146,7 +146,7 @@ export default {
         // console.log(itemDetails, " ---- ", quantities, " ---- min: ", Math.min(Number(item[0].price),Number(item[1].price),Number(item[2].price)), " quantity: ", Number(quantities[index]), "TOTAL:", Math.min(Number(item[0].price),Number(item[1].price),Number(item[2].price))*Number(quantities[index]))
         sum += Math.min(Number(item[0].price),Number(item[1].price),Number(item[2].price))*Number(quantities[index])
       })
-      return Math.round(sum*100)/100
+      return parseFloat(Math.round(sum*100)/100).toFixed(2)
     },
 
     getPics(list) {

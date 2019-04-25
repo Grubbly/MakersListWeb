@@ -2,7 +2,7 @@
 <!-- container=bogus makes a central column on the page so text doesn't hug the browser edges -->
   <div class="bogus2 card grey lighten-3" style="padding-top: 0.01px;">
     <div class="index bogus2">
-    <div v-for="(list,index) in filteredLists.slice((this.page-1)*6, this.page*6 < filteredLists.length ? this.page*6 : filteredLists.length)" :key="list.id">
+    <div v-for="(list) in filteredLists.slice((this.page-1)*6, this.page*6 < filteredLists.length ? this.page*6 : filteredLists.length)" :key="list.id">
       <div class="card-content">
         <v-hover>
           <v-card
@@ -103,6 +103,7 @@ import RadialButton from '@/components/RadialButton'
 import Vue from 'vue'
 import Favorite from '@/components/Favorite'
 import { EventBus } from '../event.js'
+import firebase from 'firebase'
 
 export default {
   name: 'Index',
@@ -114,6 +115,8 @@ export default {
       ],
       search: '',
       page: 1,
+      uid: null,
+      favorites: [],
     }
   },
   components: {
@@ -163,10 +166,45 @@ export default {
     },
 
     handleListFavorite(id) {
-      console.log("Favorited: " + id)
+      this.favorites.push(id)
+      let userDoc = db.collection('users').doc(this.uid)
+      
+      userDoc.get().then(doc => {
+        if(doc.data().favorites !== undefined) {
+          doc.data().favorites.forEach(favorite => {
+            if(favorite === id) {
+              console.log("Match found")
+              this.favorites = this.favorites.filter(fav => {
+                return fav !== id
+              })
+            } 
+          })
+        }
+      }).then(() => {
+        userDoc.update({
+          favorites: this.favorites,
+        })
+      })
     }
   },
   created() {
+    firebase.auth().onAuthStateChanged((user) => {
+          if(user) {
+            db.collection('users').where('user_id', '==', user.uid).get()
+            .then(snapshot => {
+              snapshot.forEach(doc => {
+                if(doc.data().favorites !== undefined) {
+                  this.favorites = doc.data().favorites
+                }
+                this.uid = doc.id
+              });
+            });
+          }
+          else {
+            this.uid = null
+          }
+      })
+
     // fetch data from firestore
     // snapshot refers to the state of the lists collection at a certain point in time
 

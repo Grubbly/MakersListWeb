@@ -47,9 +47,8 @@
                 <router-link :to="{name: 'ListView', params: {list_slug: list.slug}}"><h3 class="display-1 font-weight-light orange--text mb-2">{{list.title}}</h3></router-link>
                 <Favorite v-on:toggleFav="handleListFavorite($event)" :list="list"/>
               </div>
-              <h4 class="font-weight-light grey--text title mb-2">Quick Description</h4>
+              <h4 class="font-weight-light grey--text title mb-2">{{list.description}}</h4>
               <h6 class="green-text text-lighten-2">${{list.total}}</h6>
-              </router-link>
                 <v-expansion-panel expand>
                   <v-expansion-panel-content class="grey lighten-2">
                     <div slot="header">

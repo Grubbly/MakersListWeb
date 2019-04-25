@@ -2,7 +2,7 @@
   <section class="landingBanner">
     <v-carousel
       height="340px"
-      light=true
+      light
       interval=10000
     >
     <v-carousel-item

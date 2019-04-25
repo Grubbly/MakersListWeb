@@ -143,6 +143,16 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
 div.view-profile div.container div.layout div.flex div.v-card {
   margin-bottom: 15px;
 }
+div#app div.yourLists div.bogus2.v-card {
+  padding: 0;
+  margin: auto;
+  width: 68%;
+  height: auto!important;
+}
+div#app div.yourLists div.bogus2.v-card div.headline {
+  padding: 0!important;
+  height: 70px;
+}
 div#app div.lower {
   width: 75%;
   max-width: 1250px;

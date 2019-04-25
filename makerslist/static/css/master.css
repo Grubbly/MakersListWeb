@@ -136,57 +136,64 @@ div.navbar nav div.nav-wrapper nav.search div.v-input div.v-input__slot input {
 div.view-profile div.container div.layout div.flex div.v-card {
   margin-bottom: 15px;
 }
-div#app > div.bogus2 {
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
+div#app div.lower {
   width: 75%;
   max-width: 1250px;
+  margin: auto;
 }
-div#app > div.bogus2 div.index {
+div#app div.lower section.landingBanner {
+  margin-top: 15px;
+}
+div#app div.lower > div.bogus2 {
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  width: 90%;
+}
+div#app div.lower > div.bogus2 div.index {
   width: auto;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-div#app > div.bogus2 div.index > div {
+div#app div.lower > div.bogus2 div.index > div {
   width: 31%;
   min-width: 300px;
   max-width: 450px;
 }
-div#app > div.bogus2 div.index > div div.card-content div.v-card {
+div#app div.lower > div.bogus2 div.index > div div.card-content div.v-card {
   border-radius: 5px;
 }
-div#app > div.bogus2 div.index > div div.card-content div.edit {
+div#app div.lower > div.bogus2 div.index > div div.card-content div.edit {
   cursor: pointer;
 }
-div#app > div.bogus2 div.index > div div.card-content div.title {
+div#app div.lower > div.bogus2 div.index > div div.card-content div.title {
   display: flex;
   align-items: center;
 }
-div#app > div.bogus2 div.index > div div.card-content div.title a h3 {
+div#app div.lower > div.bogus2 div.index > div div.card-content div.title a h3 {
   margin: 0 !important;
   padding: 0;
   display: flex;
   align-items: center;
   font-size: 30px !important;
 }
-div#app > div.bogus2 div.index > div div.card-content div.title button {
+div#app div.lower > div.bogus2 div.index > div div.card-content div.title button {
   margin: 0;
 }
-div#app > div.bogus2 div.index > div div.card-content h4 {
+div#app div.lower > div.bogus2 div.index > div div.card-content h4 {
   margin: 0 !important;
   padding: 5px 0;
 }
-div#app > div.bogus2 div.index > div div.card-content h6 {
+div#app div.lower > div.bogus2 div.index > div div.card-content h6 {
   margin: 0 !important;
   padding: 0;
   padding-bottom: 5px;
 }
-div#app > div.bogus2 div.index > div div.card-content ul,
-div#app > div.bogus2 div.index > div div.card-content ul li {
+div#app div.lower > div.bogus2 div.index > div div.card-content ul,
+div#app div.lower > div.bogus2 div.index > div div.card-content ul li {
   border-radius: 5px;
 }
 div#app footer {

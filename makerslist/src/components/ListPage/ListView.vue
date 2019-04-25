@@ -191,7 +191,7 @@ export default {
                     url = detail.imageUrl
                 }
             })
-            return url === undefined ? "https://grubsy.xyz/static/DepthLogo.png" : url
+            return url === undefined ? "/static/img/logo.svg" : url
         },
         minPrice(item) {
             let price = Infinity

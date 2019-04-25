@@ -1,6 +1,34 @@
 <template>
     <div class="yourLists">
-        <Index v-if="profile" :filter="profile.user_id"/>
+        <v-card  class="bogus2" height="0px" flat>
+            <div class="headline text-xs-center pa-5">
+            </div>
+            <v-bottom-nav
+            :active.sync="bottomNav"
+            :value="true"
+            absolute
+            color="transparent"
+            >
+            <v-btn
+                color="cyan darken-4"
+                flat
+                value="yourlists"
+            >
+                <span>Your Lists</span>
+                <v-icon>account_circle</v-icon>
+            </v-btn>
+
+            <v-btn
+                color="cyan darken-4"
+                flat
+                value="favorites"
+            >
+                <span>Favorites</span>
+                <v-icon>favorite</v-icon>
+            </v-btn>
+            </v-bottom-nav>
+        </v-card>
+        <Index v-if="profile && bottomNav == 'yourlists'" :filter="profile.user_id"/>
     </div>
 </template>
 
@@ -13,6 +41,7 @@ export default {
     data() {
         return {
             profile: null,
+            bottomNav: 'favorites',
         }
     },
     components: {
@@ -29,6 +58,9 @@ export default {
 </script>
 
 <style>
-
+    .yourLists .contain {
+        max-width: 1250px;
+        width:90%
+    }
 </style>
 

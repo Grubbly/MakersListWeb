@@ -13,7 +13,7 @@
               max-width="600"
             >
               <v-carousel
-                hide-delimiters="true"
+                hide-delimiters
                 delimiter-icon="stop"
                 prev-icon="mdi-arrow-left"
                 next-icon="mdi-arrow-right"

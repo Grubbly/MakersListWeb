@@ -1,5 +1,5 @@
 <template>
-    <div class="yourLists">
+    <div class="yourLists" v-if="profile">
         <v-card  class="bogus2" height="0px" flat>
             <div class="headline text-xs-center pa-5">
             </div>

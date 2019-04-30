@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1250 340" style="enable-background:new 0 0 1250 340;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#0B6164;}
-	.st1{font-family:'Audiowide-Regular';}
-	.st2{font-size:59.4777px;}
-	.st3{fill:#F69820;}
-	.st4{font-size:124.334px;}
-	.st5{font-size:22.6553px;}
-	.st6{fill:#0D6265;stroke:#E7E7E7;stroke-width:2;stroke-miterlimit:10;}
-	.st7{fill:#F2F2F2;}
-	.st8{font-size:122.5953px;}
-	.st9{font-size:115.5729px;}
+	.st0{fill:none;}
+	.st1{fill:#0B6164;}
+	.st2{font-family:'Audiowide-Regular';}
+	.st3{font-size:66.6687px;}
+	.st4{fill:#F69820;}
+	.st5{font-size:139.3664px;}
+	.st6{font-size:25.3944px;}
+	.st7{fill:#0D6265;stroke:#E7E7E7;stroke-width:2;stroke-miterlimit:10;}
+	.st8{fill:#F2F2F2;}
+	.st9{font-size:137.4175px;}
+	.st10{font-size:129.546px;}
 </style>
-<text transform="matrix(1 0 0 1 566.0508 105.0615)" class="st0 st1 st2">Welcome to</text>
-<text transform="matrix(1 0 0 1 364.4736 214.7891)" class="st3 st1 st4">MakersList</text>
-<text transform="matrix(1 0 0 1 421.6431 257.1475)" class="st0 st1 st5">The always up-to-date parts list creator for Makers</text>
-<title>logo</title>
-<polygon class="st6" points="167.6,153.7 166.2,90 220.7,57 276.5,87.7 277.8,151.4 223.4,184.3 "/>
-<polygon class="st6" points="226.5,249.3 225.1,185.7 279.6,152.7 335.4,183.3 336.7,247 282.3,280 "/>
-<polygon class="st6" points="113.3,252.3 112,188.6 166.5,155.7 222.3,186.3 223.6,250 169.1,283 "/>
-<text transform="matrix(1 0 0 1 228.8496 254.9982)" class="st7 st1 st8">L</text>
-<text transform="matrix(1 0 0 1 117.4668 196.0851)" class="st7 st1 st9">M</text>
+<g id="Layer_3">
+	<rect class="st0" width="1250" height="340"/>
+</g>
+<g id="Layer_2">
+	<text transform="matrix(1 0 0 1 558.9463 86.9409)" class="st1 st2 st3">Welcome to</text>
+	<text transform="matrix(1 0 0 1 332.998 209.9346)" class="st4 st2 st5">MakersList</text>
+	<text transform="matrix(1 0 0 1 397.0796 257.4141)" class="st1 st2 st6">The always up-to-date parts list creator for Makers</text>
+	<title>logo</title>
+	<polygon class="st7" points="112.3,141.4 110.8,70.1 171.8,33.1 234.4,67.5 235.9,138.8 174.8,175.8 	"/>
+	<polygon class="st7" points="178.3,248.6 176.8,177.3 237.9,140.3 300.4,174.7 301.9,246 240.8,283 	"/>
+	<polygon class="st7" points="51.5,252 50,180.6 111,143.7 173.6,178.1 175.1,249.4 114,286.4 	"/>
+	<text transform="matrix(1 0 0 1 180.9775 255.0049)" class="st8 st2 st9">L</text>
+	<text transform="matrix(1 0 0 1 56.1279 188.9697)" class="st8 st2 st10">M</text>
+</g>
 </svg>

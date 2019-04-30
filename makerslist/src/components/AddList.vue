@@ -180,7 +180,7 @@ export default {
                 let promises = [];
 
                 this.items.forEach(item => {
-                    let itemURL = 'http://us-central1-makerslist-7f3d8.cloudfunctions.net/centralQueue/api/append?name=' + item + '&key=whatever'
+                    let itemURL = 'https://us-central1-makerslist-7f3d8.cloudfunctions.net/centralQueue/api/append?name=' + item + '&key=123'
                     promises.push(axios.get(itemURL))
                 })
 
